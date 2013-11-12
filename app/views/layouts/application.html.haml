@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title HoursReport
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    #wrap
+      = render "shared/navbar"
+      .container
+        = render "shared/flash_messages", flash: flash
+        = yield
+    #footer
+      = render 'shared/footer'

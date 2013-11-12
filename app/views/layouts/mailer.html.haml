@@ -1,0 +1,18 @@
+%html
+  %head
+    %link{ rel:'stylesheet', type: 'text/css', href: 'email.css' }
+  %body.mail
+    %center
+      %table.mail_outer_container
+        %tbody
+          %tr
+            %td
+              %table.mail_container
+                %tbody
+                  %tr#header
+                  %tr#content
+                    %td{ colspan: 2}
+                      = yield
+        %tfoot
+          %tr#footer
+            %td{ colspan: 2 }
