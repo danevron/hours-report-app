@@ -3,13 +3,6 @@
   - if current_user
     %p Welcome #{current_user.first_name}!
 .row
-  .col-md-4.panel.panel-default
-    .panel-body
-      %h2 Invite a new Employee
-      = simple_form_for @invitation, html: { class: 'form-inline' } do |f|
-        = f.input :sender, input_html: { value: current_user.email }, as: :hidden
-        = f.input :recipient, label_html: { class: 'sr-only' }, placeholder: "first.last@company.com", as: :email
-        = f.submit "Invite", class: "btn btn-primary"
   .col-md-3
     %ul
       %li Create next month report

@@ -1,6 +1,6 @@
 HoursReport::Application.routes.draw do
 
-  resources :invitations, only: [:create]
+  resources :invitations, only: [:new, :create]
   resources :users, only: [:index, :show]
   root 'users#show'
 
