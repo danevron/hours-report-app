@@ -1,9 +1,9 @@
-class EmployeesController < ApplicationController
+class UsersController < ApplicationController
 
   before_action :authenticate_user
 
   def index
-    @employees = Employee.all
+    @users = User.all
   end
 
   def show

@@ -1,6 +1,0 @@
-%h1 Employees
-
-.box.clearfix
-  - @employees.each do |employee|
-    = link_to employee, :class => 'pull-left', :title => "#{employee.first_name} #{employee.last_name}" do
-      = image_tag employee.image, :class => 'img-polaroid'
