@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_and_belongs_to_many :reports
 
   validates_uniqueness_of :uid, scope: :provider
 
