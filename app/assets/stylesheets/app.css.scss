@@ -1,6 +1,14 @@
+$gray: #f1f1f1;
+$blue: #205081;
+
 html,
 body {
+  background-color: $gray;
   height: 100%;
+}
+
+#main-header {
+  background-color: $blue;
 }
 
 .jumbotron {
@@ -23,7 +31,7 @@ body {
 
 #footer {
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: $blue;
 }
 
 #wrap > .container {
@@ -37,4 +45,24 @@ body {
 #footer > .container {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.box {
+  background: {
+    color: white;
+  }
+
+  margin-top: 9px;
+
+  box: {
+    shadow: 0 10px 15px 0 rgba(205, 205, 205, 0.3);
+  }
+
+  border: {
+    width : 1px;
+    style : solid;
+    color : #DDDDDD;
+  }
+
+  padding: 20px;
 }

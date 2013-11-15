@@ -1,6 +1,5 @@
 %h1 Employees
 
-.box.clearfix
+.row
   - @users.each do |user|
-    = link_to user, :class => 'pull-left', :title => "#{user.first_name} #{user.last_name}" do
-      = image_tag user.image, :class => 'img-polaroid'
+    = render :partial => 'users/user', :locals => { :user => user }
