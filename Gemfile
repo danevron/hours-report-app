@@ -15,6 +15,7 @@ gem 'sidekiq'
 gem 'google-api-client'
 gem 'bootstrap-datepicker-rails'
 gem 'initjs', :git => 'git@github.com:josemarluedke/initjs.git'
+gem 'date_params'
 
 group :development, :test do
   gem 'debugger'

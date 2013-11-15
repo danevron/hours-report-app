@@ -64,6 +64,9 @@ GEM
     coolline (0.4.2)
     css_parser (1.3.5)
       addressable
+    date_params (2.0.1)
+      activesupport
+      tzinfo
     debug_inspector (0.0.2)
     debugger (1.6.1)
       columnize (>= 0.3.1)
@@ -278,6 +281,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-sass-rails
   coffee-rails (~> 4.0.0)
+  date_params
   debugger
   dotenv-rails
   google-api-client
