@@ -1,0 +1,13 @@
+%h1 New Report
+= simple_form_for @report, :html => { :class => "form-horizontal" } do |f|
+  .form-group
+    = f.label :start_date, { class: "col-sm-2" }
+    .col-sm-10
+      = f.text_field :start_date, { class: 'datepicker' }
+  .form-group
+    = f.label :end_date, { class: "col-sm-2" }
+    .col-sm-10
+      = f.text_field :end_date, { class: 'datepicker' }
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit "Create", class: "btn btn-primary"

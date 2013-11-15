@@ -1,0 +1,11 @@
+.row
+  %table.table#reports
+    %tr
+      %th From
+      %th To
+      %th Status
+    - @reports.each do |report|
+      %tr
+        %td= report.start_date
+        %td= report.end_date
+        %td= report.status
