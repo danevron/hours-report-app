@@ -17,15 +17,15 @@
           %a{href: "#contact"} Contact
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-            Dropdown
+            Reports
             %b.caret
           %ul.dropdown-menu
             %li
-              %a{href: "#"} Action
+              = link_to "New Report", new_report_path
             %li
-              %a{href: "#"} Another action
+              = link_to "All Reports", reports_path
             %li
-              %a{href: "#"} Something else here
+              %a{href: "#"} Current Report
             %li.divider
             %li.dropdown-header Nav header
             %li
