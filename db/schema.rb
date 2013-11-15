@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131113222239) do
+ActiveRecord::Schema.define(version: 20131115072312) do
 
   create_table "reports", force: true do |t|
     t.datetime "start_date"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20131113222239) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "image"
+    t.string   "status",        default: "active", null: false
   end
 
 end
