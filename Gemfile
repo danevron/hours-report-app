@@ -13,6 +13,8 @@ gem 'roadie', '2.4.1'
 gem 'simple_form', '~> 3.0.0.rc'
 gem 'sidekiq'
 gem 'google-api-client'
+gem 'bootstrap-datepicker-rails'
+gem 'initjs', :git => 'git@github.com:josemarluedke/initjs.git'
 
 group :development, :test do
   gem 'debugger'

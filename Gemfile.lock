@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:josemarluedke/initjs.git
+  revision: 03db7eada95779edbd151c3d8441b3e00f9e2ea3
+  specs:
+    initjs (2.0.0.beta1)
+      jquery-rails
+      rails (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,6 +43,8 @@ GEM
     awesome_print (1.1.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.1.1.9)
+      railties (>= 3.0)
     bootstrap-sass-rails (3.0.1.0)
       railties (>= 3.1.0)
       sass-rails (>= 3.1.0)
@@ -265,6 +275,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-datepicker-rails
   bootstrap-sass-rails
   coffee-rails (~> 4.0.0)
   debugger
@@ -272,6 +283,7 @@ DEPENDENCIES
   google-api-client
   haml
   haml-rails
+  initjs!
   jazz_hands
   jbuilder (~> 1.2)
   jquery-rails

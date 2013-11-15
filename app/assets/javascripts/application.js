@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require twitter/bootstrap
+//= require bootstrap-datepicker/core
+//= require hours_report/hours_report.js
+//= require init.js
 //= require_tree .
