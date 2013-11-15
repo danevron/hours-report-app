@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
-    user = User.from_auth(omnihash)
+    user = User.from_auth(omnihash) || User.create_from_auth(omnihash)
 
     if user.save
       session[:user_id] = user.id
