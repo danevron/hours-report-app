@@ -10,4 +10,10 @@
       = f.text_field :end_date, { class: 'datepicker' }
   .form-group
     .col-sm-offset-2.col-sm-10
+      .checkbox
+        %label
+          = f.check_box :current
+          Current
+  .form-group
+    .col-sm-offset-2.col-sm-10
       = f.submit "Create", class: "btn btn-primary"
