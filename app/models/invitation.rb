@@ -30,7 +30,7 @@ class Invitation
   private
 
   def recipient_already_registered?
-    if Employee.exists?(email: recipient.downcase)
+    if User.exists?(email: recipient.downcase)
       errors.add(:recipient, "Recipient is registered")
     end
   end
