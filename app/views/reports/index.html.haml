@@ -4,8 +4,12 @@
       %th From
       %th To
       %th Status
+      %th Links
     - @reports.each do |report|
-      %tr
-        %td= report.start_date
-        %td= report.end_date
+      %tr{ :class => ("warning" if report.current?) }
+        %td= l(report.start_date.to_date)
+        %td= l(report.end_date.to_date)
         %td= report.status
+        %td
+          = link_to "Details", report
+          = link_to "Delete", report, method: :delete, confirm: "Are you sure?" unless report.current?
