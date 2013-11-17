@@ -270,6 +270,8 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uuidtools (2.1.4)
+    validates_overlap (0.2.0)
+      rails (>= 3.0.0)
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
     yard (0.8.7)
@@ -302,4 +304,5 @@ DEPENDENCIES
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
+  validates_overlap
   validates_timeliness (~> 3.0)

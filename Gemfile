@@ -16,6 +16,7 @@ gem 'google-api-client'
 gem 'bootstrap-datepicker-rails'
 gem 'initjs', :git => 'git@github.com:josemarluedke/initjs.git'
 gem 'validates_timeliness', '~> 3.0'
+gem 'validates_overlap'
 
 group :development, :test do
   gem 'debugger'
