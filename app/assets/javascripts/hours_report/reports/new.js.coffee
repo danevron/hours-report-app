@@ -2,5 +2,10 @@ HoursReport.Reports ?= {}
 
 HoursReport.Reports.New =
   init: ->
-    $('.datepicker').datepicker()
-  modules: -> []
+    $(".datepicker").datepicker
+      format: "dd/mm/yyyy"
+      todayHighlight: true
+      todayBtn: "linked"
+      autoclose: true
+
+    modules: -> []
