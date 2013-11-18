@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
-  has_and_belongs_to_many :reports
+  has_many :days
+  has_many :reports, :through => :days
 
   scope :active, -> { where(status: "active") }
 
