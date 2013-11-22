@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122165028) do
+ActiveRecord::Schema.define(version: 20131122201448) do
+
+  create_table "days", force: true do |t|
+    t.integer  "user_report_id"
+    t.datetime "date"
+    t.string   "type"
+    t.float    "value"
+    t.string   "comment"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "reports", force: true do |t|
     t.datetime "start_date"
@@ -23,12 +34,12 @@ ActiveRecord::Schema.define(version: 20131122165028) do
   end
 
   create_table "user_reports", force: true do |t|
-    t.integer "report_id"
-    t.integer "user_id"
+    t.integer  "user_id"
+    t.integer  "report_id"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "user_reports", ["report_id", "user_id"], name: "index_user_reports_on_report_id_and_user_id"
-  add_index "user_reports", ["user_id"], name: "index_user_reports_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "provider"
