@@ -4,7 +4,7 @@ class Report < ActiveRecord::Base
 
   validates :current, uniqueness: true, if: "current?"
   validates_datetime :start_date
-  validates_date :end_date, :after => lambda { |report| report.start_date + 1.month }
+  validates_date :end_date, :after => lambda { |report| report.start_date + 1.month - 2.days }
 
   validates :start_date, :end_date,
     :overlap => { :message_title => :overlapping,
