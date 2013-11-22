@@ -1,6 +1,6 @@
 class Report < ActiveRecord::Base
-  has_many :days
-  has_many :users, :through => :days
+  has_many :user_reports
+  has_many :users, :through => :user_reports
 
   validates :current, uniqueness: true, if: "current?"
   validates_datetime :start_date

@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118164459) do
-
-  create_table "days", force: true do |t|
-    t.integer  "report_id"
-    t.integer  "user_id"
-    t.datetime "date"
-    t.string   "type"
-    t.float    "value"
-    t.string   "status"
-  end
-
-  add_index "days", ["date"], name: "index_days_on_date"
-  add_index "days", ["report_id", "user_id"], name: "index_days_on_report_id_and_user_id"
-  add_index "days", ["user_id"], name: "index_days_on_user_id"
+ActiveRecord::Schema.define(version: 20131122165028) do
 
   create_table "reports", force: true do |t|
     t.datetime "start_date"
@@ -34,6 +21,14 @@ ActiveRecord::Schema.define(version: 20131118164459) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_reports", force: true do |t|
+    t.integer "report_id"
+    t.integer "user_id"
+  end
+
+  add_index "user_reports", ["report_id", "user_id"], name: "index_user_reports_on_report_id_and_user_id"
+  add_index "user_reports", ["user_id"], name: "index_user_reports_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "provider"
