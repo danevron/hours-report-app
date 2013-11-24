@@ -1,0 +1,9 @@
+= form_for [@user, @user_report], :html => { :class => "form-inline" } do |f|
+  = f.fields_for :days do |days_form|
+    .form-group
+      .form-group
+        = days_form.text_field :type, class: "form-control"
+      .form-group
+        = days_form.text_field :value, class: "form-control"
+      .form-group
+        = days_form.text_field :status, class: "form-control"
