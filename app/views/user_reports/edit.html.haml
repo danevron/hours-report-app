@@ -1,4 +1,8 @@
 = form_for [@user, @user_report] do |f|
+  .form-actions
+    = f.submit "Update", class: "btn btn-primary"
+  = f.label :comments
+  = f.text_area :comments, class: "form-control"
   %table.table-condensed
     %tr
       %th Date
@@ -19,3 +23,4 @@
           = days_form.text_field :status, class: "form-control"
         %td
           = days_form.text_field :comment, class: "form-control"
+
