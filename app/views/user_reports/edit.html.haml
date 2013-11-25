@@ -1,9 +1,21 @@
-= form_for [@user, @user_report], :html => { :class => "form-inline" } do |f|
-  = f.fields_for :days do |days_form|
-    .form-group
-      .form-group
-        = days_form.text_field :type, class: "form-control"
-      .form-group
-        = days_form.text_field :value, class: "form-control"
-      .form-group
-        = days_form.text_field :status, class: "form-control"
+= form_for [@user, @user_report] do |f|
+  %table.table-condensed
+    %tr
+      %th Date
+      %th Type
+      %th Value
+      %th Status
+      %th Comment
+
+    = f.fields_for :days do |days_form|
+      %tr.fields
+        %td
+          = days_form.date_field :date, :readonly => true, class: "form-control"
+        %td
+          = days_form.select(:day_type, [['Work Day', 'work_day'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
+        %td
+          = days_form.text_field :value, class: "form-control"
+        %td
+          = days_form.text_field :status, class: "form-control"
+        %td
+          = days_form.text_field :comment, class: "form-control"
