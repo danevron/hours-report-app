@@ -14,14 +14,9 @@ class Report < ActiveRecord::Base
 
   def self.build_report(report_data)
     report = new(report_data)
-
-    User.active.pluck(:id).each do |user_id|
-      user_report = report.user_reports.build(user_id: user_id)
-      (report.start_date.to_date..report.end_date.to_date).each do |date|
-        user_report.days.build(date: date)
-      end
+    report.user_reports = User.active.pluck(:id).map do |user_id|
+      UserReport.build_report(user_id, report.start_date, report.end_date)
     end
-
     report
   end
 end
