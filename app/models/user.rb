@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+
+  def current_report
+    user_reports.select { |r| r.current? }.first
+  end
 end

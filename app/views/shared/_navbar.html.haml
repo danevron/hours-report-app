@@ -13,6 +13,8 @@
           %a{href: "#"} Home
         %li
           = link_to "Invite a new employee", new_invitation_path
+        %li
+          = link_to "Your current report", [:edit, current_user, current_user.current_report]
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
             Reports
