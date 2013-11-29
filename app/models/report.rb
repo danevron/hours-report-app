@@ -14,9 +14,7 @@ class Report < ActiveRecord::Base
 
   def self.build_report(report_data)
     report = new(report_data)
-    report.timesheets = User.active.pluck(:id).map do |user_id|
-      Timesheet.build_timesheet(user_id, report.start_date, report.end_date)
-    end
+    report.timesheets = Timesheet.build_timesheets(User.active_users, report.start_date, report.end_date)
     report
   end
 end

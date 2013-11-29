@@ -7,9 +7,11 @@ class Timesheet < ActiveRecord::Base
   accepts_nested_attributes_for :days
   delegate :current?, :to => :report
 
-  def self.build_timesheet(user_id, start_date, end_date)
-    timesheet = new(:user_id => user_id, :status => "open")
-    timesheet.days = Day.build_days(user_id, start_date, end_date)
-    timesheet
+  def self.build_timesheets(users, start_date, end_date)
+    users.map do |user|
+      timesheet = new(:user_id => user.id, :status => "open")
+      timesheet.days = Day.build_days(start_date, end_date)
+      timesheet
+    end
   end
 end
