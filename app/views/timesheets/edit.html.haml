@@ -15,7 +15,7 @@
         %td
           = days_form.date_field :date, :readonly => true, class: "form-control"
         %td
-          = days_form.select(:day_type, [['Work Day', 'work_day'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
+          = days_form.select(:day_type, [['Work Day', 'work_day'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
         %td
           = days_form.text_field :value, class: "form-control"
         %td
