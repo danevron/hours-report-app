@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :timesheets
   has_many :reports, :through => :timesheets
 
-  scope :active, -> { where(status: "active") }
+  scope :active_users, -> { where(status: "active") }
 
   validates_uniqueness_of :uid, scope: :provider
 
