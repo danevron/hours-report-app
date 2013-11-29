@@ -1,4 +1,4 @@
-= form_for [@user, @user_report] do |f|
+= form_for [@user, @timesheet] do |f|
   .form-actions
     = f.submit "Update", class: "btn btn-primary"
   = f.label :comments
@@ -8,7 +8,6 @@
       %th Date
       %th Type
       %th Value
-      %th Status
       %th Comment
 
     = f.fields_for :days do |days_form|
@@ -19,8 +18,6 @@
           = days_form.select(:day_type, [['Work Day', 'work_day'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
         %td
           = days_form.text_field :value, class: "form-control"
-        %td
-          = days_form.text_field :status, class: "form-control"
         %td
           = days_form.text_field :comment, class: "form-control"
 

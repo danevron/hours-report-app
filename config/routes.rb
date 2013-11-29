@@ -4,11 +4,11 @@ HoursReport::Application.routes.draw do
 
   resources :invitations,    only: [:new, :create]
   resources :users,          only: [:index, :show] do
-    resources :user_reports, only: [:edit, :update]
+    resources :timesheets,   only: [:edit, :update]
   end
 
   resources :reports,        only: [:index, :show, :new, :create, :destroy] do
-    resources :user_reports, only: [:edit, :update]
+    resources :timesheets,   only: [:edit, :update]
   end
 
   match '/auth/:provider/callback' => 'sessions#create', via: %i(get post)

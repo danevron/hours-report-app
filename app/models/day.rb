@@ -1,9 +1,9 @@
 class Day < ActiveRecord::Base
-  belongs_to :user_report
+  belongs_to :timesheet
 
   def self.build_days(user_id, from, to)
     (from.to_date..to.to_date).map do |date|
-      new(:date => date, :status => "open")
+      new(:date => date)
     end
   end
 

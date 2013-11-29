@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125071443) do
+ActiveRecord::Schema.define(version: 20131122201448) do
 
   create_table "days", force: true do |t|
-    t.integer  "user_report_id"
+    t.integer  "timesheet_id"
     t.datetime "date"
     t.string   "day_type"
     t.float    "value"
     t.string   "comment"
-    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,9 +32,10 @@ ActiveRecord::Schema.define(version: 20131125071443) do
     t.datetime "updated_at"
   end
 
-  create_table "user_reports", force: true do |t|
+  create_table "timesheets", force: true do |t|
     t.integer  "user_id"
     t.integer  "report_id"
+    t.string   "status"
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -44,16 +44,16 @@ ActiveRecord::Schema.define(version: 20131125071443) do
   create_table "users", force: true do |t|
     t.string   "provider"
     t.string   "uid"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "refresh_token"
     t.string   "access_token"
     t.datetime "expires"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "image"
     t.string   "status",        default: "active", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

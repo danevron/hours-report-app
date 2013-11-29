@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-  has_many :user_reports
-  has_many :reports, :through => :user_reports
+  has_many :timesheets
+  has_many :reports, :through => :timesheets
 
   scope :active, -> { where(status: "active") }
 
@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def current_report
-    user_reports.select { |r| r.current? }.first
+  def current_timesheet
+    current_timesheets = timesheets.select { |timesheet| timesheet.current? }
+    current_timesheets.empty? ? nil : current_timesheets.first
   end
 end
