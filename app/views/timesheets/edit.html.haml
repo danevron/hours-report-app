@@ -11,7 +11,7 @@
         .col-md-1
           = days_form.object.weekday
         .col-md-2
-          = days_form.select(:day_type, [['Work Day', 'work_day'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
+          = days_form.select(:day_type, [['Work Day', 'workday'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army']], {}, :class => "form-control")
         .col-md-2
           = days_form.text_field :value, class: "form-control"
         .col-md-5

@@ -4,6 +4,8 @@ class Timesheet < ActiveRecord::Base
 
   has_many :days, dependent: :destroy
   validates_associated :days
+  validates :status, inclusion: { in: %w(open submitted reopened) }
+
   accepts_nested_attributes_for :days
   delegate :current?, :to => :report
   delegate :submitted?, :open?, :reopened?, :to => :status

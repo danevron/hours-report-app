@@ -1,6 +1,10 @@
 class Day < ActiveRecord::Base
+
+  DAY_TYPES = %w(workday weekend sickness vacation army)
+
   belongs_to :timesheet
 
+  validates :day_type, inclusion: { in: DAY_TYPES }
   before_create :prefill_default_values
 
   def self.build_days(from, to)
@@ -24,7 +28,7 @@ class Day < ActiveRecord::Base
       self.day_type = "weekend"
       self.value = 0
     else
-      self.day_type = "work_day"
+      self.day_type = "workday"
       self.value = 9
     end
   end
