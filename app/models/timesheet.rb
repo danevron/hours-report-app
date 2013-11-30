@@ -20,4 +20,12 @@ class Timesheet < ActiveRecord::Base
     status = read_attribute(:status) || ''
     status.inquiry
   end
+
+  def submit!
+    update_attributes(:status => "submitted")
+  end
+
+  def reopen!
+    update_attributes(:status => "reopened")
+  end
 end
