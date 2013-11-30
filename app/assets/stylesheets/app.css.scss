@@ -70,3 +70,13 @@ body {
 .has-error {
   color: red;
 }
+
+.action-header {
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #fff;
+  border-radius: 4px 4px 4px 4px;
+  padding: 15px 15px 15px 15px;
+  margin: 0 -15px 15px;
+  box-shadow: none;
+}

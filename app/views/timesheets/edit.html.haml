@@ -1,23 +1,22 @@
 = form_for [@user, @timesheet] do |f|
-  .form-actions
-    = f.submit "Update", class: "btn btn-primary"
-  = f.label :comments
-  = f.text_area :comments, class: "form-control"
-  %table.table-condensed
-    %tr
-      %th Date
-      %th Type
-      %th Value
-      %th Comment
+  .action-header
+    = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.submitted?
+    = f.submit "Submit Timesheet", class: "btn btn-success" unless @timesheet.submitted?
+    = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.submitted?
+  = f.fields_for :days do |days_form|
+    .row
+      .col-md-2
+        = days_form.object.date.to_date
+      .col-md-1
+        = days_form.object.weekday
+      .col-md-2
+        = days_form.select(:day_type, [['Work Day', 'work_day'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
+      .col-md-2
+        = days_form.text_field :value, class: "form-control"
+      .col-md-5
+        = days_form.text_field :comment, class: "form-control", placeholder: "Comment"
 
-    = f.fields_for :days do |days_form|
-      %tr.fields
-        %td
-          = days_form.date_field :date, :readonly => true, class: "form-control"
-        %td
-          = days_form.select(:day_type, [['Work Day', 'work_day'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army_reserve']], {}, :class => "form-control")
-        %td
-          = days_form.text_field :value, class: "form-control"
-        %td
-          = days_form.text_field :comment, class: "form-control"
-
+  .row
+    .col-md-12
+      = f.label :comments
+      = f.text_area :comments, class: "form-control"
