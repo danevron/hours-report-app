@@ -10,7 +10,13 @@ class TimesheetsController < ApplicationController
     @timesheet = timesheets.find(params[:id])
 
     if @timesheet.update_attributes(timesheet_params)
-      redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet saved"
+      if submitted_by_user?
+        redirect_to @user, notice: "Your timesheet has been submitted"
+      elsif reopened_by_user?
+        redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet reopened"
+      else
+        redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet saved"
+      end
     else
       render :action => "edit"
     end
@@ -26,8 +32,28 @@ class TimesheetsController < ApplicationController
     @user ? @user.timesheets : Timesheet
   end
 
+  def submitted_by_user?
+    params[:commit] == "Submit Timesheet"
+  end
+
+  def reopened_by_user?
+    params[:commit] == "Reopen Timesheet"
+  end
+
   def timesheet_params
-    params.require(:timesheet).permit(:comments, :status,
+    request_params = params.require(:timesheet).permit(:comments, :status,
       :days_attributes => [:id, :day_type, :value, :comment])
+    add_status_to_params(request_params)
+  end
+
+  def add_status_to_params(parameters)
+    case params[:commit]
+    when "Submit Timesheet"
+      parameters.merge(:status => "submitted")
+    when "Reopen Timesheet"
+      parameters.merge(:status => "reopened")
+    when "Update Changes"
+      parameters
+    end
   end
 end
