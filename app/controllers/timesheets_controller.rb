@@ -6,6 +6,10 @@ class TimesheetsController < ApplicationController
     @timesheet = timesheets.find(params[:id])
   end
 
+  def index
+    @timesheets = timesheets.all
+  end
+
   def update
     @timesheet = timesheets.find(params[:id])
 

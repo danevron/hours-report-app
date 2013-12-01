@@ -7,7 +7,7 @@ class Timesheet < ActiveRecord::Base
   validates :status, inclusion: { in: %w(open submitted reopened) }
 
   accepts_nested_attributes_for :days
-  delegate :current?, :to => :report
+  delegate :current?, :start_date, :end_date, :to => :report
   delegate :submitted?, :open?, :reopened?, :to => :status
 
   def self.build_timesheets(users, start_date, end_date)

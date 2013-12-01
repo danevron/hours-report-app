@@ -1,0 +1,11 @@
+.row
+  %table.table
+    %thead
+      %tr
+        %th ID
+        %th Period
+        %th Status
+        %th Comments
+    %tbody
+      - @timesheets.each do |timesheet|
+        = render :partial => 'timesheets/timesheet', :locals => { :user => @user, :timesheet => timesheet }
