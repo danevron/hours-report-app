@@ -3,6 +3,7 @@
     = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.submitted?
     = f.submit "Submit Timesheet", class: "btn btn-success" unless @timesheet.submitted?
     = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.submitted?
+    = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
   = f.fields_for :days do |days_form|
     .row
       %fieldset{ :disabled => (@timesheet.submitted? ? true : nil) }
@@ -11,9 +12,9 @@
         .col-md-1
           = days_form.object.weekday
         .col-md-2
-          = days_form.select(:day_type, [['Work Day', 'workday'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army']], {}, :class => "form-control")
+          = days_form.select(:day_type, [['Work Day', 'workday'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army']], {}, :class => "day-type form-control")
         .col-md-2
-          = days_form.text_field :value, class: "form-control"
+          = days_form.text_field :value, class: "day-value form-control"
         .col-md-5
           = days_form.text_field :comment, class: "form-control", placeholder: "Comment"
 
