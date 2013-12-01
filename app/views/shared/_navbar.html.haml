@@ -9,8 +9,6 @@
       %a.navbar-brand{href: "/"} Hours Report
     .navbar-collapse.collapse{style: "height: 1px;"}
       %ul.nav.navbar-nav.navbar-right
-        %li.active
-          %a{href: "#"} Home
         %li
           = link_to "Invite a new employee", new_invitation_path
         - if current_user && current_user.current_timesheet
