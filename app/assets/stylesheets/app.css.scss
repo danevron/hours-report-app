@@ -1,9 +1,9 @@
-$gray: #f1f1f1;
-$blue: #205081;
+$background-color: white;
+$blue: lightblue;
 
 html,
 body {
-  background-color: $gray;
+  background-color: $background-color;
   height: 100%;
 }
 
@@ -74,7 +74,7 @@ body {
 .action-header {
   margin-left: 0;
   margin-right: 0;
-  background-color: #fff;
+  background-color: white;
   border-radius: 4px 4px 4px 4px;
   padding: 15px 15px 15px 15px;
   margin: 0 -15px 15px;
