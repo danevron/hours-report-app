@@ -14,7 +14,7 @@ class Report < ActiveRecord::Base
 
   def self.build_report(report_data)
     report = new(report_data)
-    report.timesheets = Timesheet.build_timesheets(User.active_users, report.start_date, report.end_date)
+    report.timesheets = Timesheet.build_timesheets(User.active_users, report.start_date, report.end_date) if report.start_date && report.end_date
     report
   end
 end
