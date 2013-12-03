@@ -4,7 +4,7 @@ class Day < ActiveRecord::Base
 
   belongs_to :timesheet
 
-  validates :day_type, inclusion: { in: DAY_TYPES }
+  validates :day_type, inclusion: { in: DAY_TYPES }, :allow_nil => true
   before_create :prefill_default_values
 
   def self.build_days(from, to)
