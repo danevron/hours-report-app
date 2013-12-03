@@ -8,12 +8,12 @@
         %span.icon-bar
       %a.navbar-brand{href: "/"} Hours Report
     .navbar-collapse.collapse{style: "height: 1px;"}
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          = link_to "Invite a new employee", new_invitation_path
+      %ul.nav.navbar-nav.navbar-left
         - if current_user && current_user.current_timesheet
           %li
             = link_to "Your current timesheet", [:edit, current_user, current_user.current_timesheet]
+        %li
+          = link_to "Invite a new employee", new_invitation_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
             Reports
@@ -31,6 +31,7 @@
               %a{href: "#"} Separated link
             %li
               %a{href: "#"} One more separated link
+      %ul.nav.navbar-nav.navbar-right
         - if current_user
           %li
             = link_to "Sign Out", logout_path
