@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   scope :active_users, -> { where(status: "active") }
 
+  after_create :join_current_report, :if => "current_report"
+
   validates_uniqueness_of :uid, scope: :provider
 
   def self.from_auth(auth)
@@ -30,7 +32,16 @@ class User < ActiveRecord::Base
   end
 
   def current_timesheet
-    current_timesheets = timesheets.select { |timesheet| timesheet.current? }
-    current_timesheets.empty? ? nil : current_timesheets.first
+    current_report.timesheets.find_by(:user_id => id) if current_report
+  end
+
+  private
+
+  def join_current_report
+    current_report.add_new_user(self)
+  end
+
+  def current_report
+    Report.current_report
   end
 end

@@ -17,4 +17,12 @@ class Report < ActiveRecord::Base
     report.timesheets = Timesheet.build_timesheets(User.active_users, report.start_date, report.end_date) if report.start_date && report.end_date
     report
   end
+
+  def self.current_report
+    find_by(:current => true)
+  end
+
+  def add_new_user(user)
+    self.timesheets << Timesheet.build_timesheets([user], user.created_at, self.end_date)
+  end
 end
