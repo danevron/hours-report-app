@@ -23,6 +23,37 @@ class Report < ActiveRecord::Base
   end
 
   def add_new_user(user)
-    self.timesheets << Timesheet.build_timesheets([user], user.created_at, self.end_date)
+    self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date)
+  end
+
+  def timesheet_summaries
+    timesheets.map do |timesheet|
+      summary.new(timesheet.id,
+                  timesheet.user_id,
+                  timesheet.user_name,
+                  timesheet.total_hours,
+                  timesheet.vacation_days,
+                  timesheet.sickness_days,
+                  timesheet.army_reserve_days,
+                  timesheet.tenbis,
+                  timesheet.status,
+                  timesheet.comments)
+    end
+
+  end
+
+  private
+
+  def summary
+    Struct.new(:id,
+               :user_id,
+               :user_name,
+               :total_hours,
+               :vacation_days,
+               :sickness_days,
+               :army_reserve_days,
+               :tenbis,
+               :status,
+               :comments)
   end
 end
