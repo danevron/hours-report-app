@@ -1,0 +1,16 @@
+.panel{ :class => "#{panel_class_by_status(@report.status)}" }
+  .panel-heading
+    %h4= "Period: #{@report.start_date.to_date} - #{@report.end_date.to_date}"
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Total hours
+        %th Vacation Days
+        %th Sickness Days
+        %th Army Reserve Days
+        %th 10Bis
+        %th Status
+        %th Comments
+    %tbody
+      = render :partial => "timesheets/summary", :collection =>  @report.timesheet_summaries, :as => :summary
