@@ -17,6 +17,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'initjs', :git => 'git@github.com:josemarluedke/initjs.git'
 gem 'validates_timeliness', '~> 3.0'
 gem 'validates_overlap'
+gem 'capybara'
+gem 'poltergeist'
 
 group :development, :test do
   gem 'debugger'
