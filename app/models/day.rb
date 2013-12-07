@@ -1,6 +1,7 @@
 class Day < ActiveRecord::Base
 
-  DAY_TYPES = %w(workday weekend sickness vacation army)
+  DAY_TYPES = %w(workday weekend holiday sickness vacation army)
+  WEEKEND_DAYS = %w(Friday Saturday)
 
   belongs_to :timesheet
 
@@ -18,13 +19,17 @@ class Day < ActiveRecord::Base
   end
 
   def weekend?
-    weekday == "Friday" || weekday == "Saturday"
+    WEEKEND_DAYS.include?(weekday)
   end
 
   private
 
   def prefill_default_values
-    if weekend?
+    if Calendar.holidays[date.to_date]
+      self.day_type = "holiday"
+      self.value = 0
+      self.comment = Calendar.holidays[date.to_date]
+    elsif weekend?
       self.day_type = "weekend"
       self.value = 0
     else

@@ -11,6 +11,7 @@ class Report < ActiveRecord::Base
     :overlap => { :message_title => :overlapping,
                   :message_content => "There is an overalapping report for the given dates" }
 
+  before_create :pull_holidays
 
   def self.build_report(report_data)
     report = new(report_data)
@@ -55,5 +56,9 @@ class Report < ActiveRecord::Base
                :tenbis,
                :status,
                :comments)
+  end
+
+  def pull_holidays
+    Calendar.pull_holidays_between!("1qrp04se5e0bofc1rj15ntqbd6cg742o@import.calendar.google.com", User.first.access_token_for_api, start_date, end_date)
   end
 end
