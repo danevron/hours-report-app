@@ -12,6 +12,7 @@ require "sprockets/railtie"
 Bundler.require(:default, Rails.env)
 
 require_relative '../lib/ten_bis.rb'
+require_relative '../lib/calendar.rb'
 
 module HoursReport
   class Application < Rails::Application
