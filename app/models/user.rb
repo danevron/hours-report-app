@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   after_create :join_current_report, :if => "current_report"
 
   validates_uniqueness_of :uid, scope: :provider
+  validate :invited_user, :on => :create
 
   def self.from_auth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first
@@ -41,7 +42,19 @@ class User < ActiveRecord::Base
     self.access_token
   end
 
+  def invited?
+    Invitation.find_by(:recipient => self.email)
+  end
+
+  def not_invited?
+    !invited?
+  end
+
   private
+
+  def invited_user
+    errors[:base] << "User is not invited"  unless invited?
+  end
 
   def token_is_valid?
     token_validation[:audience] == ENV['GOOGLE_KEY']

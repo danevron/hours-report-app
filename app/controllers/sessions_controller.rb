@@ -6,6 +6,8 @@ class SessionsController < ApplicationController
     if user.save
       session[:user_id] = user.id
       redirect_to root_path, notice: "Signed in!"
+    elsif user.not_invited?
+      redirect_to login_path, :alert => "You are not invited!"
     else
       raise "Failed to login"
     end
