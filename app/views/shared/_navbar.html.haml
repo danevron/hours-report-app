@@ -24,7 +24,7 @@
             %li
               = link_to "All Reports", reports_path
             %li
-              %a{href: "#"} Current Report
+              = link_to "Current Report", Report.current_report if Report.current_report
             %li.divider
             %li.dropdown-header Nav header
             %li
