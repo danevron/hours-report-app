@@ -7,13 +7,19 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    @invitation = Invitation.new(params[:invitation])
+    @invitation = Invitation.new(invitation_params)
 
-    if @invitation.valid?
+    if @invitation.save
       Mailer.delay.invitation_email(@invitation)
       redirect_to root_path, notice: "Your invitation is being sent"
     else
       render "new"
     end
+  end
+
+  private
+
+  def invitation_params
+    params.require(:invitation).permit(:recipient, :sender)
   end
 end

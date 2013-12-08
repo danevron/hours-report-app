@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122201448) do
+ActiveRecord::Schema.define(version: 20131208193759) do
 
   create_table "days", force: true do |t|
     t.integer  "timesheet_id"
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 20131122201448) do
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "invitations", force: true do |t|
+    t.string "recipient"
+    t.string "sender"
   end
 
   create_table "reports", force: true do |t|

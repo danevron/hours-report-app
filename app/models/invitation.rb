@@ -1,19 +1,9 @@
-class Invitation
-  extend ActiveModel::Naming
-  include ActiveModel::Conversion
-  include ActiveModel::Validations
+class Invitation < ActiveRecord::Base
 
-  attr_accessor :sender, :recipient
 
   validates_presence_of :recipient
   validates_presence_of :sender
   validate :recipient_already_registered?, if: "recipient.present?"
-
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-  end
 
   def recipient_named_email
     "#{recipient_name} <#{recipient}>"
