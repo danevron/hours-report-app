@@ -24,6 +24,7 @@ class Report < ActiveRecord::Base
   end
 
   def add_new_user(user)
+    pull_holidays
     self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date)
   end
 
