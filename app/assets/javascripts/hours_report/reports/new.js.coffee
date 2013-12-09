@@ -8,4 +8,10 @@ HoursReport.Reports.New =
       todayBtn: "linked"
       autoclose: true
 
+    $(".month-datepicker").datepicker
+      format: "mm/yyyy"
+      autoclose: true
+      viewMode: 1
+      minViewMode: 1
+
     modules: -> []

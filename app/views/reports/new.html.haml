@@ -11,6 +11,11 @@
       = f.text_field :end_date, { class: 'datepicker form-control' }
       = f.error :end_date
   .form-group
+    = f.label :tenbis_date, { class: "col-sm-2" }
+    .col-sm-10
+      = f.text_field :tenbis_date, { class: 'month-datepicker form-control' }
+      = f.error :tenbis_date
+  .form-group
     = f.label :current, { class: "col-sm-2" }
     .col-sm-10
       = f.input_field :current
