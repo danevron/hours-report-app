@@ -6,14 +6,14 @@ class TenBisCrawler
 
   BASE_URL = "http://www.10bis.co.il/"
 
-  attr_reader :user_name, :password
+  attr_reader :user_name, :password, :month, :year
 
-  def self.create_crawler
-    new(ENV['TENBIS_USER'], ENV['TENBIS_PASSWORD'])
+  def self.create_crawler(month, year)
+    new(ENV['TENBIS_USER'], ENV['TENBIS_PASSWORD'], month, year)
   end
 
-  def initialize(user_name, password)
-    @user_name, @password = [user_name, password]
+  def initialize(user_name, password, month, year)
+    @user_name, @password, @month, @year = [user_name, password, month, year]
     Capybara.run_server = false
     Capybara.current_driver = :poltergeist
     Capybara.app_host = BASE_URL
@@ -27,7 +27,7 @@ class TenBisCrawler
   private
 
   def get_report
-    visit BASE_URL + '/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=2013&chosenMonth=10&start_year=2013&start_mon=10&start_day=1&end_year=2013&end_mon=10&end_day=1'
+    visit BASE_URL + "/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=#{year}&chosenMonth=#{month}&start_year=#{year}&start_mon=#{month}&start_day=1&end_year=#{year}&end_mon=#{month}&end_day=1"
     sleep 8
     html = begin
              page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
@@ -36,7 +36,7 @@ class TenBisCrawler
            end
     report = html.each_line.map{|s| row = s.split(/\t/); {row.first => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
     report.shift
-    report
+    downcased_keys_hash(report)
   end
 
   def login
@@ -48,4 +48,7 @@ class TenBisCrawler
     sleep 8
   end
 
+  def downcased_keys_hash(h)
+    Hash[h.map{|k,v| v.class == Array ? [k,v.map{|r| f r}.to_a] : [k.downcase,v]}]
+  end
 end
