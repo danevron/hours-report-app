@@ -27,6 +27,6 @@ class ReportsController < ApplicationController
   private
 
   def report_params
-    params.require(:report).permit(:start_date, :end_date, :current)
+    params.require(:report).permit(:start_date, :end_date, :current, :tenbis_date)
   end
 end
