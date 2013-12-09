@@ -11,9 +11,10 @@ class Timesheet < ActiveRecord::Base
   delegate :submitted?, :open?, :reopened?, :to => :status
   delegate :name, :to => :user, :prefix => :user
 
-  def self.build_timesheets(users, start_date, end_date)
+  def self.build_timesheets(users, start_date, end_date, tenbis_usage)
     users.map do |user|
       timesheet = new(:user_id => user.id, :status => "open")
+      timesheet.tenbis_usage = tenbis_usage[user.name.downcase] || 0
       timesheet.days = Day.build_days(start_date, end_date)
       timesheet
     end

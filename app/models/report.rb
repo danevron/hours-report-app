@@ -15,7 +15,13 @@ class Report < ActiveRecord::Base
 
   def self.build_report(report_data)
     report = new(report_data)
-    report.timesheets = Timesheet.build_timesheets(User.active_users, report.start_date, report.end_date) if report.start_date && report.end_date
+    if report.start_date && report.end_date
+      report.tenbis_date = DateTime.parse report_data["tenbis_date"]
+      report.timesheets = Timesheet.build_timesheets(
+        User.active_users, report.start_date, report.end_date,
+        Report.tenbis_usage(report.tenbis_date.month, report.tenbis_date.year)
+      )
+    end
     report
   end
 
@@ -37,7 +43,7 @@ class Report < ActiveRecord::Base
                   timesheet.vacation_days,
                   timesheet.sickness_days,
                   timesheet.army_reserve_days,
-                  timesheet.tenbis,
+                  timesheet.tenbis_usage,
                   timesheet.status,
                   timesheet.comments)
     end
@@ -57,6 +63,10 @@ class Report < ActiveRecord::Base
                :tenbis,
                :status,
                :comments)
+  end
+
+  def self.tenbis_usage(month, year)
+    @tenbis_usage ||= TenBisCrawler.create_crawler(month, year).crawl
   end
 
   def pull_holidays
