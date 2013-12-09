@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131208193759) do
+ActiveRecord::Schema.define(version: 20131209210654) do
 
   create_table "days", force: true do |t|
     t.integer  "timesheet_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20131208193759) do
     t.boolean  "current"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.time     "tenbis_date"
   end
 
   create_table "timesheets", force: true do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20131208193759) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "tenbis_usage"
   end
 
   create_table "users", force: true do |t|
