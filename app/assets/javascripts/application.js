@@ -17,4 +17,5 @@
 //= require bootstrap-datepicker/core
 //= require hours_report/hours_report.js
 //= require init.js
+//= require the_role_editinplace
 //= require_tree .

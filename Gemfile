@@ -20,6 +20,7 @@ gem 'validates_overlap'
 gem 'capybara'
 gem 'poltergeist'
 gem 'typhoeus'
+gem 'the_role', :git => 'git@github.com:the-teacher/the_role.git'
 
 group :development, :test do
   gem 'debugger'

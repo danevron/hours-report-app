@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_roles
 
   has_many :timesheets
   has_many :reports, :through => :timesheets

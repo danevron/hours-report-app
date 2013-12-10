@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209210654) do
+ActiveRecord::Schema.define(version: 20131210213758) do
 
   create_table "days", force: true do |t|
     t.integer  "timesheet_id"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20131209210654) do
     t.time     "tenbis_date"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.text     "the_role",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "timesheets", force: true do |t|
     t.integer  "user_id"
     t.integer  "report_id"
@@ -61,6 +70,7 @@ ActiveRecord::Schema.define(version: 20131209210654) do
     t.string   "status",        default: "active", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
   end
 
 end

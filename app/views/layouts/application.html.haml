@@ -7,6 +7,8 @@
     = csrf_meta_tags
   %body
     = initjs_tag app_name: 'HoursReport'
+    = yield :role_sidebar
+    = yield :role_main
     #wrap
       = render "shared/navbar"
       .container
