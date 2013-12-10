@@ -21,12 +21,12 @@ class TenBisCrawler
 
   def crawl
     login
-    get_report
+    get_report_and_logout
   end
 
   private
 
-  def get_report
+  def get_report_and_logout
     visit BASE_URL + "/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=#{year}&chosenMonth=#{month}&start_year=#{year}&start_mon=#{month}&start_day=1&end_year=#{year}&end_mon=#{month}&end_day=1"
     sleep 8
     html = begin
@@ -35,6 +35,7 @@ class TenBisCrawler
              page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
            end
     report = html.each_line.map{|s| row = s.split(/\t/); {row.first => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
+    logout
     report.shift
     downcased_keys_hash(report)
   end
@@ -46,6 +47,10 @@ class TenBisCrawler
     find('.HomePageHeaderTd [data-logon-popup-form-password-input]').set(password)
     find('.HomePageHeaderTd .submitButton').click
     sleep 8
+  end
+
+  def logout
+    visit BASE_URL + "/Account/LogOff"
   end
 
   def downcased_keys_hash(h)
