@@ -31,7 +31,8 @@ class Report < ActiveRecord::Base
 
   def add_new_user(user)
     pull_holidays
-    self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date)
+    tenbis_usage = Report.tenbis_usage(self.tenbis_date.month, self.tenbis_date.year)
+    self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date, tenbis_usage)
   end
 
   def timesheet_summaries
