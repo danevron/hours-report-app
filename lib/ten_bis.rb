@@ -15,6 +15,12 @@ class TenBisCrawler
   def initialize(user_name, password, month, year)
     @user_name, @password, @month, @year = [user_name, password, month, year]
     Capybara.run_server = false
+    Capybara.register_driver :poltergeist do |app|
+        Capybara::Poltergeist::Driver.new(app, {
+          :js_errors => false,
+          :timeout => 120
+        })
+    end
     Capybara.current_driver = :poltergeist
     Capybara.app_host = BASE_URL
   end
