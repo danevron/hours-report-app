@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
 
-  before_action :authenticate_user
+  before_action :login_required
+  before_action :role_required
 
   def index
     @reports = Report.all
