@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
       provider:      auth["provider"],
       refresh_token: auth["credentials"]["refresh_token"],
       access_token:  auth["credentials"]["token"],
-      expires:       auth["credentials"]["expires_in"],
+      expires:       auth["credentials"]["expires_at"],
       first_name:    auth["info"]["first_name"],
       last_name:     auth["info"]["last_name"],
       image:         auth["info"]["image"],
