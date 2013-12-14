@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
 
-  before_filter :authenticate_user
+  before_action :login_required
+  before_action :role_required
 
   def new
     @invitation = Invitation.new(sender: current_user.email)
@@ -11,7 +12,7 @@ class InvitationsController < ApplicationController
 
     if @invitation.save
       Mailer.delay.invitation_email(@invitation)
-      redirect_to root_path, notice: "Your invitation is being sent"
+      redirect_to current_user, notice: "Your invitation is being sent"
     else
       render "new"
     end
