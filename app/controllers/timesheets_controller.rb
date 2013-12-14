@@ -1,9 +1,12 @@
 class TimesheetsController < ApplicationController
   before_action :load_user
-  before_action :authenticate_user
+
+  before_action :login_required
+  before_action :role_required, :only => [:index]
+  before_action :set_timesheet, :only => [:edit, :update]
+  before_action :owner_required, :only => [:edit, :update]
 
   def edit
-    @timesheet = timesheets.find(params[:id])
   end
 
   def index
@@ -11,8 +14,6 @@ class TimesheetsController < ApplicationController
   end
 
   def update
-    @timesheet = timesheets.find(params[:id])
-
     if @timesheet.update_attributes(timesheet_params)
       if user_submitted?
         @timesheet.submit!
@@ -29,6 +30,10 @@ class TimesheetsController < ApplicationController
   end
 
   private
+
+  def set_timesheet
+    @owner_check_object = @timesheet = timesheets.find(params[:id])
+  end
 
   def load_user
     @user = User.find(params[:user_id])
