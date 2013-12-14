@@ -7,6 +7,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @invitation = Invitation.new
+    @user = User.find(params[:id])
   end
 end
