@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def access_denied
-    return render(text: 'access_denied: requires a role')
+    flash[:alert] = 'You are not authorized to view this page!'
+    redirect_to_back_or_default
   end
 
   alias_method :role_access_denied, :access_denied
@@ -22,5 +23,13 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def redirect_to_back_or_default(default = root_url)
+    if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+      redirect_to :back
+    else
+      redirect_to default
+    end
   end
 end
