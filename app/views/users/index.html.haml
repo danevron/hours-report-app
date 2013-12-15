@@ -1,5 +1,3 @@
-%h1 Employees
-
 .row
   - @users.each do |user|
     = render :partial => 'users/user', :locals => { :user => user }
