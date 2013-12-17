@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  respond_to :xls, :html
+
 
   before_action :login_required
   before_action :role_required
@@ -9,6 +11,10 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xlsx { render xlsx: :show, filename: "temp" }
+    end
   end
 
   def new

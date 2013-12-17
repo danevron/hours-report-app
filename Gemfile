@@ -21,6 +21,7 @@ gem 'capybara'
 gem 'poltergeist'
 gem 'typhoeus'
 gem 'the_role', :git => 'git@github.com:the-teacher/the_role.git'
+gem 'to_spreadsheet'
 
 group :development, :test do
   gem 'debugger'
