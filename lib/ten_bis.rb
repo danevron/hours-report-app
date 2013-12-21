@@ -49,9 +49,9 @@ class TenBisCrawler
   def login
     visit BASE_URL
     find('[data-home-page-logon-button]').click
-    find('.HomePageHeaderTd [data-logon-email]').set(user_name)
-    find('.HomePageHeaderTd [data-logon-popup-form-password-input]').set(password)
-    find('.HomePageHeaderTd .submitButton').click
+    first('[data-logon-popup-form-user-name-input]', :visible => false).set(user_name)
+    first('[data-logon-popup-form-password-input]', :visible => false).set(password)
+    first('[data-logon-popup-form-submit-btn]', :visible => false).click
     sleep 8
   end
 
