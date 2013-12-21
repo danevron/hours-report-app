@@ -1,3 +1,6 @@
 .row
-  - @users.each do |user|
-    = render :partial => 'users/user', :locals => { :user => user }
+  = simple_form_for :user, :url => update_all_path, :html => { :method => :put } do
+    %input.btn.btn-primary{ :type => "submit", :value => "Save Changes" }
+    - @users.each do |user|
+      = simple_fields_for "user[]", user do |user_fields|
+        = render :partial => 'users/user', :locals => { :user => user, :f => user_fields }

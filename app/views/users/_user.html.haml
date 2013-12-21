@@ -1,4 +1,8 @@
 .row.box
   .row
-    = link_to user, :class => '', :title => "#{user.name}" do
-      = image_tag user.image || "http://lorempixel.com/100/100/cats/", :class => 'img-thumbnail'
+    .col-md-2
+      = link_to user, :class => '', :title => "#{user.name}" do
+        = image_tag user.image || "http://lorempixel.com/100/100/cats/", :class => 'img-thumbnail'
+    .col-md-2
+      = f.input :role_id, :collection => [['Admin',1],['User',2]]
+

@@ -6,6 +6,8 @@ HoursReport::Application.routes.draw do
     resources :timesheets,   only: [:edit, :update, :index]
   end
 
+  match "users/all" => "users#update_all", :as => :update_all, :via => :put
+
   resources :reports,        only: [:index, :show, :new, :create, :destroy] do
     resources :timesheets,   only: [:edit, :update, :index]
   end
