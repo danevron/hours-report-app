@@ -12,14 +12,14 @@ class Report < ActiveRecord::Base
                   :message_content => "There is an overalapping report for the given dates" }
 
   before_create :pull_holidays
+  after_create :extract_tenbis_usage
 
   def self.build_report(report_data)
     report = new(report_data)
     if report.start_date && report.end_date
-      report.tenbis_date = DateTime.parse report_data["tenbis_date"]
+      report.tenbis_date = Date.parse report_data["tenbis_date"]
       report.timesheets = Timesheet.build_timesheets(
-        User.active_users, report.start_date, report.end_date,
-        Report.tenbis_usage(report.tenbis_date.month, report.tenbis_date.year)
+        User.active_users, report.start_date, report.end_date
       )
     end
     report
@@ -31,8 +31,7 @@ class Report < ActiveRecord::Base
 
   def add_new_user(user)
     pull_holidays
-    tenbis_usage = Report.tenbis_usage(self.tenbis_date.month, self.tenbis_date.year)
-    self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date, tenbis_usage)
+    self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date)
   end
 
   def timesheet_summaries
@@ -66,11 +65,12 @@ class Report < ActiveRecord::Base
                :comments)
   end
 
-  def self.tenbis_usage(month, year)
-    @tenbis_usage ||= TenBisCrawler.create_crawler(month, year).crawl
-  end
-
   def pull_holidays
     Calendar.pull_holidays_between!("1qrp04se5e0bofc1rj15ntqbd6cg742o@import.calendar.google.com", User.first.access_token_for_api, start_date, end_date)
+  end
+
+  def extract_tenbis_usage
+    TenbisWorker.perform_async(self.tenbis_date.month, self.tenbis_date.year)
+    TenbisUsageCollector.perform_in(2.minutes, self.id)
   end
 end
