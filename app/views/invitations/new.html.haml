@@ -3,4 +3,5 @@
   = simple_form_for @invitation do |f|
     = f.input :sender, as: :hidden
     = f.input :recipient, label_html: { class: 'sr-only' }, placeholder: "first.last@company.com", as: :email
+    = f.input :employee_number, label_html: { class: 'sr-only' }
     = f.submit "Send invitation", class: "btn btn-primary"

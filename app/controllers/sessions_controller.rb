@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.from_auth(omnihash) || User.create_from_auth(omnihash)
+    user.employee_number = Invitation.find_by(:recipient => user.email).employee_number if user.new_record?
 
     if user.save
       session[:user_id] = user.id

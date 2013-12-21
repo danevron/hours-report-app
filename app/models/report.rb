@@ -35,10 +35,11 @@ class Report < ActiveRecord::Base
   end
 
   def timesheet_summaries
-    timesheets.map do |timesheet|
+    timesheets.joins(:user).order("users.employee_number").map do |timesheet|
       summary.new(timesheet.id,
                   timesheet.user_id,
                   timesheet.user_name,
+                  timesheet.user.employee_number,
                   timesheet.total_hours,
                   timesheet.vacation_days,
                   timesheet.sickness_days,
@@ -56,6 +57,7 @@ class Report < ActiveRecord::Base
     Struct.new(:id,
                :user_id,
                :user_name,
+               :employee_number,
                :total_hours,
                :vacation_days,
                :sickness_days,

@@ -1,8 +1,6 @@
 class Invitation < ActiveRecord::Base
 
-
-  validates_presence_of :recipient
-  validates_presence_of :sender
+  validates_presence_of :recipient, :sender, :employee_number
   validate :recipient_already_registered?, if: "recipient.present?"
 
   def recipient_named_email

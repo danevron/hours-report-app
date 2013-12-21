@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   after_create :join_current_report, :if => "current_report"
 
   validates_uniqueness_of :uid, scope: :provider
+  validates_presence_of :employee_number
   validate :invited_user, :on => :create
 
   def self.from_auth(auth)

@@ -1,5 +1,5 @@
 %tr
-  %td= link_to summary.user_name, edit_user_timesheet_path(summary.user_id, summary.id)
+  %td= link_to "#{summary.user_name} (#{summary.employee_number})", edit_user_timesheet_path(summary.user_id, summary.id)
   %td= summary.total_hours
   %td= summary.vacation_days
   %td= summary.sickness_days
