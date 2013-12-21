@@ -48,7 +48,12 @@ class TenBisCrawler
 
   def login
     visit BASE_URL
-    find('[data-home-page-logon-button]').click
+    begin
+      find('[data-home-page-logon-button]').click
+    rescue Capybara::ElementNotFound => e
+      logout
+      find('[data-home-page-logon-button]').click
+    end
     first('[data-logon-popup-form-user-name-input]', :visible => false).set(user_name)
     first('[data-logon-popup-form-password-input]', :visible => false).set(password)
     first('[data-logon-popup-form-submit-btn]', :visible => false).click
