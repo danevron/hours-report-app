@@ -36,4 +36,6 @@
                   = link_to "Current Report", Report.current_report if Report.current_report
         %ul.nav.navbar-nav.navbar-right
           %li
+            = link_to current_user.name, root_path
+          %li
             = link_to "Sign Out", logout_path
