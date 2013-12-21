@@ -1,5 +1,4 @@
 HoursReport::Application.routes.draw do
-
   root 'users#show'
 
   resources :invitations,    only: [:new, :create]
@@ -14,4 +13,6 @@ HoursReport::Application.routes.draw do
   match '/auth/:provider/callback' => 'sessions#create', via: %i(get post)
   match '/logout'                  => 'sessions#destroy', via: %i(get delete), as: :logout
   match '/login'                   => 'sessions#new', via: %i(get), as: :login
+
+  mount Sidekiq::Web => '/sidekiq'
 end

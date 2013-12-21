@@ -12,6 +12,7 @@ gem 'bootstrap-sass-rails'
 gem 'roadie', '2.4.1'
 gem 'simple_form', '~> 3.0.0.rc'
 gem 'sidekiq'
+gem 'sinatra'
 gem 'google-api-client', :require => 'google/api_client'
 gem 'bootstrap-datepicker-rails'
 gem 'initjs', :git => 'git@github.com:josemarluedke/initjs.git'
@@ -19,6 +20,7 @@ gem 'validates_timeliness', '~> 3.0'
 gem 'validates_overlap'
 gem 'capybara'
 gem 'poltergeist'
+gem 'pg'
 gem 'typhoeus'
 gem 'the_role', :git => 'git@github.com:the-teacher/the_role.git'
 gem 'to_spreadsheet'
@@ -29,9 +31,6 @@ group :development, :test do
 end
 
 gem "letter_opener", :group => :development
-
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
