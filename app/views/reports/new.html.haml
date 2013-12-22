@@ -1,27 +1,28 @@
 %h1 New Report
-= simple_form_for @report, :html => { :class => "form-horizontal" } do |f|
-  .form-group
-    = f.label :start_date, { class: "col-sm-2" }
-    .col-sm-10
-      = f.text_field :start_date, { class: 'datepicker form-control' }
-      = f.error :start_date
-  .form-group
-    = f.label :end_date, { class: "col-sm-2" }
-    .col-sm-10
-      = f.text_field :end_date, { class: 'datepicker form-control' }
-      = f.error :end_date
-  .form-group
-    = f.label :tenbis_date, { class: "col-sm-2" }
-    .col-sm-10
-      = f.text_field :tenbis_date, { class: 'month-datepicker form-control' }
-      = f.error :tenbis_date
-  .form-group
-    = f.label :current, { class: "col-sm-2" }
-    .col-sm-10
-      = f.input_field :current
-      = f.error :current
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      = f.error :overlapping
-      = f.submit "Create Report", class: "btn btn-primary"
+.well.col-sm-offset-3.col-sm-6
+  = simple_form_for @report, :html => { :class => "form-horizontal" } do |f|
+    .form-group
+      = f.label :start_date, { class: "col-sm-3" }
+      .col-sm-9
+        = f.text_field :start_date, { class: 'datepicker form-control' }
+        = f.error :start_date
+    .form-group
+      = f.label :end_date, { class: "col-sm-3" }
+      .col-sm-9
+        = f.text_field :end_date, { class: 'datepicker form-control' }
+        = f.error :end_date
+    .form-group
+      = f.label :tenbis_date, "10bis month", { class: "col-sm-3 control-label" }
+      .col-sm-9
+        = f.text_field :tenbis_date, { class: 'month-datepicker form-control' }
+        = f.error :tenbis_date
+    .form-group
+      = f.label :current, { class: "col-sm-3" }
+      .col-sm-9
+        = f.input_field :current
+        = f.error :current
+    .form-group
+      .col-sm-offset-3.col-sm-9
+        = f.error :overlapping
+        = f.submit "Create Report", class: "btn btn-primary"
 
