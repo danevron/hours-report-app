@@ -15,7 +15,7 @@
           = days_form.select(:day_type, [['Work Day', 'workday'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army'], ['Holiday', 'holiday']], {}, :class => "day-type form-control")
         .col-md-2
           = days_form.text_field :value,
-            :value => number_with_precision(days_form.object.value, precision: 1, significant: true, strip_insignificant_zeros: true),
+            :value => number_with_precision(days_form.object.value, precision: 2, significant: true, strip_insignificant_zeros: true),
             class: "day-value form-control"
         .col-md-5
           = days_form.text_field :comment, class: "form-control"
