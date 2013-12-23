@@ -4,7 +4,7 @@
     = f.submit "Submit Timesheet", class: "btn btn-success" unless @timesheet.submitted?
     = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.submitted?
     = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
-  = f.fields_for :days do |days_form|
+  = f.fields_for :days, @timesheet.days.sort do |days_form|
     .row
       %fieldset{ :disabled => (@timesheet.submitted? ? true : nil) }
         .col-md-2
