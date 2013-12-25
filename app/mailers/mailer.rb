@@ -10,4 +10,15 @@ class Mailer < ActionMailer::Base
       subject: "Welcome to Hours Report"
     )
   end
+
+  def reminder_email(user_id)
+
+    @user = User.find(user_id)
+
+    mail(
+      from: "Hours Report <noreply@hoursreport.se>",
+      to: @user.email,
+      subject: "Please fill your Hours Report"
+    )
+  end
 end

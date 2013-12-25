@@ -1,0 +1,3 @@
+%h1.mail= "Hi #{@user.name}"
+%p.mail
+  Please fill #{ link_to "Your", edit_user_timesheet_url(@user, @user.current_timesheet) } hours report
