@@ -1,7 +1,10 @@
 .panel{ :class => "#{panel_class_by_status(@report.status)}" }
   .panel-heading
     %h4= "Period: #{@report.start_date.to_date} - #{@report.end_date.to_date}"
-    = link_to 'Download as Excel', report_path(@report, format: "xlsx"), class: 'btn btn-primary'
+    = form_for [@report, Reminder.new] do |f|
+      .btn-group
+        = f.submit "Send Reminders", :class => "btn btn-default"
+      = link_to 'Download as Excel', report_path(@report, format: "xlsx"), class: 'btn btn-primary'
   %table.table
     %thead
       %tr

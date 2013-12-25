@@ -1,5 +1,6 @@
 class Report < ActiveRecord::Base
   has_many :timesheets, dependent: :destroy
+  has_many :reminders, dependent: :destroy
   has_many :users, :through => :timesheets
 
   validates :current, uniqueness: true, if: "current?"

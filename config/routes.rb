@@ -10,6 +10,7 @@ HoursReport::Application.routes.draw do
 
   resources :reports,        only: [:index, :show, :new, :create, :destroy] do
     resources :timesheets,   only: [:edit, :update, :index]
+    resources :reminders,    only: [:create]
   end
 
   match '/auth/:provider/callback' => 'sessions#create', via: %i(get post)
