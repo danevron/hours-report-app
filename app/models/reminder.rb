@@ -5,7 +5,7 @@ class Reminder < ActiveRecord::Base
 
   def send_reminder_emails
     self.report.users.each do |user|
-      Mailer.delay.reminder_email(user.id) unless user.current_timesheet.status == "submitted"
+      Mailer.delay.reminder_email(user.id, self.report.id) unless user.current_timesheet.status == "submitted"
     end
   end
 
