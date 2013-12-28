@@ -1,3 +1,4 @@
 %h1.mail= "Hi #{@user.name}"
+%h3 Please fill #{ link_to "Your hours report", edit_user_timesheet_url(@user, @user.current_timesheet) }
 %p.mail
-  Please fill #{ link_to "Your", edit_user_timesheet_url(@user, @user.current_timesheet) } hours report
+  The last day you can fill in your hours is #{@report.end_date.to_date}
