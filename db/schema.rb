@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20131225165523) do
   create_table "reports", force: true do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string   "status"
+    t.string   "status",      default: "open", null: false
     t.boolean  "current"
     t.datetime "created_at"
     t.datetime "updated_at"
