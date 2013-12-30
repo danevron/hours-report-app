@@ -1,7 +1,6 @@
 class ReportsController < ApplicationController
   respond_to :xls, :html
 
-
   before_action :login_required
   before_action :role_required
 
@@ -25,15 +24,26 @@ class ReportsController < ApplicationController
     @report = Report.build_report(report_params)
 
     if @report.save
-      redirect_to reports_path, notice: "Report created"
+      redirect_to reports_path, :notice => "Report created"
     else
       render "new"
+    end
+  end
+
+  def update
+    @report = Report.find(params[:id])
+
+    if @report.update_attributes(report_params)
+      redirect_to @report, :notice => "Report #{@report.status}"
+    else
+      flash[:alert] = "Action failed"
+      render 'show'
     end
   end
 
   private
 
   def report_params
-    params.require(:report).permit(:start_date, :end_date, :current, :tenbis_date)
+    params.require(:report).permit(:start_date, :end_date, :current, :tenbis_date, :status)
   end
 end
