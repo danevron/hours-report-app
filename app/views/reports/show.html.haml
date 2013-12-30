@@ -8,7 +8,10 @@
   = simple_form_for @report, :html => { :class => "form-horizontal" } do |f|
     - change_status_to = @report.reload.submitted? ? "reopened" : "submitted"
     = f.hidden_field :status, :value => change_status_to
-    = f.submit "Submit Report", :class => "btn btn-success" unless @report.reload.submitted?
+    - unless @report.reload.submitted?
+      = f.submit "Submit Report", :class => "btn btn-success"
+      = f.hidden_field :current, :value => false
+
     = f.submit "Reopen Report", :class => "btn btn-success" if @report.reload.submitted?
     = f.error :base
 
