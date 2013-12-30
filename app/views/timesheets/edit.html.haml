@@ -1,9 +1,10 @@
-= form_for [@user, @timesheet] do |f|
+= simple_form_for [@user, @timesheet] do |f|
   .action-header
-    = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.submitted?
-    = f.submit "Submit Timesheet", class: "btn btn-success" unless @timesheet.submitted?
-    = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.submitted?
+    = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.reload.submitted?
+    = f.submit "Submit Timesheet", class: "btn btn-success" unless @timesheet.reload.submitted?
+    = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.reload.submitted?
     = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
+    = f.error :base
   = f.fields_for :days, @timesheet.days.sort do |days_form|
     .row
       %fieldset{ :disabled => (@timesheet.submitted? ? true : nil) }
