@@ -3,8 +3,10 @@ class Timesheet < ActiveRecord::Base
   belongs_to :report
 
   has_many :days, dependent: :destroy
+
   validates_associated :days
   validates :status, inclusion: { in: %w(open submitted reopened) }
+  validate :report_open, :if => :reopened?
 
   accepts_nested_attributes_for :days
   delegate :current?, :start_date, :end_date, :to => :report
@@ -22,14 +24,6 @@ class Timesheet < ActiveRecord::Base
   def status
     status = read_attribute(:status) || ''
     status.inquiry
-  end
-
-  def submit!
-    update_attributes(:status => "submitted")
-  end
-
-  def reopen!
-    update_attributes(:status => "reopened")
   end
 
   def total_hours
@@ -58,5 +52,9 @@ class Timesheet < ActiveRecord::Base
     days.inject(0) do |sum, day|
       day.day_type == day_type ? sum += day.value : sum
     end
+  end
+
+  def report_open
+    errors[:base] << "Timesheet cannot be reopened due to submitted report" if self.report.submitted?
   end
 end

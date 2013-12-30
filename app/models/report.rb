@@ -7,13 +7,17 @@ class Report < ActiveRecord::Base
   validates_datetime :start_date
   validates_date :end_date, :after => lambda { |report| report.start_date + 1.month - 2.days }
 
+  validates :status, inclusion: { in: %w(open submitted reopened) }
   validates_associated :timesheets
   validates :start_date, :end_date,
     :overlap => { :message_title => :overlapping,
                   :message_content => "There is an overalapping report for the given dates" }
+  validate :timesheets_submitted, :if => :submitted?
 
   before_create :pull_holidays
   after_create :extract_tenbis_usage
+
+  delegate :submitted?, :open?, :reopened?, :to => :status
 
   def self.build_report(report_data)
     report = new(report_data)
@@ -53,6 +57,11 @@ class Report < ActiveRecord::Base
 
   end
 
+  def status
+    status = read_attribute(:status) || ''
+    status.inquiry
+  end
+
   private
 
   def summary
@@ -76,5 +85,11 @@ class Report < ActiveRecord::Base
   def extract_tenbis_usage
     TenbisWorker.perform_async(self.tenbis_date.month, self.tenbis_date.year)
     TenbisUsageCollector.perform_in(2.minutes, self.id)
+  end
+
+  def timesheets_submitted
+    self.timesheets.each do |timesheet|
+      return errors[:base] << "Report cannot be submitted due to unsubmitted timesheets" unless timesheet.submitted?
+    end
   end
 end
