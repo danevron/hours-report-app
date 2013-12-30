@@ -14,15 +14,4 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
-
-  def panel_class_by_status(status)
-    case status
-      when "open"
-        "panel-info"
-      when "submitted"
-        "panel-success"
-      else
-        "panel-default"
-    end
-  end
 end
