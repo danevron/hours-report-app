@@ -8,7 +8,7 @@ HoursReport::Application.routes.draw do
 
   match "users/all" => "users#update_all", :as => :update_all, :via => :put
 
-  resources :reports,        only: [:index, :show, :new, :create, :destroy] do
+  resources :reports,        only: [:index, :show, :new, :create, :destroy, :update] do
     resources :timesheets,   only: [:edit, :update, :index]
     resources :reminders,    only: [:create]
   end
