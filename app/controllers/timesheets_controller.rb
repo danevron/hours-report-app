@@ -14,22 +14,25 @@ class TimesheetsController < ApplicationController
   end
 
   def update
-    if @timesheet.update_attributes(timesheet_params)
-      if user_submitted?
-        @timesheet.submit!
-        redirect_to @user, notice: "Your timesheet has been submitted"
-      elsif user_reopened?
-        @timesheet.reopen!
-        redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet reopened"
-      else
-        redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet saved"
-      end
+    if @timesheet.update_attributes(timesheet_params_with_status)
+      redirect_user(@user, @timesheet)
     else
+      flash[:alert] = "Action failed"
       render :action => "edit"
     end
   end
 
   private
+
+  def redirect_user(user, timesheet)
+    if user_submitted?
+      redirect_to @user, notice: "Your timesheet has been submitted"
+    elsif user_reopened?
+      redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet reopened"
+    else
+      redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet saved"
+    end
+  end
 
   def set_timesheet
     @owner_check_object = @timesheet = timesheets.find(params[:id])
@@ -49,6 +52,16 @@ class TimesheetsController < ApplicationController
 
   def user_reopened?
     params[:commit] == "Reopen Timesheet"
+  end
+
+  def timesheet_params_with_status
+    if user_submitted?
+      timesheet_params.merge(:status => "submitted")
+    elsif user_reopened?
+      timesheet_params.merge(:status => "reopened")
+    else
+      timesheet_params
+    end
   end
 
   def timesheet_params
