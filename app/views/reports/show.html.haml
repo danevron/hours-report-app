@@ -1,13 +1,17 @@
 .action-header
-  = simple_form_for [@report, Reminder.new] do |f|
-    = f.submit "Send Reminders", :class => "btn btn-default"
+  - unless @report.reload.submitted?
+    = simple_form_for [@report, Reminder.new] do |f|
+      = f.submit "Send Reminders", :class => "btn btn-default"
+
   = link_to 'Download as Excel', report_path(@report, format: "xlsx"), :class => "btn btn-primary pull-right"
+
   = simple_form_for @report, :html => { :class => "form-horizontal" } do |f|
     - change_status_to = @report.reload.submitted? ? "reopened" : "submitted"
     = f.hidden_field :status, :value => change_status_to
     = f.submit "Submit Report", :class => "btn btn-success" unless @report.reload.submitted?
     = f.submit "Reopen Report", :class => "btn btn-success" if @report.reload.submitted?
     = f.error :base
+
 .panel.panel-default
   .panel-heading
     %h4= "Period: #{@report.start_date.to_date} - #{@report.end_date.to_date}"
