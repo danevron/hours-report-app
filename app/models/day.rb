@@ -27,14 +27,12 @@ class Day < ActiveRecord::Base
   def prefill_default_values
     if Calendar.holidays[date.to_date]
       self.day_type = "holiday"
-      self.value = 0
       self.comment = Calendar.holidays[date.to_date]
     elsif weekend?
       self.day_type = "weekend"
-      self.value = 0
     else
       self.day_type = "workday"
-      self.value = 9
     end
+    self.value = 0
   end
 end
