@@ -79,7 +79,7 @@ class Report < ActiveRecord::Base
   end
 
   def pull_holidays
-    Calendar.pull_holidays_between!("1qrp04se5e0bofc1rj15ntqbd6cg742o@import.calendar.google.com", User.first.access_token_for_api, start_date, end_date)
+    Calendar.pull_holidays_between!(ENV['GOOGLE_CALENDAR_IDENTIFIER'], User.first.access_token_for_api, start_date, end_date)
   end
 
   def extract_tenbis_usage
