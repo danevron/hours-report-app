@@ -1,8 +1,8 @@
 GIT
-  remote: git@github.com:josemarluedke/initjs.git
-  revision: 03db7eada95779edbd151c3d8441b3e00f9e2ea3
+  remote: git://github.com/josemarluedke/initjs.git
+  revision: 018032371e84560dd5b66a3d41aa4568285d500d
   specs:
-    initjs (2.0.0.beta1)
+    initjs (2.0.0)
       jquery-rails
       rails (>= 3.1)
 
