@@ -30,6 +30,7 @@ group :development, :test do
   gem 'jazz_hands'
 end
 
+gem 'rails_12factor', group: :production
 gem "letter_opener", :group => :development
 
 # Use SCSS for stylesheets
