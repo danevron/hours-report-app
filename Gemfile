@@ -22,7 +22,7 @@ gem 'capybara'
 gem 'poltergeist'
 gem 'pg'
 gem 'typhoeus'
-gem 'the_role', :git => 'git@github.com:the-teacher/the_role.git'
+gem 'the_role', :github => 'the-teacher/the_role'
 gem 'to_spreadsheet'
 
 group :development, :test do

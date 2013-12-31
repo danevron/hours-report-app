@@ -7,10 +7,10 @@ GIT
       rails (>= 3.1)
 
 GIT
-  remote: git@github.com:the-teacher/the_role.git
-  revision: df5800ab4f4e150ee01a069e063b778b520185bb
+  remote: git://github.com/the-teacher/the_role.git
+  revision: ae6f87ee6295b78a4fe53fc4ae295baf8c67efb2
   specs:
-    the_role (2.1.1)
+    the_role (2.3)
       haml
       rails (>= 3, < 5)
 

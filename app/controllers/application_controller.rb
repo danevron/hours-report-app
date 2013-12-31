@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include TheRoleController
+  include TheRole::Controller
 
   protect_from_forgery with: :exception
 
