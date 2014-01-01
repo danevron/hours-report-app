@@ -15,6 +15,7 @@ class Mailer < ActionMailer::Base
 
     @user = User.find(user_id)
     @report = Report.find(report_id)
+    @timesheet = @report.timesheets.find_by_user_id(user_id)
 
     mail(
       from: "Hours Report <noreply@hoursreport.se>",

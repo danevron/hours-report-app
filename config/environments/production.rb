@@ -87,4 +87,8 @@ HoursReport::Application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
+
+
+  config.action_mailer.default_url_options = { :host => 'hours-report.herokuapp.com' }
+  config.action_mailer.asset_host          = "http://hours-report.herokuapp.com/"
 end
