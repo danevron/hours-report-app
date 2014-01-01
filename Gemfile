@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+ruby '2.0.0'
 gem 'rails', '4.0.0'
 
+gem 'foreman'
 gem 'rspec-rails'
 gem 'omniauth-google-oauth2'
 gem 'haml'
@@ -24,6 +26,7 @@ gem 'pg'
 gem 'typhoeus'
 gem 'the_role', :github => 'the-teacher/the_role'
 gem 'to_spreadsheet'
+gem 'unicorn'
 
 group :development, :test do
   gem 'debugger'
