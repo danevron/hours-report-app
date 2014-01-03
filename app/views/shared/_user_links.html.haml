@@ -1,0 +1,6 @@
+- if current_user.timesheets.exists?
+  %li
+    = link_to "All your timesheets", user_timesheets_path(current_user)
+- if current_user.current_timesheet
+  %li
+    = link_to "Your current timesheet", [:edit, current_user, current_user.current_timesheet]
