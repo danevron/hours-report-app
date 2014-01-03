@@ -91,4 +91,5 @@ HoursReport::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'hours-report.herokuapp.com' }
   config.action_mailer.asset_host          = "http://hours-report.herokuapp.com/"
+  ActionMailer::Base.default :from => 'Hours Report <noreply@hoursreport.com>'
 end

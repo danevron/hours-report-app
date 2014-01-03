@@ -5,7 +5,6 @@ class Mailer < ActionMailer::Base
     @invitation = invitation
 
     mail(
-      from: "Hours Report <noreply@hoursreport.se>",
       to: @invitation.recipient_named_email,
       subject: "Welcome to Hours Report"
     )
@@ -18,7 +17,6 @@ class Mailer < ActionMailer::Base
     @timesheet = @report.timesheets.find_by_user_id(user_id)
 
     mail(
-      from: "Hours Report <noreply@hoursreport.se>",
       to: @user.email,
       subject: "Please fill your Hours Report"
     )
