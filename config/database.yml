@@ -1,27 +1,20 @@
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: hours_report_development
-  host: localhost
+hours_report_environment: &hours_report_environment
+  adapter: mysql2
+  encoding: utf8
   pool: 5
-  username: danevron
-  password:
+  username: <%= ENV['HOURS_REPORT_DB_USER'] %>
+  password: <%= ENV['HOURS_REPORT_DB_PASSWORD'] %>
+  host: <%= ENV['HOURS_REPORT_DB_HOST'] %>
+  port: <%= ENV['HOURS_REPORT_DB_PORT'] %>
+
+development:
+  database: hours_report_development
+  <<: *hours_report_environment
 
 test:
-  adapter: postgresql
-  encoding: unicode
   database: hours_report_test
-  host: localhost
-  pool: 5
-  username: danevron
-  password:
+  <<: *hours_report_environment
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USER'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
+  <<: *hours_report_environment
+  database: rails
