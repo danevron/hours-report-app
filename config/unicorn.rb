@@ -1,6 +1,9 @@
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
+run_sidekiq_in_this_thread = %w(production).include?(ENV['RAILS_ENV'])
+worker_processes (run_sidekiq_in_this_thread ? 2 : 3)
 timeout 15
 preload_app true
+
+@sidekiq_pid = nil
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
@@ -10,6 +13,11 @@ before_fork do |server, worker|
 
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
+
+  if run_sidekiq_in_this_thread
+    @resque_pid ||= spawn("bundle exec sidekiq -c 2")
+    Rails.logger.info("Spawned sidekiq #{@request_pid}")
+  end
 end
 
 after_fork do |server, worker|
