@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131225165523) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "days", force: true do |t|
     t.integer  "timesheet_id"
     t.datetime "date"
@@ -52,7 +49,7 @@ ActiveRecord::Schema.define(version: 20131225165523) do
     t.string   "name",        null: false
     t.string   "title",       null: false
     t.text     "description", null: false
-    t.json     "the_role",    null: false
+    t.text     "the_role",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
