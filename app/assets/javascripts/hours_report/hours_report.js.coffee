@@ -15,6 +15,11 @@ window.HoursReport =
 
   init: ->
     # Something here. This is called in every page.
+    currentTimesheetEndingTime = $(".current-timesheet-ending-time")
+    if currentTimesheetEndingTime.length > 0
+      $('.time-left-to-submit-timesheet').countdown
+        until: new Date(currentTimesheetEndingTime.text())
+        layout: "You have {dn} {dl}, {hn} {hl}, {mn} {ml}, and {sn} {sl} to submit your timesheet"
 
   modules: -> []
     # Some modules that will be used on every page.
