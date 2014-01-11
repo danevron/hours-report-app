@@ -18,4 +18,5 @@
 //= require hours_report/hours_report.js
 //= require init.js
 //= require the_role_editinplace
+//= require jquery.countdown.min
 //= require_tree .
