@@ -10,8 +10,9 @@
  *
  *= require_self
  *= require twitter/bootstrap
- *= require bootstrap-datepicker
  *= require jquery.countdown
+ *= require default
+ *= require default.date
  *= require_tree
  *= require css
  */

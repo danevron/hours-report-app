@@ -2,16 +2,16 @@ HoursReport.Reports ?= {}
 
 HoursReport.Reports.New =
   init: ->
-    $(".datepicker").datepicker
-      format: "dd/mm/yyyy"
-      todayHighlight: true
-      todayBtn: "linked"
-      autoclose: true
+    $(".datepicker").pickadate
+      format: 'dddd, dd mmm, yyyy'
+      editable: true
+      selectYears: true
+      selectMonths: true
 
-    $(".month-datepicker").datepicker
-      format: "mm/yyyy"
-      autoclose: true
-      viewMode: 1
-      minViewMode: 1
+    $(".month-datepicker").pickadate
+      format: 'dddd, dd mmm, yyyy'
+      editable: true
+      selectYears: true
+      selectMonths: true
 
     modules: -> []

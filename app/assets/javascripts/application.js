@@ -14,9 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require twitter/bootstrap
-//= require bootstrap-datepicker/core
 //= require hours_report/hours_report.js
 //= require init.js
 //= require the_role_editinplace
 //= require jquery.countdown.min
+//= require picker
+//= require picker.date
 //= require_tree .
