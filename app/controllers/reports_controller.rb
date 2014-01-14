@@ -17,7 +17,7 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = Report.new
+    @report = Report.prepare_next
   end
 
   def create

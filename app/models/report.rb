@@ -34,6 +34,18 @@ class Report < ActiveRecord::Base
     find_by(:current => true)
   end
 
+  def self.prepare_next
+    Report.new(:start_date => last_end_date + 1.day, :end_date => last_end_date + 1.month, :tenbis_date => last_tenbis_date + 1.month)
+  end
+
+  def self.last_end_date
+    Report.order(:end_date => :desc).first.end_date
+  end
+
+  def self.last_tenbis_date
+    Report.order(:tenbis_date => :desc).first.tenbis_date
+  end
+
   def add_new_user(user)
     pull_holidays
     self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date)
