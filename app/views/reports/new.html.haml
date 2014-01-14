@@ -4,17 +4,17 @@
     .form-group
       = f.label :start_date, { class: "col-sm-3" }
       .col-sm-9
-        = f.text_field :start_date, { class: 'datepicker form-control' }
+        = f.text_field :start_date, { class: 'datepicker form-control', :value => f.object.start_date.strftime('%B %d, %Y') }
         = f.error :start_date
     .form-group
       = f.label :end_date, { class: "col-sm-3" }
       .col-sm-9
-        = f.text_field :end_date, { class: 'datepicker form-control' }
+        = f.text_field :end_date, { class: 'datepicker form-control', :value => f.object.end_date.strftime('%B %d, %Y') }
         = f.error :end_date
     .form-group
       = f.label :tenbis_date, "10bis month", { class: "col-sm-3 control-label" }
       .col-sm-9
-        = f.text_field :tenbis_date, { class: 'month-datepicker form-control' }
+        = f.text_field :tenbis_date, { class: 'month-datepicker form-control', :value => f.object.tenbis_date.strftime('%B %Y') }
         = f.error :tenbis_date
     .form-group
       = f.label :current, { class: "col-sm-3" }
