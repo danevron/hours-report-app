@@ -2,9 +2,9 @@ class TimesheetsController < ApplicationController
   before_action :load_user
 
   before_action :login_required
-  before_action :role_required, :only => [:index]
-  before_action :set_timesheet, :only => [:edit, :update]
-  before_action :owner_required, :only => [:edit, :update]
+  before_action :set_owner_check_object, :only => [:index]
+  before_action :set_timesheet,          :only => [:edit, :update]
+  before_action :owner_required,         :only => [:edit, :update, :index]
 
   def edit
   end
@@ -36,6 +36,10 @@ class TimesheetsController < ApplicationController
 
   def set_timesheet
     @owner_check_object = @timesheet = timesheets.find(params[:id])
+  end
+
+  def set_owner_check_object
+    @owner_check_object = timesheets.first
   end
 
   def load_user
