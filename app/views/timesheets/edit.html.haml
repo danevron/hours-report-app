@@ -6,6 +6,7 @@
     = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
     = f.error :base
   = f.fields_for :days, @timesheet.days.sort do |days_form|
+    - day_type = days_form.object.day_type
     .row
       %fieldset{ :disabled => (@timesheet.submitted? ? true : nil) }
         .col-md-2
@@ -13,13 +14,13 @@
         .col-md-1
           = days_form.object.weekday
         .col-md-2
-          = days_form.select(:day_type, [['Work Day', 'workday'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army'], ['Holiday', 'holiday']], {}, :class => "day-type form-control")
+          = days_form.select(:day_type, [['Work Day', 'workday'], ['Weekend', 'weekend'], ['Vacation', 'vacation'], ['Sickness', 'sickness'], ['Army Reserve', 'army'], ['Holiday', 'holiday']], {}, :class => "day-type form-control #{day_type}")
         .col-md-2
           = days_form.text_field :value,
             :value => number_with_precision(days_form.object.value, precision: 2, significant: true, strip_insignificant_zeros: true),
-            class: "day-value form-control"
+            class: "day-value form-control #{day_type}"
         .col-md-5
-          = days_form.text_field :comment, class: "form-control"
+          = days_form.text_field :comment, class: "form-control #{day_type}"
 
   .row
     .col-md-12

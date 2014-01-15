@@ -1,5 +1,6 @@
 $background-color: white;
 $blue: lightblue;
+$weekend-row-color: aliceblue;
 
 html,
 body {
@@ -83,4 +84,11 @@ body {
   * {
     display:inline
   }
+}
+
+form.edit_timesheet input.weekend,
+form.edit_timesheet select.weekend,
+form.edit_timesheet input.holiday,
+form.edit_timesheet select.holiday {
+  background-color: $weekend-row-color;
 }
