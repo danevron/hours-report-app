@@ -25,7 +25,7 @@ class Report < ActiveRecord::Base
     if report.start_date && report.end_date
       report.tenbis_date = Date.parse report_data["tenbis_date"]
       report.timesheets = Timesheet.build_timesheets(
-        User.active_users, report.start_date, report.end_date
+        User.active, report.start_date, report.end_date
       )
     end
     report

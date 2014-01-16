@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :timesheets
   has_many :reports, :through => :timesheets
 
-  scope :active_users, -> { where(status: "active") }
+  scope :active, -> { where(status: "active") }
 
   after_create :join_unsubmitted_reports
 
