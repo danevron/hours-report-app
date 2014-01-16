@@ -14,6 +14,7 @@ class Report < ActiveRecord::Base
                   :message_content => "There is an overalapping report for the given dates" }
   validate :timesheets_submitted, :if => :submitted?
 
+  scope :unsubmitted, -> { where.not(:status => "submitted") }
   before_create :pull_holidays
   after_create :extract_tenbis_usage
 

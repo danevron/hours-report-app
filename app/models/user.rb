@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   scope :active_users, -> { where(status: "active") }
 
-  after_create :join_current_report, :if => "current_report"
+  after_create :join_unsubmitted_reports
 
   validates_uniqueness_of :uid, scope: :provider
   validates_presence_of :employee_number
@@ -87,8 +87,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def join_current_report
-    current_report.add_new_user(self)
+  def join_unsubmitted_reports
+    Report.unsubmitted.each { |report| report.add_new_user(self) }
   end
 
   def current_report
