@@ -8,9 +8,13 @@ class User < ActiveRecord::Base
 
   after_create :join_unsubmitted_reports
 
+  # validations
+  validates :status, inclusion: { in: %w(active inactive) }
   validates_uniqueness_of :uid, scope: :provider
   validates_presence_of :employee_number
   validate :invited_user, :on => :create
+
+  delegate :active?, :inactive?, :to => :status
 
   def self.from_auth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first
@@ -53,6 +57,11 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def status
+    status = read_attribute(:status) || ''
+    status.inquiry
+  end
 
   def invited_user
     errors[:base] << "User is not invited"  unless invited?

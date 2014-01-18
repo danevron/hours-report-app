@@ -5,4 +5,5 @@
         = image_tag user.image || "http://lorempixel.com/100/100/cats/", :class => 'img-thumbnail'
     .col-md-2
       = f.input :role_id, :collection => Role.all
+      = f.input :status, :collection => ["active", "inactive"]
 
