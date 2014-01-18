@@ -1,0 +1,18 @@
+<td class="w580" width="580">
+  <p align="left" class="article-title">
+    <singleline label="Title">
+      <%= "Hi #{@user.name}" %>
+    </singleline>
+  </p>
+  <div align="left" class="article-content">
+    <multiline label="Description">
+    <p>
+      Please fill
+      <%= link_to "Your hours report", edit_user_timesheet_url(@user, @timesheet) %>
+    </p>
+    <p>
+      <%= "The last day you can fill in your hours is #{@report.end_date.strftime('%B %d, %Y')}" %>
+    </p>
+    </multiline>
+  </div>
+</td>

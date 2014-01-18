@@ -1,0 +1,16 @@
+<td class="w580" width="580">
+  <p align="left" class="article-title">
+    <singleline label="Title">
+      <%= "Hi #{@invitation.recipient_name}" %>
+    </singleline>
+  </p>
+  <div align="left" class="article-content">
+    <multiline label="Description">
+    <p>
+      Please register
+      <%= link_to "Here", login_url %>
+      to start getting monthly notifications and fill in your hours
+    </p>
+    </multiline>
+  </div>
+</td>
