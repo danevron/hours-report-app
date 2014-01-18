@@ -10,7 +10,7 @@
     .row
       %fieldset{ :disabled => (@timesheet.submitted? ? true : nil) }
         .col-md-2
-          = days_form.object.date.to_date
+          = days_form.object.date.strftime('%B %d, %Y')
         .col-md-1
           = days_form.object.weekday
         .col-md-2
