@@ -1,5 +1,5 @@
 %tr{ :class => timesheet.current? ? "active" : nil }
-  %td= link_to timesheet.id, [:edit, user, timesheet]
+  %td.hidden= link_to timesheet.id, [:edit, user, timesheet]
   %td= "#{timesheet.start_date.strftime('%B %d, %Y')} - #{timesheet.end_date.strftime('%B %d, %Y')}"
   %td= timesheet.status
   %td= timesheet.comments

@@ -1,15 +1,17 @@
 .row
-  %table.table#reports
+  %table.table.hoverable-row#reports
     %tr
+      %th.hidden
       %th From
       %th To
       %th Status
-      %th Links
+      %th Actions
     - @reports.each do |report|
       %tr{ :class => ("warning" if report.current?) }
+        %td.hidden
+          = link_to "Details", report
         %td= report.start_date.strftime('%B %d, %Y')
         %td= report.end_date.strftime('%B %d, %Y')
         %td= report.status
         %td
-          = link_to "Details", report
-          = link_to "Delete", report, method: :delete, confirm: "Are you sure?" unless report.current?
+          = link_to "", report, :class => 'glyphicon glyphicon-trash', :method => :delete, :confirm => "Are you sure?" unless report.current?

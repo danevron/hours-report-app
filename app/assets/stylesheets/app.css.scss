@@ -1,5 +1,5 @@
 $background-color: white;
-$blue: lightblue;
+$header-and-footer-color: lightblue;
 $weekend-row-color: aliceblue;
 
 html,
@@ -9,7 +9,7 @@ body {
 }
 
 #main-header {
-  background-color: $blue;
+  background-color: $header-and-footer-color;
 }
 
 .jumbotron {
@@ -32,11 +32,11 @@ body {
 
 #footer {
   height: 60px;
-  background-color: $blue;
+  background-color: $header-and-footer-color;
 }
 
 #wrap > .container {
-  padding: 60px 15px 0;
+  padding: 90px 15px 0;
 }
 
 .container .credit {
@@ -91,4 +91,13 @@ form.edit_timesheet select.weekend,
 form.edit_timesheet input.holiday,
 form.edit_timesheet select.holiday {
   background-color: $weekend-row-color;
+}
+
+.hoverable-row tbody tr {
+  &:hover {
+    td {
+      cursor: pointer;
+      background-color: $weekend-row-color !important;
+    }
+  }
 }
