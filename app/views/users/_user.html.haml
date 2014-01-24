@@ -6,4 +6,6 @@
     .col-md-2
       = f.input :role_id, :collection => Role.all
       = f.input :status, :collection => ["active", "inactive"]
+    .col-md-4
+      = f.error :base, :error_method => :to_sentence
 

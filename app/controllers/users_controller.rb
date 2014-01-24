@@ -13,11 +13,20 @@ class UsersController < ApplicationController
   end
 
   def update_all
+    @users = []
+    errors_found = false
     params['user'].keys.each do |id|
       @user = User.find(id.to_i)
-      @user.update_attributes(params['user'][id].permit(:role_id))
+      @user.update_attributes(params['user'][id].permit(:role_id, :status))
+      @users << @user
+      errors_found = true unless @user.valid?
     end
-    redirect_to(users_url)
+    if errors_found
+      flash[:alert] = "Some errors were found"
+    else
+      flash[:notice] = "Users saved"
+    end
+    render 'index'
   end
 
   def set_user

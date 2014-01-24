@@ -8,7 +8,6 @@ feature "Signing in", :js => true do
   scenario "Signing in with correct credentials" do
 
     visit root_path
-    binding.pry
 
     expect(page).to have_content 'Hours Report'
   end
