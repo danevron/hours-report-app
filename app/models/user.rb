@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :uid, scope: :provider
   validates_presence_of :employee_number
   validate :invited_user, :on => :create
-
+  validate :all_timesheets_are_submitted, :if => "inactive?"
   delegate :active?, :inactive?, :to => :status
 
   def self.from_auth(auth)
@@ -64,7 +64,12 @@ class User < ActiveRecord::Base
   end
 
   def invited_user
-    errors[:base] << "User is not invited"  unless invited?
+    errors[:base] << "User is not invited" unless invited?
+  end
+
+  def all_timesheets_are_submitted
+    statuses = self.timesheets.pluck(:status)
+    errors[:base] << "User has open timesheets, close open timesheets before inactivating" if statuses.include?("open") or statuses.include?("reopened")
   end
 
   def token_is_valid?
