@@ -57,4 +57,8 @@ class Timesheet < ActiveRecord::Base
   def report_open
     errors[:base] << "Timesheet cannot be reopened due to submitted report" if self.report.submitted?
   end
+
+  def report_open
+    errors[:base] << "Timesheet cannot be reopened due to inactive user" if self.user.inactive?
+  end
 end
