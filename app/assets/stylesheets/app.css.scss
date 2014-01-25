@@ -4,6 +4,7 @@ $weekend-row-color: aliceblue;
 
 html,
 body {
+  font-family: NeoSansStd-Regular;
   background-color: $background-color;
   height: 100%;
 }
@@ -15,6 +16,7 @@ body {
 .jumbotron {
   text-align: center;
   background-color: transparent;
+  font-family: NeoSansStd-Light;
 }
 
 .signin-button {
