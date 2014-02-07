@@ -6,7 +6,6 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to(image_tag("logo.png", :alt => "home image", :width => 150, :height => 70, :title => "Click here to return to Home"), "/")
     - if current_user
       .navbar-collapse.collapse{style: "height: 1px;"}
         %ul.nav.navbar-nav.navbar-left
@@ -21,3 +20,4 @@
           %li
             = link_to current_user, :class => '', :title => "#{current_user.name}" do
               = image_tag current_user.image || "http://lorempixel.com/100/100/cats/", :size => "50x50", :class => "img-rounded"
+            %p= "Hi #{current_user.first_name}"
