@@ -26,6 +26,7 @@ gem 'the_role', :github => 'the-teacher/the_role'
 gem 'to_spreadsheet'
 gem 'unicorn'
 gem 'selenium-webdriver'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'debugger'
