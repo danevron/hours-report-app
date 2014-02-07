@@ -1,5 +1,5 @@
 $background-color: white;
-$header-and-footer-color: lightblue;
+$header-color: lightblue;
 $weekend-row-color: aliceblue;
 
 html,
@@ -10,7 +10,7 @@ body {
 }
 
 #main-header {
-  background-color: $header-and-footer-color;
+  background-color: $header-color;
 }
 
 .jumbotron {
@@ -32,22 +32,12 @@ body {
   padding: 0 0 60px;
 }
 
-#footer {
-  height: 60px;
-  background-color: $header-and-footer-color;
-}
-
 #wrap > .container {
   padding: 90px 15px 0;
 }
 
 .container .credit {
   margin: 20px 0;
-}
-
-#footer > .container {
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .box {
