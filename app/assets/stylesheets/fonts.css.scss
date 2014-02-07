@@ -1,29 +1,32 @@
 @font-face {
   font-family: 'NeoSansStd-Regular';
-  src: asset_url('/fonts/NeoSansStd-Regular.eot?iefix') format('embedded-opentype'),
-  asset_url('/fonts/NeoSansStd-Regular.woff') format('woff'),
-  asset_url('/fonts/NeoSansStd-Regular.ttf') format('truetype'),
-  asset_url('/fonts/NeoSansStd-Regular.svg') format('svg');
+  src: url(font-path('NeoSansStd-Regular.eot'));
+  src: url(font-path('NeoSansStd-Regular.eot?iefix')) format('embedded-opentype'),
+       url(font-path('NeoSansStd-Regular.woff')) format('woff'),
+       url(font-path('NeoSansStd-Regular.ttf')) format('truetype'),
+       url(font-path('NeoSansStd-Regular.svg')) format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'NeoSansStd-Bold';
-  src: asset_url('/fonts/NeoSansStd-Bold.eot?iefix') format('embedded-opentype'),
-  asset_url('/fonts/NeoSansStd-Bold.woff') format('woff'),
-  asset_url('/fonts/NeoSansStd-Bold.ttf') format('truetype'),
-  asset_url('/fonts/NeoSansStd-Bold.svg') format('svg');
+  src: url(font-path('NeoSansStd-Bold.eot'));
+  src: url(font-path('NeoSansStd-Bold.eot?iefix')) format('embedded-opentype'),
+       url(font-path('NeoSansStd-Bold.woff')) format('woff'),
+       url(font-path('NeoSansStd-Bold.ttf')) format('truetype'),
+       url(font-path('NeoSansStd-Bold.svg')) format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'NeoSansStd-Light';
-  src: asset_url('/fonts/NeoSansStd-Light.eot?iefix') format('embedded-opentype'),
-  asset_url('/fonts/NeoSansStd-Light.woff') format('woff'),
-  asset_url('/fonts/NeoSansStd-Light.ttf') format('truetype'),
-  asset_url('/fonts/NeoSansStd-Light.svg') format('svg');
+  src: url(font-path('NeoSansStd-Light.eot'));
+  src: url(font-path('NeoSansStd-Light.eot?iefix')) format('embedded-opentype'),
+       url(font-path('NeoSansStd-Light.woff')) format('woff'),
+       url(font-path('NeoSansStd-Light.ttf')) format('truetype'),
+       url(font-path('NeoSansStd-Light.svg')) format('svg');
   font-weight: normal;
   font-style: normal;
 }

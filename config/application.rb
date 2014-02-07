@@ -28,6 +28,7 @@ module HoursReport
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.action_mailer.delivery_method = :smtp
   end
 end
