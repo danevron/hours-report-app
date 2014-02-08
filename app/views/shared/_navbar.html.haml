@@ -16,7 +16,9 @@
 
         %ul.nav.navbar-nav.navbar-right
           %li
-            = link_to "Sign Out", logout_path
+            = link_to logout_path do
+              %i.fa.fa-sign-out.fa-3x
+              %p Sign Out
           %li
             = link_to current_user, :class => '', :title => "#{current_user.name}" do
-              = image_tag current_user.image || "http://lorempixel.com/100/100/cats/", :size => "50x50", :class => "img-rounded"
+              = image_tag current_user.image || "http://lorempixel.com/100/100/cats/", :size => "70x70", :class => "img-rounded"
