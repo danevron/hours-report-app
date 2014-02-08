@@ -1,0 +1,13 @@
+#main-header {
+  .dropdown-toggle {
+    p {
+      margin: 5px 0 0 0;
+    }
+  }
+
+  .dropdown-menu li a p {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+}

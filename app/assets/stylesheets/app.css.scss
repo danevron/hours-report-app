@@ -6,6 +6,8 @@
 @import "components/box";
 @import "components/links";
 @import "components/inputs";
+@import "components/site_menu";
+@import "font-awesome";
 
 html,
 body {
@@ -38,7 +40,7 @@ body {
 }
 
 #wrap > .container {
-  padding: 90px 15px 0;
+  padding: 110px 15px 0;
 }
 
 .container .credit {

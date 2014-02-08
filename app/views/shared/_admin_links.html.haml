@@ -1,21 +1,32 @@
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-    Users
-    %b.caret
+    = fa_icon "user 3x"
+    %p Users
   %ul.dropdown-menu
     %li
-      = link_to "Invite a new user", new_invitation_path
+      = link_to  new_invitation_path do
+        %i.fa.fa-envelope.fa-2x
+        %p Invite a new user
     %li
-      = link_to "All Users", users_path
+      = link_to users_path do
+        %i.fa.fa-users.fa-2x
+        %p All Users
+
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-    Reports
-    %b.caret
+    = fa_icon "calendar 3x"
+    %p Reports
   %ul.dropdown-menu
     %li
-      = link_to "New Report", new_report_path
+      = link_to new_report_path do
+        %i.fa.fa-plus.fa-2x
+        %p New Report
     %li
-      = link_to "All Reports", reports_path
-    %li
-      = link_to "Current Report", Report.current_report if Report.current_report
-
+      = link_to reports_path do
+        %i.fa.fa-files-o.fa-2x
+        %p All Reports
+    - if Report.current_report
+      %li
+        = link_to Report.current_report do
+          %i.fa.fa-file-text-o.fa-2x
+          %p Current Report
