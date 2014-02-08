@@ -1,0 +1,8 @@
+.hoverable-row tbody tr {
+  &:hover {
+    td {
+      cursor: pointer;
+      background-color: $weekend-row-color !important;
+    }
+  }
+}

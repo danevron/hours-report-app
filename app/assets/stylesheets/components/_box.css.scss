@@ -1,0 +1,24 @@
+@mixin box() {
+  background: {
+    color: white;
+  }
+
+  margin-top: 9px;
+
+  box: {
+    shadow: 0 10px 15px 0 rgba(205, 205, 205, 0.3);
+  }
+
+  border: {
+    width : 1px;
+    style : solid;
+    color : $border-color;
+  }
+
+  padding: 20px;
+}
+
+
+.box {
+  @include box();
+}

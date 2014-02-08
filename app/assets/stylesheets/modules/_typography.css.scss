@@ -1,0 +1,18 @@
+$em-base: 16 !default;
+
+$title-font-size: convert-to-em(40);
+$subtitle-font-size: convert-to-em(15);
+$primary-font-size: convert-to-em(13.5);
+$secondary-font-size: convert-to-em(12.5);
+$small-font-size: convert-to-em(10.5);
+
+@mixin primary-text(){
+  font-size: $primary-font-size;
+  line-height: $primary-font-size;
+}
+
+@mixin secondary-text(){
+  font-size: $secondary-font-size;
+  line-height: 1.1em;
+  color: $color-gray;
+}

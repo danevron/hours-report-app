@@ -1,0 +1,32 @@
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea {
+  font-size: $secondary-font-size;
+  color: $text-color;
+}
+
+input[disabled], input[readonly]{
+}
+
+form.edit_timesheet input.weekend,
+form.edit_timesheet select.weekend,
+form.edit_timesheet input.holiday,
+form.edit_timesheet select.holiday {
+  background-color: $weekend-row-color;
+}
+
+label {
+  font-size: $secondary-font-size;
+  color: $text-color;
+}
