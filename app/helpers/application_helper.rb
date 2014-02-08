@@ -14,4 +14,9 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+
+  def render_google_tag_manager
+    render "/shared/google_tag_manager" if Rails.env.production?
+  end
 end
