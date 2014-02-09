@@ -29,6 +29,7 @@ gem 'selenium-webdriver'
 gem 'newrelic_rpm'
 gem 'font-awesome-rails'
 gem 'andand'
+gem 'bugsnag'
 
 group :development, :test do
   gem 'debugger'
