@@ -1,9 +1,56 @@
 #main-header {
+
+  .purple {
+    background-color: $purple;
+
+    &.open > a {
+      background-color: $purple;
+    }
+  }
+
+  .orenge {
+    background-color: $orenge;
+
+    &.open > a {
+      background-color: $orenge;
+    }
+  }
+
+  .green {
+    background-color: $green;
+
+    &.open > a {
+      background-color: $green;
+    }
+  }
+
+  .pink {
+    background-color: $pink;
+
+    a {
+      color: white;
+    }
+
+    p {
+      margin-bottom: 7px;
+    }
+  }
+
   .dropdown {
-    width: 100px;
+    width: 180px;
+    height: 100px;
+  }
+
+  h1 {
+    font-family: NeoSansStd-Light;
+    color: white;
+    margin-right: 50px;
   }
 
   .dropdown-toggle {
+
+    color: white;
+
     p {
       margin: 5px 0 0 0;
     }

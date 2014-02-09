@@ -16,9 +16,11 @@
 
         %ul.nav.navbar-nav.navbar-right
           %li
+            %h1= Time.now.strftime('%B %d, %Y')
+          %li.pink
             = link_to logout_path do
               %i.fa.fa-sign-out.fa-3x
               %p Sign Out
-          %li
+          %li.pink
             = link_to current_user, :class => '', :title => "#{current_user.name}" do
               = image_tag current_user.image || "http://lorempixel.com/100/100/cats/", :size => "70x70", :class => "img-rounded"

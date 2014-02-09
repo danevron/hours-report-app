@@ -17,7 +17,7 @@
 
 .panel.panel-default
   .panel-heading
-    %h4= "Period: #{@report.start_date.to_date} - #{@report.end_date.to_date}"
+    %h4= "#{@report.start_date.strftime('%B %d, %Y')} - #{@report.end_date.strftime('%B %d, %Y')}"
   %table.table
     %thead
       %tr
