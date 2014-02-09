@@ -28,6 +28,7 @@ gem 'unicorn'
 gem 'selenium-webdriver'
 gem 'newrelic_rpm'
 gem 'font-awesome-rails'
+gem 'andand'
 
 group :development, :test do
   gem 'debugger'

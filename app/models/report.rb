@@ -36,7 +36,11 @@ class Report < ActiveRecord::Base
   end
 
   def self.prepare_next
-    Report.new(:start_date => last_end_date + 1.day, :end_date => last_end_date + 1.month, :tenbis_date => last_tenbis_date + 1.month)
+    if Report.not_first
+      Report.new(:start_date => last_end_date + 1.day, :end_date => last_end_date + 1.month, :tenbis_date => last_tenbis_date + 1.month)
+    else
+      Report.new
+    end
   end
 
   def self.last_end_date
@@ -76,6 +80,10 @@ class Report < ActiveRecord::Base
   end
 
   private
+
+  def self.not_first
+    Report.count > 0
+  end
 
   def summary
     Struct.new(:id,
