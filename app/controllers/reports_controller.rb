@@ -17,7 +17,6 @@ class ReportsController < ApplicationController
   end
 
   def new
-    Bugsnag.notify(RuntimeError.new("test"))
     @report = Report.prepare_next
   end
 
