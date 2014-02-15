@@ -40,10 +40,10 @@ class TenBisCrawler
            rescue Exception => e
              page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
            end
-    report = html.each_line.map{|s| row = s.split(/\t/); {row.first => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
+    report = html.each_line.map{|s| row = s.split(/\t/); {row.second.to_i.to_s => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
     logout
     report.shift
-    downcased_keys_hash(report)
+    report
   end
 
   def login
@@ -62,9 +62,5 @@ class TenBisCrawler
 
   def logout
     visit BASE_URL + "/Account/LogOff"
-  end
-
-  def downcased_keys_hash(h)
-    Hash[h.map{|k,v| v.class == Array ? [k,v.map{|r| f r}.to_a] : [k.downcase,v]}]
   end
 end

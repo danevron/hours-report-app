@@ -3,6 +3,10 @@
 .well.col-sm-offset-3.col-sm-6
   = simple_form_for @invitation do |f|
     = f.input :sender, as: :hidden
-    = f.input :recipient, label_html: { class: 'sr-only' }, placeholder: "first.last@company.com", as: :email
-    = f.input :employee_number, label_html: { class: 'sr-only' }, placeholder: "Employee number"
+    = f.label :recipient, "Email"
+    = f.input :recipient, label_html: { class: 'sr-only' }
+    = f.label :employee_number
+    = f.input :employee_number, label_html: { class: 'sr-only' }
+    = f.label :tenbis_number
+    = f.input :tenbis_number, label_html: { class: 'sr-only' }
     = f.submit "Send invitation", class: "btn btn-primary"

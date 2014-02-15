@@ -11,10 +11,6 @@ class Invitation < ActiveRecord::Base
     recipient.split(/\.|@/)[0..1].map(&:capitalize).join(" ")
   end
 
-  def persisted?
-    false
-  end
-
   private
 
   def recipient_already_registered?
