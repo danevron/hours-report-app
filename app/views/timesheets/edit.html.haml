@@ -26,3 +26,8 @@
     .col-md-12
       = f.label :comments
       = f.text_area :comments, class: "form-control", :disabled => (@timesheet.submitted? ? true : nil)
+
+  - if current_user.admin?
+    .row
+      .col-md-12
+        = f.input :tenbis_usage

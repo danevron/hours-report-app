@@ -69,7 +69,7 @@ class TimesheetsController < ApplicationController
   end
 
   def timesheet_params
-    request_params = params.require(:timesheet).permit(:comments, :status,
+    request_params = params.require(:timesheet).permit(:comments, :status, :tenbis_usage,
       :days_attributes => [:id, :day_type, :value, :comment])
   end
 end
