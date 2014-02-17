@@ -21,6 +21,15 @@ body {
   background-color: $header-color;
 }
 
+
+#footer {
+  height: 60px;
+  background-color: $header-color;
+  color: white;
+  font-size: $subtitle-font-size;
+  text-align: center;
+}
+
 .jumbotron {
   text-align: center;
   background-color: transparent;

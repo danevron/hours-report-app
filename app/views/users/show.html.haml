@@ -1,6 +1,4 @@
 .jumbotron
-  = image_tag("logo.png", :alt => "Hours Report")
+  %h1 Hours Report
   - if current_user
     %p Welcome #{@user.first_name}!
-    - if current_user.current_timesheet
-      .time-left-to-submit-timesheet
