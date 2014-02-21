@@ -1,4 +1,4 @@
 .container
   %p.text-muted.credit
-    - if current_user.andand.current_timesheet
+    - unless current_user.andand.current_timesheet.andand.submitted?
       .time-left-to-submit-timesheet
