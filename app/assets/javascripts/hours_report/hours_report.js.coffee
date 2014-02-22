@@ -15,6 +15,8 @@ window.HoursReport =
 
   init: ->
     # Something here. This is called in every page.
+    $(".fa-question").popover()
+
     currentTimesheetEndingTime = $(".current-timesheet-ending-time")
     if currentTimesheetEndingTime.length > 0
       $('.time-left-to-submit-timesheet').countdown
