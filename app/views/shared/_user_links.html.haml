@@ -9,4 +9,4 @@
       - if current_user.current_timesheet
         %li
           = link_to "Your current timesheet", [:edit, current_user, current_user.current_timesheet]
-          .current-timesheet-ending-time.hidden= current_user.current_timesheet.end_date
+          .current-timesheet-ending-time.hidden= current_user.current_timesheet.end_date.strftime("%Y/%m/%d")
