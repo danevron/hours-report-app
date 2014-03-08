@@ -2,3 +2,4 @@
   %h1 Hours Report
   - if current_user
     %p Welcome #{@user.first_name}!
+    = link_to "Your current timesheet", [:edit, current_user, current_user.current_timesheet] if current_user.current_timesheet
