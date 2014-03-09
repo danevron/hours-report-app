@@ -132,3 +132,12 @@ Now you should have a fully functional development environment!!
 
 This application is hosted on Heroku.
 In order to be able to deploy you should complete steps 1-3 in this [quickstart](https://devcenter.heroku.com/articles/quickstart)
+
+Next, to link to the existing Heroku app:
+
+	git remote add heroku git@heroku.com:hours-report.git
+
+Now you should be able to deploy by running:
+
+	git push heroku master
+
