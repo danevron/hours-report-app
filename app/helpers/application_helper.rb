@@ -21,6 +21,13 @@ module ApplicationHelper
   end
 
   def add_units(day_type)
-    day_type == "Workday" ? "#{day_type} (Hours)" : "#{day_type} (Days)"
+    case day_type
+    when "Workday"
+      "#{day_type} (Hours)"
+    when "Weekend", "Holiday"
+      "#{day_type}"
+    else
+      "#{day_type} (Days)"
+    end
   end
 end
