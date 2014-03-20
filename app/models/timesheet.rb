@@ -46,6 +46,10 @@ class Timesheet < ActiveRecord::Base
 
   end
 
+  def comments_number
+    self.days.select { |d| d.comment? }.count + (self.comments? ? 1 : 0)
+  end
+
   private
 
   def summarize(day_type)
