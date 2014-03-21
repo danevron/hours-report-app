@@ -19,4 +19,15 @@ module ApplicationHelper
   def render_google_tag_manager
     render "/shared/google_tag_manager" if Rails.env.production?
   end
+
+  def add_units(day_type)
+    case day_type
+    when "Workday"
+      "#{day_type} (Hours)"
+    when "Weekend", "Holiday"
+      "#{day_type}"
+    else
+      "#{day_type} (Days)"
+    end
+  end
 end

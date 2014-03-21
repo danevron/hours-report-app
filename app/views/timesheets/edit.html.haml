@@ -1,10 +1,10 @@
 = simple_form_for [@user, @timesheet] do |f|
   .action-header
     = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.reload.submitted?
-    = f.submit "Submit Timesheet", class: "btn btn-success" unless @timesheet.reload.submitted?
     = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.reload.submitted?
     = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
     = f.error :base
+    = f.submit "Submit Timesheet", class: "btn btn-success pull-right" unless @timesheet.reload.submitted?
   = f.fields_for :days, @timesheet.days.sort do |days_form|
     - day_type = days_form.object.day_type
     .row
@@ -14,12 +14,12 @@
         .col-md-1
           = days_form.object.weekday
         .col-md-2
-          = days_form.select(:day_type, Day::DAY_TYPES.map { |dt| [dt.capitalize, dt] }, {}, :class => "day-type form-control #{day_type}")
-        .col-md-2
+          = days_form.select(:day_type, Day::DAY_TYPES.map { |dt| [add_units(dt.capitalize), dt] }, {}, :class => "day-type form-control #{day_type}")
+        .col-md-1
           = days_form.text_field :value,
             :value => number_with_precision(days_form.object.value, precision: 2, significant: true, strip_insignificant_zeros: true),
-            class: "day-value form-control #{day_type}"
-        .col-md-5
+            class: "day-value form-control #{day_type}", disabled: (day_type == 'weekend') ? true : nil
+        .col-md-6
           = days_form.text_field :comment, class: "form-control #{day_type}"
 
   .row

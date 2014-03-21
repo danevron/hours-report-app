@@ -11,7 +11,15 @@ HoursReport.Timesheets.Edit =
       valueInput.removeClass(classes).addClass(@.value)
       commentInput.removeClass(classes).addClass(@.value)
 
-      valueInput.val(0) unless @.value == "workday"
+      if @.value == "workday"
+        valueInput.val(9)
+        valueInput.prop('disabled', false)
+      if @.value == "sickness" or @.value == "vacation" or @.value == "army"
+        valueInput.val(1)
+        valueInput.prop('disabled', false)
+      if @.value == "weekend" or @.value == "holiday"
+        valueInput.val(0)
+        valueInput.prop('disabled', true)
 
     $("#prefill-working-days").click ->
       for day in $(".edit_timesheet fieldset")

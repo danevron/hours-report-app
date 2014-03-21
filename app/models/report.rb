@@ -69,7 +69,7 @@ class Report < ActiveRecord::Base
                   timesheet.army_reserve_days,
                   timesheet.tenbis_usage,
                   timesheet.status,
-                  timesheet.comments)
+                  timesheet.comments_number)
     end
 
   end
@@ -96,7 +96,7 @@ class Report < ActiveRecord::Base
                :army_reserve_days,
                :tenbis,
                :status,
-               :comments)
+               :comments_number)
   end
 
   def pull_holidays
