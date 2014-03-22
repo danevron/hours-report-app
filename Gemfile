@@ -3,33 +3,40 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '4.0.0'
 
+gem 'andand'
+gem 'bootstrap-sass-rails'
+gem 'bugsnag'
+gem 'capybara'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'doc_raptor'
+gem 'dotenv-rails'
+gem 'font-awesome-rails'
 gem 'foreman'
-gem 'rspec-rails'
-gem 'omniauth-google-oauth2'
+gem 'google-api-client', :require => 'google/api_client'
 gem 'haml'
 gem 'haml-rails'
-gem 'dotenv-rails'
-gem 'bootstrap-sass-rails'
-gem 'roadie', '2.4.1'
-gem 'simple_form', '~> 3.0.0.rc'
-gem 'sidekiq'
-gem 'sinatra'
-gem 'google-api-client', :require => 'google/api_client'
 gem 'initjs', :github => 'josemarluedke/initjs'
-gem 'validates_timeliness', '~> 3.0'
-gem 'validates_overlap'
-gem 'capybara'
-gem 'poltergeist'
+gem 'jbuilder', '~> 1.2'
+gem 'jquery-rails'
+gem 'newrelic_rpm'
+gem 'omniauth-google-oauth2'
 gem 'pg'
-gem 'typhoeus'
+gem 'poltergeist'
+gem 'roadie', '2.4.1'
+gem 'rspec-rails'
+gem 'sass-rails', '~> 4.0.0'
+gem 'selenium-webdriver'
+gem 'sidekiq'
+gem 'simple_form', '~> 3.0.0.rc'
+gem 'sinatra'
 gem 'the_role', :github => 'the-teacher/the_role'
 gem 'to_spreadsheet'
+gem 'turbolinks'
+gem 'typhoeus'
+gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
-gem 'selenium-webdriver'
-gem 'newrelic_rpm'
-gem 'font-awesome-rails'
-gem 'andand'
-gem 'bugsnag'
+gem 'validates_overlap'
+gem 'validates_timeliness', '~> 3.0'
 
 group :development, :test do
   gem 'debugger'
@@ -37,18 +44,12 @@ group :development, :test do
 end
 
 group :test do
-  gem "factory_girl_rails", "~> 4.0"
   gem "database_cleaner"
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 gem 'rails_12factor', group: :production
 gem "letter_opener", :group => :development
-gem 'sass-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
 
 group :doc do
   gem 'sdoc', require: false

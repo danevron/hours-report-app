@@ -98,6 +98,8 @@ GEM
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     diffy (3.0.1)
+    doc_raptor (0.3.2)
+      httparty (>= 0.7.0)
     dotenv (0.9.0)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
@@ -371,6 +373,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   debugger
+  doc_raptor
   dotenv-rails
   factory_girl_rails (~> 4.0)
   font-awesome-rails
