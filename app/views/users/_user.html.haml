@@ -1,11 +1,13 @@
 .row.box
   .row
-    .col-md-2
+    .col-md-4
       = link_to user, :class => '', :title => "#{user.name}" do
         = image_tag user.image || "http://lorempixel.com/100/100/cats/", :class => 'img-thumbnail'
-    .col-md-2
+      %h4= user.name
+    .col-md-8
       = f.input :role_id, :collection => Role.all
       = f.input :status, :collection => ["active", "inactive"]
-    .col-md-4
+  .row
+    .col-md-12
       = f.error :base, :error_method => :to_sentence
 
