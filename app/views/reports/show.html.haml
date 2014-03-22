@@ -3,7 +3,7 @@
     = simple_form_for [@report, Reminder.new] do |f|
       = f.submit "Send Reminders", :class => "btn btn-default"
 
-  = link_to image_tag('excel_icon.ico', :size => '25x25'), report_path(@report, format: "xlsx"), :class => "btn btn-default pull-right", :title => "Export to Excel"
+  = link_to image_tag('excel_icon.ico', :size => '25x25'), report_path(@report, format: "xls"), :class => "btn btn-default pull-right", :title => "Export to Excel"
 
   = simple_form_for @report, :html => { :class => "form-horizontal" } do |f|
     - change_status_to = @report.reload.submitted? ? "reopened" : "submitted"
