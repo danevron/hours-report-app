@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   def login_required
     authenticate_user
   end
+
   private
 
   def authenticate_user
@@ -30,6 +31,26 @@ class ApplicationController < ActionController::Base
       redirect_to :back
     else
       redirect_to default
+    end
+  end
+
+  def doc_raptor_send(options = {})
+    default_options = {
+      :name => controller_name,
+      :document_type => :xls,
+      :test => ! Rails.env.production?,
+    }
+
+    options = default_options.merge(options)
+
+    options[:document_content] ||= render_to_string
+    ext = options[:document_type].to_sym
+
+    response = DocRaptor.create(options)
+    if response.code == 200
+      send_data response, :filename => "#{options[:name]}.#{ext}", :type => ext
+    else
+      render :inline => response.body, :status => response.code
     end
   end
 end

@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
     respond_to do |format|
       format.html
-      format.xlsx { render xlsx: :show, filename: "report" }
+      format.xls { doc_raptor_send }
     end
   end
 
