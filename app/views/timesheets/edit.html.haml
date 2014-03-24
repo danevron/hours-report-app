@@ -9,10 +9,10 @@
     - day_type = days_form.object.day_type
     .row
       %fieldset{ :disabled => (@timesheet.submitted? ? true : nil) }
-        .col-md-2
-          = days_form.object.date.strftime('%B %d, %Y')
-        .col-md-1
-          = days_form.object.weekday
+        .col-md-2.input-height
+          %span= days_form.object.date.strftime('%B %d, %Y')
+        .col-md-1.input-height
+          %span= days_form.object.weekday
         .col-md-2
           = days_form.select(:day_type, Day::DAY_TYPES.map { |dt| [add_units(dt.capitalize), dt] }, {}, :class => "day-type form-control #{day_type}")
         .col-md-1
