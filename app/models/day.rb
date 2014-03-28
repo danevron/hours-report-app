@@ -26,9 +26,11 @@ class Day < ActiveRecord::Base
   private
 
   def prefill_default_values
-    if Calendar.holidays[date.to_date]
+    holidays = Calendar.holidays_between(timesheet.start_date, timesheet.end_date)
+
+    if holidays[date.to_date]
       self.day_type = "holiday"
-      self.comment = Calendar.holidays[date.to_date]
+      self.comment = holidays[date.to_date]
     elsif weekend?
       self.day_type = "weekend"
     else

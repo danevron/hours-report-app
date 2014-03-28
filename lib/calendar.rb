@@ -1,13 +1,7 @@
 class Calendar
 
-  @holidays = nil
-
-  def self.pull_holidays_between!(calendar_id, access_token, from, to)
-    @holidays = get_holidays_from_google(calendar_id, access_token, from, to)
-  end
-
-  def self.holidays
-    @holidays
+  def self.holidays_between(from, to)
+    @holidays ||= get_holidays_from_google(calendar_id, access_token, from, to)
   end
 
   private
@@ -32,5 +26,13 @@ class Calendar
       holidays[Date.parse(event.start.date)] = event.summary
     end
     holidays
+  end
+
+  def self.access_token
+    User.admins.first.access_token_for_api
+  end
+
+  def self.calendar_id
+    ENV['GOOGLE_CALENDAR_IDENTIFIER']
   end
 end
