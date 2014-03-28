@@ -1,12 +1,16 @@
 class Calendar
 
   def self.holidays_between(from, to)
-    @holidays ||= get_holidays_from_google(calendar_id, access_token, from, to)
+    if same_period_as_last_query?(from, to)
+      @holidays
+    else
+      get_holidays_from_google(from, to)
+    end
   end
 
   private
 
-  def self.get_holidays_from_google(calendar_id, access_token, from, to)
+  def self.get_holidays_from_google(from, to)
     client = Google::APIClient.new
     client.authorization.access_token = access_token
     service = client.discovered_api('calendar', 'v3')
@@ -34,5 +38,15 @@ class Calendar
 
   def self.calendar_id
     ENV['GOOGLE_CALENDAR_IDENTIFIER']
+  end
+
+  def self.same_period_as_last_query?(from, to)
+    if @from == from && @to == to
+      true
+    else
+      @from = from
+      @to = to
+      false
+    end
   end
 end
