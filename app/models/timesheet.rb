@@ -13,6 +13,9 @@ class Timesheet < ActiveRecord::Base
   delegate :submitted?, :open?, :reopened?, :to => :status
   delegate :name, :to => :user, :prefix => :user
 
+  attr_reader :extract_calendar_events_on_update
+  before_save :extract_calendar_events, :if => :extract_calendar_events_on_update
+
   def self.build_timesheets(users, start_date, end_date)
     users.map do |user|
       timesheet = new(:user_id => user.id, :status => "open")
@@ -50,7 +53,15 @@ class Timesheet < ActiveRecord::Base
     self.days.select { |d| d.comment? }.count + (self.comments? ? 1 : 0)
   end
 
+  def extract_calendar_events_on_update=(string_value)
+    @extract_calendar_events_on_update = (string_value == "1")
+  end
+
   private
+
+  def extract_calendar_events
+    binding.pry
+  end
 
   def summarize(day_type)
     days.inject(0) do |sum, day|

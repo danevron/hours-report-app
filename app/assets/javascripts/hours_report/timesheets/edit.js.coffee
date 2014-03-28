@@ -26,4 +26,7 @@ HoursReport.Timesheets.Edit =
         dayType = $(day).find(".day-type").val()
         $(day).find(".day-value").val(9) if dayType == "workday"
 
+    $("#extract-calendar-events").click ->
+      $("#timesheet_extract_calendar_events_on_update").attr("checked", true)
+
     modules: -> []
