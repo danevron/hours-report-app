@@ -4,39 +4,57 @@ class Calendar
     if same_period_as_last_query?(from, to)
       @holidays
     else
-      get_holidays_from_google(from, to)
+      get_holidays(from, to)
     end
+  end
+
+  def self.get_personal_events(user_access_token, email, from, to)
+    params = { :parameters => {
+        "calendarId" => email,
+        "timeMin" => from.to_datetime,
+        "timeMax" => to.to_datetime,
+        "q" => "OPEN"
+      }
+    }
+    get_calendar_events(user_access_token, params)
   end
 
   private
 
-  def self.get_holidays_from_google(from, to)
-    client = Google::APIClient.new
-    client.authorization.access_token = access_token
-    service = client.discovered_api('calendar', 'v3')
-    response = client.execute(:api_method => service.events.list,
-      :parameters => {
-        "calendarId" => calendar_id,
+  def self.get_holidays(from, to)
+    params = { :parameters => {
+        "calendarId" => holidays_calendar_id,
         "timeMin" => from.to_datetime,
         "timeMax" => to.to_datetime
       }
-    )
-    @holidays = parse_holidays(response.data)
+    }
+
+    @holidays = get_calendar_events(admin_access_token, params)
   end
 
-  def self.parse_holidays(google_data)
-    holidays = {}
+  def self.get_calendar_events(token, params)
+    client = Google::APIClient.new
+    client.authorization.access_token = token
+    service = client.discovered_api('calendar', 'v3')
+    response = client.execute({ :api_method => service.events.list }.merge(params))
+    parse(response.data)
+  end
+
+
+  def self.parse(google_data)
+    binding.pry
+    events = {}
     google_data.items.each do |event|
-      holidays[Date.parse(event.start.date)] = event.summary
+      events[Date.parse(event.start.date)] = event.summary
     end
-    holidays
+    events
   end
 
-  def self.access_token
+  def self.admin_access_token
     User.admins.first.access_token_for_api
   end
 
-  def self.calendar_id
+  def self.holidays_calendar_id
     ENV['GOOGLE_CALENDAR_IDENTIFIER']
   end
 
