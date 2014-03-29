@@ -1,5 +1,12 @@
 class Day < ActiveRecord::Base
 
+  PERSONAL_CALENDAR_EVENTS_MAPPING = {
+    /.*Half PTO.*/ => { :type => "vacation", :value => 0.5 },
+    /.*PTO.*/      => { :type => "vacation", :value => 1 },
+    /.*Army.*/     => { :type => "army", :value => 1 },
+    /.*Sick.*/     => { :type => "sickness", :value => 1 }
+  }
+
   DAY_TYPES = %w(workday weekend holiday sickness vacation army)
   WEEKEND_DAYS = %w(Friday Saturday)
 
@@ -13,6 +20,18 @@ class Day < ActiveRecord::Base
     (from.to_date..to.to_date).map do |date|
       new(:date => date)
     end
+  end
+
+  def set_personal_calendar_event(event)
+    PERSONAL_CALENDAR_EVENTS_MAPPING.each do |regex, mapping|
+      if event =~ regex
+        self.day_type = mapping[:type]
+        self.value = mapping[:value]
+        save
+        break
+      end
+    end
+    true
   end
 
   def weekday

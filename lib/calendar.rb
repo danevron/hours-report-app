@@ -8,14 +8,15 @@ class Calendar
     end
   end
 
-  def self.get_personal_events(user_access_token, email, from, to)
+  def self.personal_events(user_access_token, email, from, to)
     params = { :parameters => {
         "calendarId" => email,
         "timeMin" => from.to_datetime,
         "timeMax" => to.to_datetime,
-        "q" => "OPEN"
+        "q" => ENV['PERSONAL_CALENDAR_MARK']
       }
     }
+
     get_calendar_events(user_access_token, params)
   end
 
@@ -42,10 +43,11 @@ class Calendar
 
 
   def self.parse(google_data)
-    binding.pry
     events = {}
     google_data.items.each do |event|
-      events[Date.parse(event.start.date)] = event.summary
+      (Date.parse(event.start.date)..Date.parse(event.end.date) - 1).each do |date|
+        events[date] = event.summary
+      end
     end
     events
   end
@@ -55,7 +57,7 @@ class Calendar
   end
 
   def self.holidays_calendar_id
-    ENV['GOOGLE_CALENDAR_IDENTIFIER']
+    ENV['HOLIDAYS_CALENDAR_ID']
   end
 
   def self.same_period_as_last_query?(from, to)

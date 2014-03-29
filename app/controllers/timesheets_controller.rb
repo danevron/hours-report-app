@@ -15,7 +15,7 @@ class TimesheetsController < ApplicationController
 
   def update
     if @timesheet.update_attributes(timesheet_params_with_status)
-      redirect_user(@user, @timesheet)
+      redirect_user
     else
       flash[:alert] = "Action failed"
       render :action => "edit"
@@ -24,11 +24,13 @@ class TimesheetsController < ApplicationController
 
   private
 
-  def redirect_user(user, timesheet)
+  def redirect_user
     if user_submitted?
       redirect_to @user, notice: "Your timesheet has been submitted"
     elsif user_reopened?
       redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet reopened"
+    elsif @timesheet.calendar_events
+      redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Calendar events extracted"
     else
       redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet saved"
     end
@@ -69,7 +71,7 @@ class TimesheetsController < ApplicationController
   end
 
   def timesheet_params
-    params.require(:timesheet).permit(:comments, :status, :tenbis_usage, :extract_calendar_events_on_update,
+    params.require(:timesheet).permit(:comments, :status, :tenbis_usage, :calendar_events,
       :days_attributes => [:id, :day_type, :value, :comment])
   end
 end
