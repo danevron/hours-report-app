@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     })
   end
 
+  def self.admins
+    self.select(&:admin?)
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -54,6 +58,12 @@ class User < ActiveRecord::Base
 
   def not_invited?
     !invited?
+  end
+
+  def gravatar_image_url
+    hash = Digest::MD5.hexdigest(email)
+
+    "http://www.gravatar.com/avatar/#{hash}"
   end
 
   private

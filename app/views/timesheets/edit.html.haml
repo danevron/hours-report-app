@@ -4,6 +4,7 @@
     = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.reload.submitted?
     = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
     = f.error :base
+    = f.submit "Extract calendar events", class: "btn btn-warning", :id => "extract-calendar-events" unless @timesheet.reload.submitted?
     = f.submit "Submit Timesheet", class: "btn btn-success pull-right" unless @timesheet.reload.submitted?
   = f.fields_for :days, @timesheet.days.sort do |days_form|
     - day_type = days_form.object.day_type
@@ -26,6 +27,7 @@
     .col-md-12
       = f.label :comments
       = f.text_area :comments, class: "form-control", :disabled => (@timesheet.submitted? ? true : nil)
+      .hidden= f.input :calendar_events, :as => :boolean
 
   - if current_user.admin?
     .row

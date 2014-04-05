@@ -1,5 +1,12 @@
 class Day < ActiveRecord::Base
 
+  PERSONAL_CALENDAR_EVENTS_MAPPING = {
+    /.*Half PTO.*/ => { :type => "vacation", :value => 0.5 },
+    /.*PTO.*/      => { :type => "vacation", :value => 1 },
+    /.*Army.*/     => { :type => "army", :value => 1 },
+    /.*Sick.*/     => { :type => "sickness", :value => 1 }
+  }
+
   DAY_TYPES = %w(workday weekend holiday sickness vacation army)
   WEEKEND_DAYS = %w(Friday Saturday)
 
@@ -15,6 +22,18 @@ class Day < ActiveRecord::Base
     end
   end
 
+  def set_personal_calendar_event(event)
+    PERSONAL_CALENDAR_EVENTS_MAPPING.each do |regex, mapping|
+      if event =~ regex
+        self.day_type = mapping[:type]
+        self.value = mapping[:value]
+        save
+        break
+      end
+    end
+    true
+  end
+
   def weekday
     date.strftime("%A")
   end
@@ -26,9 +45,11 @@ class Day < ActiveRecord::Base
   private
 
   def prefill_default_values
-    if Calendar.holidays[date.to_date]
+    holidays = Calendar.holidays_between(timesheet.start_date, timesheet.end_date)
+
+    if holidays[date.to_date]
       self.day_type = "holiday"
-      self.comment = Calendar.holidays[date.to_date]
+      self.comment = holidays[date.to_date]
     elsif weekend?
       self.day_type = "weekend"
     else

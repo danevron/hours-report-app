@@ -15,7 +15,7 @@ class Report < ActiveRecord::Base
   validate :timesheets_submitted, :if => :submitted?
 
   scope :unsubmitted, -> { where.not(:status => "submitted") }
-  before_create :pull_holidays
+
   after_create :extract_tenbis_usage
 
   delegate :submitted?, :open?, :reopened?, :to => :status
@@ -36,7 +36,7 @@ class Report < ActiveRecord::Base
   end
 
   def self.prepare_next
-    if Report.not_first
+    if Report.not_first?
       Report.new(:start_date => last_end_date + 1.day, :end_date => last_end_date + 1.month, :tenbis_date => last_tenbis_date + 1.month)
     else
       Report.new
@@ -81,7 +81,7 @@ class Report < ActiveRecord::Base
 
   private
 
-  def self.not_first
+  def self.not_first?
     Report.count > 0
   end
 
@@ -97,10 +97,6 @@ class Report < ActiveRecord::Base
                :tenbis,
                :status,
                :comments_number)
-  end
-
-  def pull_holidays
-    Calendar.pull_holidays_between!(ENV['GOOGLE_CALENDAR_IDENTIFIER'], User.first.access_token_for_api, start_date, end_date)
   end
 
   def extract_tenbis_usage
