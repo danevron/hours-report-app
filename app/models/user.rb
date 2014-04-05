@@ -60,6 +60,12 @@ class User < ActiveRecord::Base
     !invited?
   end
 
+  def gravatar_image_url
+    hash = Digest::MD5.hexdigest(email)
+
+    "http://www.gravatar.com/avatar/#{hash}"
+  end
+
   private
 
   def status

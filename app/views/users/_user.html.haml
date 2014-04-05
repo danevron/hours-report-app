@@ -2,7 +2,7 @@
   .row
     .col-md-4
       = link_to user, :class => '', :title => "#{user.name}" do
-        = image_tag user.image || "http://lorempixel.com/100/100/cats/", :class => 'img-thumbnail'
+        = image_tag user.gravatar_image_url, :size => "100", :class => 'img-thumbnail'
       %h4= user.name
     .col-md-8
       = f.input :role_id, :collection => Role.all
