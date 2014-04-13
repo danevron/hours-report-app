@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     errors_found = false
     params['user'].keys.each do |id|
       @user = User.find(id.to_i)
-      @user.update_attributes(params['user'][id].permit(:role_id, :status))
+      @user.update_attributes(params['user'][id].permit(:role_id, :status, :employee_number))
       @users << @user
       errors_found = true unless @user.valid?
     end
