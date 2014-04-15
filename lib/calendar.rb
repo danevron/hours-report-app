@@ -38,13 +38,14 @@ class Calendar
     client.authorization.access_token = token
     service = client.discovered_api('calendar', 'v3')
     response = client.execute({ :api_method => service.events.list }.merge(params))
-    parse(response.data)
+    parse(response.data, params[:parameters]["calendarId"])
   end
 
 
-  def self.parse(google_data)
+  def self.parse(google_data, organizer)
     events = {}
-    google_data.items.each do |event|
+    events_filtered_by_organizer = google_data.items.select { |item| item.organizer.email == organizer }
+    events_filtered_by_organizer.each do |event|
       (Date.parse(event.start.date)..Date.parse(event.end.date) - 1).each do |date|
         events[date] = event.summary
       end
