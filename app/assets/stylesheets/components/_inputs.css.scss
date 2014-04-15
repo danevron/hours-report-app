@@ -26,6 +26,11 @@ form.edit_timesheet select.holiday {
   background-color: $weekend-row-color;
 }
 
+form.edit_timesheet input.vacation,
+form.edit_timesheet select.vacation {
+  background-color: $vacation-row-color;
+}
+
 label {
   font-size: $secondary-font-size;
   color: $text-color;
