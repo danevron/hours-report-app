@@ -24,7 +24,7 @@ class Day < ActiveRecord::Base
 
   def set_personal_calendar_event(event)
     PERSONAL_CALENDAR_EVENTS_MAPPING.each do |regex, mapping|
-      if event =~ regex
+      if event =~ regex && self.workday?
         self.day_type = mapping[:type]
         self.value = mapping[:value]
         save
@@ -32,6 +32,10 @@ class Day < ActiveRecord::Base
       end
     end
     true
+  end
+
+  def workday?
+    day_type == "workday"
   end
 
   def weekday
