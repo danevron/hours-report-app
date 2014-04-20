@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215190252) do
+ActiveRecord::Schema.define(version: 20140420130427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,31 @@ ActiveRecord::Schema.define(version: 20140215190252) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "expense_reports", force: true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "country"
+    t.string   "currency"
+    t.string   "status"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "expense_reports", ["user_id"], name: "index_expense_reports_on_user_id", using: :btree
+
+  create_table "expenses", force: true do |t|
+    t.string   "currency"
+    t.string   "description"
+    t.decimal  "amount"
+    t.decimal  "quantity"
+    t.integer  "expence_report_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "expenses", ["expence_report_id"], name: "index_expenses_on_expence_report_id", using: :btree
 
   create_table "invitations", force: true do |t|
     t.string  "recipient"
