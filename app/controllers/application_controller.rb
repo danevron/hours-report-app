@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_user
+    @user = User.find(params[:user_id]) if params[:user_id]
+  end
+
   def doc_raptor_send(options = {})
     default_options = {
       :name => controller_name,

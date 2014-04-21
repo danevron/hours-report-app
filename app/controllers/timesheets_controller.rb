@@ -44,10 +44,6 @@ class TimesheetsController < ApplicationController
     @owner_check_object = timesheets.first
   end
 
-  def load_user
-    @user = User.find(params[:user_id])
-  end
-
   def timesheets
     @user ? @user.timesheets : Timesheet
   end
