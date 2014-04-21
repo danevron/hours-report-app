@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include TheRole::User
 
   has_many :timesheets
+  has_many :expense_reports
   has_many :reports, :through => :timesheets
 
   scope :active, -> { where(status: "active") }
