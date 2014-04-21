@@ -1,10 +1,11 @@
 HoursReport::Application.routes.draw do
   root 'users#show'
 
-  resources :expense_reports, only: [:new, :create, :index, :edit, :update]
-  resources :invitations,     only: [:new, :create]
-  resources :users,           only: [:index, :show] do
-    resources :timesheets,    only: [:edit, :update, :index]
+  resources :expense_reports,   only: [:index, :edit, :update]
+  resources :invitations,       only: [:new, :create]
+  resources :users,             only: [:index, :show] do
+    resources :expense_reports, only: [:new, :create, :index, :edit, :update]
+    resources :timesheets,      only: [:edit, :update, :index]
   end
 
   match "users/all" => "users#update_all", :as => :update_all, :via => :put
