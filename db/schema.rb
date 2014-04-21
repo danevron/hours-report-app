@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20140420130427) do
     t.string   "description"
     t.decimal  "amount"
     t.decimal  "quantity"
-    t.integer  "expence_report_id"
+    t.integer  "expense_report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "expenses", ["expence_report_id"], name: "index_expenses_on_expence_report_id", using: :btree
+  add_index "expenses", ["expense_report_id"], name: "index_expenses_on_expense_report_id", using: :btree
 
   create_table "invitations", force: true do |t|
     t.string  "recipient"

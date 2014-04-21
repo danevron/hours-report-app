@@ -5,7 +5,7 @@ class CreateExpenses < ActiveRecord::Migration
       t.string :description
       t.decimal :amount
       t.decimal :quantity
-      t.references :expence_report, index: true
+      t.references :expense_report, index: true
 
       t.timestamps
     end

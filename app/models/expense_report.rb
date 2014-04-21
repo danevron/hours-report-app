@@ -7,9 +7,10 @@ class ExpenseReport < ActiveRecord::Base
 
   validates :start_time, :end_time,
     :overlap => { :message_title => :overlapping,
-                  :message_content => "There is an overalapping report for the given interval" }
+                  :message_content => "There is an overalapping report for the given range" }
 
   validates_associated :expenses
+
   def self.build_report
     expense_report = self.new
     expense_report.expenses << Expense.new_default
