@@ -21,7 +21,7 @@ class ExpenseReportsController < ApplicationController
   end
 
   def index
-    expense_reports.all
+    @expense_reports = expense_reports.all
   end
 
   def edit
