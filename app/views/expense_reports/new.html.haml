@@ -1,4 +1,4 @@
-= simple_form_for @expense_report do |f|
+= simple_form_for [@user, @expense_report] do |f|
   .col-sm-3
     = f.input :start_time
   .col-sm-3
@@ -7,3 +7,13 @@
     = f.input :country, :priority => [ "Sweden" ], :input_html => { class: 'form-control' }
   .col-sm-3
     = f.input :currency
+  = f.fields_for :expenses do |builder|
+    .col-sm-3
+      = builder.input :description
+    .col-sm-3
+      = builder.input :amount
+    .col-sm-3
+      = builder.input :quantity
+    .col-sm-3
+      = builder.input :currency
+  = f.submit

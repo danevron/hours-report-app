@@ -4,7 +4,7 @@ HoursReport::Application.routes.draw do
   resources :expense_reports,   only: [:index, :edit, :update]
   resources :invitations,       only: [:new, :create]
   resources :users,             only: [:index, :show] do
-    resources :expense_reports, only: [:new, :create, :index, :edit, :update]
+    resources :expense_reports, only: [:new, :create, :index, :edit, :update, :show]
     resources :timesheets,      only: [:edit, :update, :index]
   end
 
