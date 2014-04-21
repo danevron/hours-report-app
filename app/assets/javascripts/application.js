@@ -20,4 +20,5 @@
 //= require jquery.countdown.min
 //= require picker
 //= require picker.date
+//= require angular
 //= require_tree .
