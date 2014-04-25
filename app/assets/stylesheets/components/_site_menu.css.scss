@@ -1,5 +1,13 @@
 #main-header {
 
+  .indianred {
+    background-color: $indianred;
+
+    &.open > a {
+      background-color: $indianred;
+    }
+  }
+
   .purple {
     background-color: $purple;
 
@@ -37,7 +45,7 @@
   }
 
   .dropdown {
-    width: 180px;
+    width: 140px;
     height: 100px;
   }
 
