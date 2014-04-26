@@ -213,6 +213,8 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    open_exchange_rates (0.4.0)
+      yajl-ruby
     pg (0.17.1)
     poltergeist (1.4.1)
       capybara (~> 2.1.0)
@@ -366,6 +368,7 @@ GEM
     websocket-driver (0.2.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    yajl-ruby (1.2.0)
     yard (0.8.7)
 
 PLATFORMS
@@ -396,6 +399,7 @@ DEPENDENCIES
   letter_opener
   newrelic_rpm
   omniauth-google-oauth2
+  open_exchange_rates
   pg
   poltergeist
   rails (= 4.0.0)
