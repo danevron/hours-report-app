@@ -32,4 +32,8 @@
   - if current_user.admin?
     .row
       .col-md-12
-        = f.input :tenbis_usage
+        = f.input :tenbis_usage, :label => "10Bis usage for #{@timesheet.report.tenbis_date.strftime('%B %Y')}"
+  - else
+    .row
+      .col-md-12
+        = f.input :tenbis_usage, :disabled => true, :label => "10Bis usage for #{@timesheet.report.tenbis_date.strftime('%B %Y')}"
