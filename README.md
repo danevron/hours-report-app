@@ -21,6 +21,7 @@ The workflow that the application is intended for is the following:
 
 * Authetication system using Google (Klarna is using Gmail as an email provider).
 * Company vacations support according to provided Google calendar (maintained seperatly).
+* Personal vacations, sickness days and army days extraction from personal Google calendar.
 * 10Bis data extraction (User and password for 10Bis needed).
 * Emails sending using Sidekiq
 
@@ -94,15 +95,16 @@ We are using the [Dotenv](https://github.com/bkeepers/dotenv) gem to load confid
 
 Environment variables needed for the application:
 
-* APPLICATION_CONFIG_SECRET_TOKEN: <your-secret-token>
-* GOOGLE_CALENDAR_IDENTIFIER: <identifier-for-the-company-vacations>
-* GOOGLE_KEY: <application-key-for-google-omniauth>
-* GOOGLE_SECRET: <application-key-for-google-omniauth>
-* REDIS_URL: <url-to-redis>
-* SIDEKIQ_PASSWORD: <sidekiq-ui-password>
-* SIDEKIQ_USER: <sidekiq-ui-username>
-* TENBIS_PASSWORD: <10Bis-password>
-* TENBIS_USER: <10Bis-user-email>
+* APPLICATION_CONFIG_SECRET_TOKEN: your-secret-token
+* HOLIDAYS_CALENDAR_ID: identifier-for-the-company-vacations
+* GOOGLE_KEY: application-key-for-google-omniauth
+* GOOGLE_SECRET: application-key-for-google-omniauth
+* PERSONAL_CALENDAR_MARK: string-which-identify-the-personal-calendar-event
+* REDIS_URL: url-to-redis
+* SIDEKIQ_PASSWORD: sidekiq-ui-password
+* SIDEKIQ_USER: sidekiq-ui-username
+* TENBIS_PASSWORD: 10Bis-password
+* TENBIS_USER: 10Bis-user-email
 
 ## Initial setup
 
