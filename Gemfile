@@ -5,6 +5,7 @@ gem 'rails', '4.0.0'
 
 gem 'andand'
 gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 1.0.0'
 gem 'bootstrap-sass-rails'
 gem 'bugsnag'
 gem 'capybara'

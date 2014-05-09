@@ -21,4 +21,6 @@
 //= require picker
 //= require picker.date
 //= require angular
+//= require angularjs/rails/resource
+//= require ng-app
 //= require_tree .
