@@ -1,0 +1,14 @@
+.row
+  %form{ 'novalidate' => true }
+    From:
+    %input{ :type =>"text", 'ng-model' => "expense_report.startTime" }
+    To:
+    %input{ :type =>"text", 'ng-model' => "expense_report.endTime" }
+    Country:
+    %input{ :type =>"text", 'ng-model' => "expense_report.country" }
+    %div{ 'ng-repeat' => "expense in expense_report.expenses" }
+      .row
+        %input{ :type => "text", 'ng-model' => "expense.description" }
+        %input{ :type => "text", 'ng-model' => "expense.amount" }
+        %input{ :type => "text", 'ng-model' => "expense.currency" }
+

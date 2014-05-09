@@ -1,2 +1,2 @@
-%h1 ExpenseReports#show
-%p Find me in app/views/expense_reports/show.html.haml
+%div{ 'ng-controller' => 'ExpenseReportsCtrl' }
+  = render :partial => 'expense_reports/expense_report', :locals => { :expense_report => @expense_report }
