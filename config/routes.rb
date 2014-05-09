@@ -1,7 +1,7 @@
 HoursReport::Application.routes.draw do
   root 'users#show'
 
-  resources :expense_reports,   only: [:index, :edit, :update]
+  resources :expense_reports,   only: [:index, :edit, :update, :show]
   resources :invitations,       only: [:new, :create]
   resources :users,             only: [:index, :show] do
     resources :expense_reports, only: [:new, :create, :index, :edit, :update, :show]
