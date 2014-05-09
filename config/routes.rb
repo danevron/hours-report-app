@@ -1,5 +1,10 @@
 HoursReport::Application.routes.draw do
   root 'users#show'
+  concern :the_role, TheRole::AdminRoutes.new
+
+  namespace :admin do
+    concerns :the_role
+  end
 
   resources :invitations,    only: [:new, :create]
   resources :users,          only: [:index, :show] do
