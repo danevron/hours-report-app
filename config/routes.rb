@@ -23,4 +23,13 @@ HoursReport::Application.routes.draw do
   match '/login'                   => 'sessions#new', via: %i(get), as: :login
 
   mount Sidekiq::Web => '/sidekiq'
+
+  namespace :api, :defaults => { :format => :json } do
+    namespace :v1 do
+      resources :expenses
+      resources :expense_reports do
+        resources :expenses
+      end
+    end
+  end
 end
