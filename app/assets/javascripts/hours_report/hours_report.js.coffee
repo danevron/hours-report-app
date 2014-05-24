@@ -1,6 +1,8 @@
 #= require_self
 #= require_tree .
 
+@App = angular.module("ExpenseReportApp", ["rails", "ngRoute"]);
+
 window.HoursReport =
   configs:
     turbolinks: true # True to use initjs with Turbolinks by default.

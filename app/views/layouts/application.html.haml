@@ -6,7 +6,7 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
-  %body{ :class => "#{controller_name} #{action_name}" }
+  %body{ :class => "#{controller_name} #{action_name}", "ng-app" => "ExpenseReportApp" }
     = render_google_tag_manager
     = initjs_tag app_name: 'HoursReport'
     = yield :role_sidebar
