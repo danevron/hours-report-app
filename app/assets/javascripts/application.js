@@ -14,10 +14,18 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require twitter/bootstrap
-//= require hours_report/hours_report.js
 //= require init.js
 //= require the_role_editinplace
 //= require jquery.countdown.min
 //= require picker
 //= require picker.date
+//= require angular
+//= require angular-route
+//= require angularjs/rails/resource
+//= require hours_report/hours_report.js
+
+//= require_tree ./models
+//= require_tree ./controllers
+//= require router
+
 //= require_tree .
