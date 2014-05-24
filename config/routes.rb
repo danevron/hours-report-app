@@ -6,9 +6,10 @@ HoursReport::Application.routes.draw do
     concerns :the_role
   end
 
-  resources :invitations,    only: [:new, :create]
-  resources :users,          only: [:index, :show] do
-    resources :timesheets,   only: [:edit, :update, :index]
+  resources :invitations,       only: [:new, :create]
+  resources :users,             only: [:index, :show] do
+    resources :timesheets,      only: [:edit, :update, :index]
+    resources :expense_reports, only: [:index]
   end
 
   match "users/all" => "users#update_all", :as => :update_all, :via => :put
