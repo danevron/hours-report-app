@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include TheRole::User
 
+  has_many :expense_reports
   has_many :timesheets
   has_many :reports, :through => :timesheets
 

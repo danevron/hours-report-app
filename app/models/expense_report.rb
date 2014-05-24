@@ -9,13 +9,14 @@ class ExpenseReport < ActiveRecord::Base
 
   def as_json(options = {})
     {
-      :start_time => self.start_time,
-      :end_time   => self.end_time,
-      :user_id    => self.user_id,
-      :currency   => self.currency,
       :country    => self.country,
+      :currency   => self.currency,
+      :end_time   => self.end_time,
+      :expenses   => self.expenses,
+      :id         => self.id,
+      :start_time => self.start_time,
       :status     => self.status,
-      :expenses   => self.expenses
+      :user_id    => self.user_id
     }
   end
 end
