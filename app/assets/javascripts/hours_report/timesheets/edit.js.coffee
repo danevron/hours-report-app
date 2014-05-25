@@ -25,6 +25,7 @@ HoursReport.Timesheets.Edit =
       for day in $(".edit_timesheet fieldset")
         dayType = $(day).find(".day-type").val()
         $(day).find(".day-value").val(9) if dayType == "workday"
+      $(".edit_timesheet").submit()
 
     $("#extract-calendar-events").click ->
       $("#timesheet_calendar_events").attr("checked", true)
