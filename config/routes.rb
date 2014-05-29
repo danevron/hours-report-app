@@ -1,4 +1,13 @@
 HoursReport::Application.routes.draw do
+
+  class XHRConstraint
+    def matches?(request)
+      !request.xhr? && !(request.url =~ /\.json$/ && ::Rails.env == 'development') && (request.url =~ /users\/\d+\/expense_reports\//)
+    end
+  end
+
+  get '/users/:user_id/expense_reports*path' => 'expense_reports#index', :constraints => XHRConstraint.new
+
   root 'users#show'
   concern :the_role, TheRole::AdminRoutes.new
 
