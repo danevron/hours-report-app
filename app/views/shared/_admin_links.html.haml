@@ -4,11 +4,11 @@
     %p Users
   %ul.dropdown-menu
     %li
-      = link_to  new_invitation_path do
+      = link_to  new_invitation_path, target: "_self" do
         %i.fa.fa-envelope.fa-2x
         %p Invite a new user
     %li
-      = link_to users_path do
+      = link_to users_path, target: "_self" do
         %i.fa.fa-users.fa-2x
         %p All Users
 
@@ -18,15 +18,15 @@
     %p Reports
   %ul.dropdown-menu
     %li
-      = link_to new_report_path do
+      = link_to new_report_path, target: "_self" do
         %i.fa.fa-plus.fa-2x
         %p New Report
     %li
-      = link_to reports_path do
+      = link_to reports_path, target: "_self" do
         %i.fa.fa-files-o.fa-2x
         %p All Reports
     - if Report.current_report
       %li
-        = link_to Report.current_report do
+        = link_to Report.current_report, target: "_self" do
           %i.fa.fa-file-text-o.fa-2x
           %p Current Report
