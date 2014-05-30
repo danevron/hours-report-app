@@ -24,6 +24,14 @@
     }
   }
 
+  .indianred {
+    background-color: $indianred;
+
+    &.open > a {
+      background-color: $indianred;
+    }
+  }
+
   .pink {
     background-color: $pink;
 
@@ -37,7 +45,7 @@
   }
 
   .dropdown {
-    width: 180px;
+    width: 150px;
     height: 100px;
   }
 
