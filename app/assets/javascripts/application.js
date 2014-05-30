@@ -22,10 +22,13 @@
 //= require angular
 //= require angular-route
 //= require angularjs/rails/resource
+//= require moment
+//= require datetimepicker
 //= require hours_report/hours_report.js
 
 //= require_tree ./models
 //= require_tree ./controllers
+//= require_tree ./directives
 //= require router
 
 //= require_tree .

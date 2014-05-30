@@ -1,7 +1,7 @@
 #= require_self
 #= require_tree .
 
-@App = angular.module("ExpenseReportApp", ["rails", "ngRoute"]);
+@App = angular.module("ExpenseReportApp", ["rails", "ngRoute", 'ui.bootstrap.datetimepicker']);
 
 window.HoursReport =
   configs:
