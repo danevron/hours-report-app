@@ -8,6 +8,10 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer',
           @resource('expenses', 'Expense')
         )
 
+      availableCountries: ->
+        [ "USA", "Great Britain", "Japan", "European Union", "Australia", "Canada",
+          "Denmark", "Norway", "South Africa", "Sweden", "Switzerland" ]
+
       total: ->
         sum = 0
         sum += expense.total() for expense in @expenses

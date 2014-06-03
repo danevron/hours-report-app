@@ -1,3 +1,29 @@
 %div{ "ng-controller" => "ExpenseReportFormController" }
-  .row
-    dani is here
+  .panel-body
+    .row
+      .col-md-3
+        .dropdown
+          %a.dropdown-toggle.my-toggle-select#dLabel{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
+            .input-group
+              %input.input-lg.form-control{ "type" => "text", "data-ng-model" => "newExpenseReport.startTime", "readable" => true, "placeholder" => "Departure Time" }
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+          %ul.dropdown-menu{ "role" => "menu", "aria-labelledby" => "dLabel" }
+            %datetimepicker{ "data-ng-model" => "newExpenseReport.startTime", "data-datetimepicker-config" => "{ dropdownSelector: '.my-toggle-select', minView: 'hour' }" }
+
+      .col-md-3.col-md-offset-1{ "ng-show" => "newExpenseReport.startTime" }
+        .dropdown
+          %a.dropdown-toggle.my-toggle-select#dLabel{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
+            .input-group
+              %input.input-lg.form-control{ "type" => "text", "data-ng-model" => "newExpenseReport.endTime", "readable" => true, "placeholder" => "Return Time"}
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+          %ul.dropdown-menu{ "role" => "menu", "aria-labelledby" => "dLabel" }
+            %datetimepicker{ "data-ng-model" => "newExpenseReport.endTime", "data-datetimepicker-config" => "{ dropdownSelector: '.my-toggle-select', minView: 'hour' }" }
+
+      .col-md-3.col-md-offset-1{ "ng-show" => "newExpenseReport.startTime && newExpenseReport.endTime" }
+        %select.form-control.input-lg{ "ng-model" => "newExpenseReport.country",
+          "ng-options" => "country for country in newExpenseReport.availableCountries()" }
+          %option{ "value" => "" } Destination
+
+    .row.top-buffer
