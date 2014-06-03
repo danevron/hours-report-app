@@ -1,0 +1,21 @@
+%div{ "ng-include" => "'/assets/_expense_reports.html'" }
+
+.col-md-4
+  .dropdown
+    %a.dropdown-toggle.my-toggle-select#dLabel{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
+      .input-group
+        %input.input-large.form-control{ "type" => "text", "data-ng-model" => "expenseReport.startTime", "readable" => true }
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+    %ul.dropdown-menu{ "role" => "menu", "aria-labelledby" => "dLabel" }
+      %datetimepicker{ "data-ng-model" => "expenseReport.startTime", "data-datetimepicker-config" => "{ dropdownSelector: '.my-toggle-select', minView: 'hour' }" }
+
+.col-md-4
+  .dropdown
+    %a.dropdown-toggle.my-toggle-select#dLabel{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
+      .input-group
+        %input.input-large.form-control{ "type" => "text", "data-ng-model" => "expenseReport.endTime", "readable" => true }
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+    %ul.dropdown-menu{ "role" => "menu", "aria-labelledby" => "dLabel" }
+      %datetimepicker{ "data-ng-model" => "expenseReport.endTime", "data-datetimepicker-config" => "{ dropdownSelector: '.my-toggle-select', minView: 'hour' }" }

@@ -1,0 +1,6 @@
+.col-md-3
+  .well.sidebar-nav
+    %ul.nav.nav-list
+      %li.nav-header Expense Reports
+      %li{ "ng-repeat" => "report in reports" }
+        %a{ "href" => "/users/{{report.userId}}/expense_reports/{{report.id}}" } {{ report.startTime | date }} - {{ report.endTime | date }}
