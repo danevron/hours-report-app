@@ -19,3 +19,7 @@
         = link_to user_expense_reports_path(current_user), target: "_self" do
           %i.fa.fa-files-o.fa-2x
           %p All your expense reports
+      %li
+        = link_to new_user_expense_report_path(current_user), target: "_self" do
+          %i.fa.fa-files-o.fa-2x
+          %p New expense reports

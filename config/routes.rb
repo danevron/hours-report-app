@@ -18,7 +18,7 @@ HoursReport::Application.routes.draw do
   resources :invitations,       only: [:new, :create]
   resources :users,             only: [:index, :show] do
     resources :timesheets,      only: [:edit, :update, :index]
-    resources :expense_reports, only: [:index]
+    resources :expense_reports, only: [:index, :new]
   end
 
   match "users/all" => "users#update_all", :as => :update_all, :via => :put
