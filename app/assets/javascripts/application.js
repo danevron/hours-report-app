@@ -29,6 +29,7 @@
 //= require_tree ./models
 //= require_tree ./controllers
 //= require_tree ./directives
+//= require_tree ./services
 //= require router
 
 //= require_tree .
