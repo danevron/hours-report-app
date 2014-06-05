@@ -49,13 +49,13 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense',
           description: "Per Dium",
           amount: @defaultPerDiumAmount(),
           quantity: @numberOfDays(),
-          currency: "usd"
+          currency: "USD"
         })
         @addExpense(@perDium)
 
       numberOfDays: ->
         if @startTime and @endTime
-          moment.duration(@endTime - @startTime).days()
+          moment.duration(@endTime - @startTime).days() + 1
         else
           0
 ]
