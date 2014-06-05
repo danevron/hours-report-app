@@ -35,3 +35,10 @@ label {
   font-size: $secondary-font-size;
   color: $text-color;
 }
+
+.simplebox {
+  outline: none;
+  border:none !important;
+  box-shadow:none !important;
+  background-color: transparent;
+}

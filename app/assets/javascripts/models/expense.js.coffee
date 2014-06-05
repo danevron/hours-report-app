@@ -21,6 +21,12 @@ App.factory "Expense", ['RailsResource',
         ]
 
       total: ->
-        @amount * @quantity
+        @amountInLocalCurrency() * @quantity
 
+      updateExchangeRate: (startDate, endDate) ->
+        # TODO get rate from service
+        @exchangeRate = @exchangeRate / 2
+
+      amountInLocalCurrency: ->
+        @amount * (@exchangeRate || 1)
 ]
