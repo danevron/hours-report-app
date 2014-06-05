@@ -44,17 +44,17 @@
             %td
               %a.simplebox.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "newExpenseReport.removeExpense(expense)" }
             %td
-              %input.input-sm.form-control.simplebox{ "type" => "text", "data-ng-model" => "expense.description", "placeholder" => "Description" }
+              %input.simplebox{ "type" => "text", "data-ng-model" => "expense.description", "placeholder" => "Description" }
             %td
-              %input.input-sm.form-control.simplebox{ "type" => "number", "data-ng-model" => "expense.amount", "placeholder" => "Amount" }
+              %input.simplebox{ "type" => "number", "data-ng-model" => "expense.amount", "placeholder" => "Amount" }
             %td
-              %span.simplebox {{expense.currency}}
+              %span {{expense.currency}}
             %td
-              %input.input-sm.form-control.simplebox{ "type" => "number", "data-ng-model" => "expense.quantity", "placeholder" => "Quantity" }
+              %input.simplebox{ "type" => "number", "data-ng-model" => "expense.quantity", "placeholder" => "Quantity" }
             %td
-              %span.simplebox {{expense.exchangeRate}}
+              %span {{expense.exchangeRate}}
             %td
-              %span.simplebox {{expense.total() + " " + currencySymbol['ILS'] }}
+              %span {{expense.total() + " " + currencySymbol['ILS'] }}
           %tr
             %td
               %a.glyphicon.glyphicon-plus{ "href" => "", "ng-click" => "addExpense()" }
@@ -65,11 +65,11 @@
             %td
             %td
           %tr
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-              %span.pull-right Total:
-            %td {{ newExpenseReport.total() + " " + currencySymbol['ILS'] }}
+            %td.no-top-border
+            %td.no-top-border
+            %td.no-top-border
+            %td.no-top-border
+            %td.no-top-border
+            %td.no-top-border.total-left
+              %span.pull-right Expense report total:
+            %td.no-top-border.total-right {{ newExpenseReport.total() + " " + currencySymbol['ILS'] }}
