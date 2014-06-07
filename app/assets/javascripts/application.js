@@ -19,6 +19,8 @@
 //= require jquery.countdown.min
 //= require picker
 //= require picker.date
+//= require spin.min
+//= require jquery.blockUI
 //= require angular
 //= require angular-route
 //= require angularjs/rails/resource
