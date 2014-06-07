@@ -7,26 +7,22 @@ App.factory "Expense", ['RailsResource',
 
       availableCurrencies: ->
         [
-          { id: "usd", name: "USD United States Dollars" },
-          { id: "gbp", name: "GBP United Kingdom Pounds" },
-          { id: "jpy", name: "JPY Japan Yen" },
-          { id: "eur", name: "EUR Euro" },
-          { id: "aud", name: "AUD Australia Dollars" },
-          { id: "cad", name: "CAD Canada Dollars" },
-          { id: "dkk", name: "DKK Denmark Kroner" },
-          { id: "nok", name: "NOK Norway Kroner" },
-          { id: "zar", name: "ZAR South Africa Rand" },
-          { id: "sek", name: "SEK Sweden Krona" },
-          { id: "chf", name: "CHF Switzerland Francs" }
+          { id: "USD", name: "United States Dollars" },
+          { id: "GBP", name: "United Kingdom Pounds" },
+          { id: "JPY", name: "Japan Yen" },
+          { id: "EUR", name: "Euro" },
+          { id: "AUD", name: "Australia Dollars" },
+          { id: "CAD", name: "Canada Dollars" },
+          { id: "DKK", name: "Denmark Kroner" },
+          { id: "NOK", name: "Norway Kroner" },
+          { id: "ZAR", name: "South Africa Rand" },
+          { id: "SEK", name: "Sweden Krona" },
+          { id: "CHF", name: "Switzerland Francs" }
         ]
 
       total: ->
-        @amountInLocalCurrency() * @quantity
+        @localTotal() * (@exchangeRate)
 
-      updateExchangeRate: (startDate, endDate) ->
-        # TODO get rate from service
-        @exchangeRate = @exchangeRate / 2
-
-      amountInLocalCurrency: ->
-        @amount * (@exchangeRate || 1)
+      localTotal: ->
+        @amount * @quantity
 ]
