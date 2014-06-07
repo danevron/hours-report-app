@@ -1,5 +1,5 @@
-App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense',
-  (RailsResource, railsSerializer, Expense) ->
+App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'rateService',
+  (RailsResource, railsSerializer, Expense, rateService) ->
     class ExpenseReport extends RailsResource
       @configure
         url: "/api/v1/expense_reports",
@@ -13,7 +13,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense',
         amount: 0
         quantity: 1
         currency: ""
-        exchangeRate: 1
+        exchangeRate: 0
 
       defaultPerDiumAmount: ->
         86
@@ -33,6 +33,15 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense',
         unless @expenses
           @expenses = []
         @expenses.push(expense)
+
+      updateRate: (expense, callback = "") ->
+        if @startTime and @endTime
+          promise = rateService.maximumRateBetween(expense.currency, @startTime, @endTime)
+          promise.then (response) ->
+            expense.exchangeRate = response.data.rate
+            callback() if callback
+        else
+          expense.exchangeRate = 0
 
       removeExpense: (expenseToRemove) ->
         @expenses = (item for item in @expenses when item != expenseToRemove)
