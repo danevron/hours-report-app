@@ -3,6 +3,11 @@
 
 @App = angular.module("ExpenseReportApp", ["rails", "ngRoute", "ui.bootstrap.datetimepicker", "cc"])
 
+@App.config ["$httpProvider", (provider) ->
+  provider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest'
+  provider.defaults.headers.common["X-CSRF-Token"] = $("meta[name=csrf-token]").attr("content")
+]
+
 window.HoursReport =
   configs:
     turbolinks: true # True to use initjs with Turbolinks by default.
