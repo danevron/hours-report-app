@@ -128,6 +128,18 @@ Give the new user admin permissions:
 
 	User.first.update( role: Role.with_name(:admin) )
 
+Check your admin Role:
+  Role.with_name(:admin)
+
+Due to a bug in the_role it isn't always populated with the correct data. if "the_role" attribute is an empty hash do the following:
+  admin_role_fragment = {
+    :system => {
+      :administrator => true
+    }
+  }
+
+  Role.with_name(:admin).update_attribute(:the_role, admin_role_fragment)
+
 Now you should have a fully functional development environment!!
 
 ## Deployment
