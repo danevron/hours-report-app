@@ -1,81 +1,88 @@
-%div{ "ng-controller" => "ExpenseReportFormController" }
-  .panel-body
+%form{ "name" => "mainForm", "novalidate" => true }
+  %div{ "ng-controller" => "ExpenseReportFormController" }
+    .panel-body
+      .row
+        .col-md-3
+          .dropdown
+            %a.dropdown-toggle#start-time-select{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
+              .input-group
+                %input.input-lg.form-control{ "name" => "startDate", "type" => "text", "data-ng-model" => "newExpenseReport.startTime", "readable" => true, "placeholder" => "Departure Time", "required" => true }
+                %span.input-group-addon
+                  %span.glyphicon.glyphicon-calendar
+            %ul.dropdown-menu{ "role" => "menu"}
+              %datetimepicker{ "data-ng-model" => "newExpenseReport.startTime",
+                "data-datetimepicker-config" => "{ dropdownSelector: '#start-time-select', minView: 'hour' }" }
+
+        .col-md-3.col-md-offset-1
+          .dropdown
+            %a.dropdown-toggle#end-time-select{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
+              .input-group
+                %input.input-lg.form-control{ "name" => "endDate", "type" => "text", "data-ng-model" => "newExpenseReport.endTime", "readable" => true, "placeholder" => "Return Time", "required" => true }
+                %span.input-group-addon
+                  %span.glyphicon.glyphicon-calendar
+            %ul.dropdown-menu{ "role" => "menu"}
+              %datetimepicker{ "data-ng-model" => "newExpenseReport.endTime",
+                "data-datetimepicker-config" => "{ dropdownSelector: '#end-time-select', minView: 'hour' }" }
+
+        .col-md-3.col-md-offset-1
+          %select.form-control.input-lg{ "name" => "country", "ng-model" => "newExpenseReport.country", "required" => true,
+            "ng-options" => "country for country in newExpenseReport.availableCountries()" }
+            %option{ "value" => "" } Destination
+
+      .row.top-buffer
+        %table.table
+          %thead
+            %tr
+              %th
+              %th Description
+              %th Amount
+              %th Currency
+              %th Quantity
+              %th Exchange Rate
+              %th Total (Local)
+              %th Total (ILS)
+          %tbody
+            %tr{ "ng-repeat" => "expense in newExpenseReport.expenses", "ng-form" => "subForm" }
+              %td
+                %a.simplebox.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "newExpenseReport.removeExpense(expense)" }
+              %td
+                %input.simplebox{ "type" => "text", "name" => "description", "data-ng-model" => "expense.description", "placeholder" => "Description",
+                  "required" => true }
+              %td
+                %input.simplebox{ "type" => "number", "name" => "amount", "data-ng-model" => "expense.amount", "placeholder" => "Amount",
+                  "min" => "1", "required" => true }
+              %td
+                %select.simplebox{ "type" => "text", "data-ng-model" => "expense.currency", "ng-change" => "updateRate(expense)", "required" => true,
+                  "ng-options" => "currency.id as currency.name for currency in expense.availableCurrencies()" }
+              %td
+                %input.simplebox{ "type" => "number", "name" => "quantity", "data-ng-model" => "expense.quantity", "placeholder" => "Quantity",
+                  "min" => "1", "required" => true }
+              %td
+                %span {{expense.exchangeRate}}
+              %td
+                %span {{(expense.localTotal() | number:2) + " " + currencySymbol[expense.currency] }}
+              %td
+                %span {{(expense.total() | number:2) + " " + currencySymbol['ILS'] }}
+            %tr
+              %td
+                %a.glyphicon.glyphicon-plus{ "href" => "", "ng-click" => "addExpense()" }
+              %td
+              %td
+              %td
+              %td
+              %td
+              %td
+              %td
+            %tr
+              %td.no-top-border
+              %td.no-top-border
+              %td.no-top-border
+              %td.no-top-border
+              %td.no-top-border
+              %td.no-top-border
+              %td.no-top-border.total-left
+                %span.pull-right Expense report total:
+              %td.no-top-border.total-right {{ (newExpenseReport.total() | number:2) + " " + currencySymbol['ILS'] }}
     .row
-      .col-md-3
-        .dropdown
-          %a.dropdown-toggle#start-time-select{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
-            .input-group
-              %input.input-lg.form-control{ "type" => "text", "data-ng-model" => "newExpenseReport.startTime", "readable" => true, "placeholder" => "Departure Time", "required" => true }
-              %span.input-group-addon
-                %span.glyphicon.glyphicon-calendar
-          %ul.dropdown-menu{ "role" => "menu"}
-            %datetimepicker{ "data-ng-model" => "newExpenseReport.startTime",
-              "data-datetimepicker-config" => "{ dropdownSelector: '#start-time-select', minView: 'hour' }" }
-
-      .col-md-3.col-md-offset-1
-        .dropdown
-          %a.dropdown-toggle#end-time-select{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
-            .input-group
-              %input.input-lg.form-control{ "type" => "text", "data-ng-model" => "newExpenseReport.endTime", "readable" => true, "placeholder" => "Return Time", "required" => true }
-              %span.input-group-addon
-                %span.glyphicon.glyphicon-calendar
-          %ul.dropdown-menu{ "role" => "menu"}
-            %datetimepicker{ "data-ng-model" => "newExpenseReport.endTime",
-              "data-datetimepicker-config" => "{ dropdownSelector: '#end-time-select', minView: 'hour' }" }
-
-      .col-md-3.col-md-offset-1
-        %select.form-control.input-lg{ "ng-model" => "newExpenseReport.country", "required" => true,
-          "ng-options" => "country for country in newExpenseReport.availableCountries()" }
-          %option{ "value" => "" } Destination
-
-    .row.top-buffer
-      %table.table
-        %thead
-          %tr
-            %th
-            %th Description
-            %th Amount
-            %th Currency
-            %th Quantity
-            %th Exchange Rate
-            %th Total (Local)
-            %th Total (ILS)
-        %tbody
-          %tr{ "ng-repeat" => "expense in newExpenseReport.expenses" }
-            %td
-              %a.simplebox.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "newExpenseReport.removeExpense(expense)" }
-            %td
-              %input.simplebox{ "type" => "text", "data-ng-model" => "expense.description", "placeholder" => "Description" }
-            %td
-              %input.simplebox{ "type" => "number", "data-ng-model" => "expense.amount", "placeholder" => "Amount", "min" => "1" }
-            %td
-              %select.simplebox{ "type" => "text", "data-ng-model" => "expense.currency", "ng-change" => "updateRate(expense)",
-                "ng-options" => "currency.id as currency.name for currency in expense.availableCurrencies()" }
-            %td
-              %input.simplebox{ "type" => "number", "data-ng-model" => "expense.quantity", "placeholder" => "Quantity", "min" => "1" }
-            %td
-              %span {{expense.exchangeRate}}
-            %td
-              %span {{(expense.localTotal() | number:2) + " " + currencySymbol[expense.currency] }}
-            %td
-              %span {{(expense.total() | number:2) + " " + currencySymbol['ILS'] }}
-          %tr
-            %td
-              %a.glyphicon.glyphicon-plus{ "href" => "", "ng-click" => "addExpense()" }
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-          %tr
-            %td.no-top-border
-            %td.no-top-border
-            %td.no-top-border
-            %td.no-top-border
-            %td.no-top-border
-            %td.no-top-border
-            %td.no-top-border.total-left
-              %span.pull-right Expense report total:
-            %td.no-top-border.total-right {{ (newExpenseReport.total() | number:2) + " " + currencySymbol['ILS'] }}
+      %button.pull-right.btn.btn-primary.btn-lg{ "type" => "button", "ng-disabled" => "mainForm.$invalid",
+        "ng-click" => "submitReport()" } Submit Expense Report

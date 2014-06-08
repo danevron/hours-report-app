@@ -28,3 +28,6 @@
     for exp in $scope.newExpenseReport.expenses
       $scope.updateRate(exp) if $scope.newExpenseReport.endTime and $scope.newExpenseReport.startTime
   )
+
+  $scope.submitReport = ->
+    $scope.newExpenseReport.create()
