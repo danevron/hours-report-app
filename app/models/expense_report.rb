@@ -5,6 +5,7 @@ class ExpenseReport < ActiveRecord::Base
   validates_datetime :start_time, :end_time
   validates_datetime :end_time, :after => :start_time
 
+  accepts_nested_attributes_for :expenses
   validates_associated :expenses
 
   def as_json(options = {})
