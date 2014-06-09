@@ -5,6 +5,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
         url: "/api/v1/expense_reports",
         name: "expense_report",
         serializer: railsSerializer( ->
+          @nestedAttribute('expenses')
           @resource('expenses', 'Expense')
         )
 
