@@ -1,6 +1,16 @@
-.col-md-3
-  .well.sidebar-nav
-    %ul.nav.nav-list
-      %li.nav-header Expense Reports
-      %li{ "ng-repeat" => "report in reports" }
-        %a{ "href" => "/users/{{report.userId}}/expense_reports/{{report.id}}" } {{ report.startTime | date }} - {{ report.endTime | date }}
+.row
+  %table.table.hoverable-row
+    %thead
+      %tr
+        %th From
+        %th To
+        %th Country
+        %th Total in ILS
+        %th Status
+    %tbody
+      %tr{ "ng-repeat" => "report in expenseReports", "ng-click" => "redirectTo(report)" }
+        %td {{ report.startTime | date }}
+        %td {{ report.endTime | date }}
+        %td {{ report.country }}
+        %td {{ (report.total() | number:2) + " " + currencySymbol['ILS'] }}
+        %td {{ report.status }}

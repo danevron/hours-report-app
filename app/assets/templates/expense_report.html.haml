@@ -1,6 +1,4 @@
-%div{ "ng-include" => "'/assets/_expense_reports.html'" }
-
-.col-md-4
+.col-md-6
   .dropdown
     %a.dropdown-toggle.my-toggle-select#dLabel{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
       .input-group
@@ -10,7 +8,7 @@
     %ul.dropdown-menu{ "role" => "menu", "aria-labelledby" => "dLabel" }
       %datetimepicker{ "data-ng-model" => "expenseReport.startTime", "data-datetimepicker-config" => "{ dropdownSelector: '.my-toggle-select', minView: 'hour' }" }
 
-.col-md-4
+.col-md-6
   .dropdown
     %a.dropdown-toggle.my-toggle-select#dLabel{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
       .input-group
