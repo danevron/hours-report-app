@@ -54,7 +54,7 @@ class Calendar
   end
 
   def self.admin_access_token
-    User.admins.first.access_token_for_api
+    User.admins.last.access_token_for_api
   end
 
   def self.holidays_calendar_id
