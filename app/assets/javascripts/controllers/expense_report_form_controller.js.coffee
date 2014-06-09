@@ -1,7 +1,7 @@
 @ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location) ->
 
   $scope.newExpenseReport = new ExpenseReport
-    userId: $routeParams.userId
+    userId: $routeParams.user_id
 
   $scope.addExpense = ->
     $scope.newExpenseReport.addExpense()
@@ -32,6 +32,6 @@
 
   $scope.submitReport = ->
     $scope.newExpenseReport.create().then (expenseReport) ->
-      debugger
+      $scope.newExpenseReport = ""
       $location.path("/users/#{expenseReport.userId}/expense_reports/#{expenseReport.id}")
 
