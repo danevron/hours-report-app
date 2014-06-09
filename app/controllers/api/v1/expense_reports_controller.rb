@@ -11,7 +11,7 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
   end
 
   def index
-    @expense_reports = ExpenseReport.joins(:expenses).where({})
+    @expense_reports = ExpenseReport.where({})
     [:user_id].each do |p|
       if params[p].present?
         @expense_reports = @expense_reports.where( p => params[p] )
