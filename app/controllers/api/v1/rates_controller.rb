@@ -7,15 +7,19 @@ class Api::V1::RatesController < Api::V1::ApiController
   private
 
   def get_rates(currency, start_date, end_date)
-    rates = []
-    start_date.upto(end_date) do |date|
-      begin
-        returned_rates_data = BankOfIsrael.rates(date)
-        rates << (returned_rates_data[currency][:rate].to_d / returned_rates_data[currency][:unit].to_d)
-      rescue RuntimeError
+    if currency == :ils
+      { rate: 1 }
+    else
+      rates = []
+      start_date.upto(end_date) do |date|
+        begin
+          returned_rates_data = BankOfIsrael.rates(date)
+          rates << (returned_rates_data[currency][:rate].to_d / returned_rates_data[currency][:unit].to_d)
+        rescue RuntimeError
+        end
       end
-    end
 
-    { rate: rates.max }
+      { rate: rates.max }
+    end
   end
 end

@@ -7,6 +7,7 @@ App.factory "Expense", ['RailsResource',
 
       availableCurrencies: ->
         [
+          { id: "ILS", name: "Israeli Sheqel" },
           { id: "USD", name: "United States Dollars" },
           { id: "GBP", name: "United Kingdom Pounds" },
           { id: "JPY", name: "Japan Yen" },
