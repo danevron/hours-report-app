@@ -43,6 +43,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
             callback() if callback
         else
           expense.exchangeRate = 0
+          callback() if callback
 
       removeExpense: (expenseToRemove) ->
         @expenses = (item for item in @expenses when item != expenseToRemove)
