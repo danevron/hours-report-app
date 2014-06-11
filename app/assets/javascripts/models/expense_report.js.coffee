@@ -56,7 +56,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
 
       addPerDiumExpense: ->
         @perDium = new Expense({
-          description: "Per Dium",
+          description: "Per Diem",
           amount: @defaultPerDiumAmount(),
           quantity: @numberOfDays(),
           currency: "USD"
