@@ -10,16 +10,16 @@
         %li
           = link_to "Your current timesheet", [:edit, current_user, current_user.current_timesheet], target: "_self"
           .current-timesheet-ending-time.hidden= current_user.current_timesheet.end_date.strftime("%Y/%m/%d")
-  %li.dropdown.indianred
-    %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-      = fa_icon "plane 3x"
-      %p Expense Report
-    %ul.dropdown-menu
-      %li
-        = link_to user_expense_reports_path(current_user), target: "_self" do
-          %i.fa.fa-files-o.fa-2x
-          %p All your expense reports
-      %li
-        = link_to new_user_expense_report_path(current_user), target: "_self" do
-          %i.fa.fa-files-o.fa-2x
-          %p New expense reports
+%li.dropdown.indianred
+  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    = fa_icon "plane 3x"
+    %p Expense Report
+  %ul.dropdown-menu
+    %li
+      = link_to user_expense_reports_path(current_user), target: "_self" do
+        %i.fa.fa-files-o.fa-2x
+        %p All your expense reports
+    %li
+      = link_to new_user_expense_report_path(current_user), target: "_self" do
+        %i.fa.fa-files-o.fa-2x
+        %p New expense reports
