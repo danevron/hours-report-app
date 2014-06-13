@@ -23,7 +23,7 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
   private
 
   def safe_params
-    params.require(:expense_report).permit(:start_time, :end_time, :country, :currency, :user_id,
+    params.require(:expense_report).permit(:start_time, :end_time, :country, :currency, :user_id, :status,
       :expenses_attributes => [:description, :amount, :quantity, :exchange_rate, :currency])
   end
 end
