@@ -1,7 +1,8 @@
-@ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location) ->
+@ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location, flashService) ->
 
   $scope.newExpenseReport = new ExpenseReport
     userId: $routeParams.user_id
+    status: "open"
 
   $scope.addExpense = ->
     $scope.newExpenseReport.addExpense()
@@ -25,7 +26,7 @@
         $("body").spin(false)
 
   $scope.$watch("newExpenseReport.endTime - newExpenseReport.startTime", ->
-    $scope.newExpenseReport.updatePerDiumExpense()
+    $scope.newExpenseReport.updatePerDiemExpense()
     for exp in $scope.newExpenseReport.expenses
       $scope.updateRate(exp) if $scope.newExpenseReport.endTime and $scope.newExpenseReport.startTime
   )
@@ -33,5 +34,6 @@
   $scope.submitReport = ->
     $scope.newExpenseReport.create().then (expenseReport) ->
       $scope.newExpenseReport = ""
-      $location.path("/users/#{expenseReport.userId}/expense_reports/#{expenseReport.id}")
+      flashService.flash("success", "Expense report created")
+      $location.path("/users/#{expenseReport.userId}/expense_reports")
 
