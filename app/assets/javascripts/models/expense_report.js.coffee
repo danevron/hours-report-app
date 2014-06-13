@@ -16,7 +16,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
         currency: ""
         exchangeRate: 0
 
-      defaultPerDiumAmount: ->
+      defaultPerDiemAmount: ->
         86
 
       availableCountries: ->
@@ -47,22 +47,22 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
 
       removeExpense: (expenseToRemove) ->
         @expenses = (item for item in @expenses when item != expenseToRemove)
-        @perDium = "" if expenseToRemove == @perDium
+        @perDiem = "" if expenseToRemove == @perDiem
 
-      updatePerDiumExpense: ->
-        if @perDium
-          @perDium.quantity = @numberOfDays()
+      updatePerDiemExpense: ->
+        if @perDiem
+          @perDiem.quantity = @numberOfDays()
         else
-          @addPerDiumExpense()
+          @addPerDiemExpense()
 
-      addPerDiumExpense: ->
-        @perDium = new Expense({
+      addPerDiemExpense: ->
+        @perDiem = new Expense({
           description: "Per Diem",
-          amount: @defaultPerDiumAmount(),
+          amount: @defaultPerDiemAmount(),
           quantity: @numberOfDays(),
           currency: "USD"
         })
-        @addExpense(@perDium)
+        @addExpense(@perDiem)
 
       numberOfDays: ->
         if @startTime and @endTime
