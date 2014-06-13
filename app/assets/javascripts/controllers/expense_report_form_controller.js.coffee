@@ -32,8 +32,10 @@
   )
 
   $scope.submitReport = ->
-    $scope.newExpenseReport.create().then (expenseReport) ->
+    $scope.newExpenseReport.create().then ((expenseReport) ->
       $scope.newExpenseReport = ""
       flashService.flash("success", "Expense report created")
       $location.path("/users/#{expenseReport.userId}/expense_reports")
+    ), (error) ->
+      flashService.flash("danger", "Expense report was not saved due to errors")
 
