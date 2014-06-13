@@ -6,7 +6,10 @@ App.config ($routeProvider, $locationProvider) ->
       templateUrl: "/assets/expense_report_form.html",
       controller: "ExpenseReportFormController"
     })
-    .when("/users/:user_id/expense_reports", {templateUrl: "/assets/expense_reports.html"})
+    .when("/users/:user_id/expense_reports", {
+      templateUrl: "/assets/expense_reports.html",
+      controller: "ExpenseReportsController"
+    })
     .when("/users/:user_id/expense_reports/:id", {
       templateUrl: "/assets/expense_report.html",
       controller: "ExpenseReportController"
