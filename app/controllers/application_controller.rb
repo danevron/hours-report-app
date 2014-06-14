@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_for_list_owner
+    unless (current_user == @user || current_user.admin?)
+      access_denied
+    end
+  end
+
   def doc_raptor_send(options = {})
     default_options = {
       :name => controller_name,
