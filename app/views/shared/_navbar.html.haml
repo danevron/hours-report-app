@@ -18,7 +18,7 @@
           %li
             %h1= Time.now.strftime('%B %d, %Y')
           %li.pink
-            = link_to logout_path do
+            = link_to logout_path, target: "_self" do
               %i.fa.fa-sign-out.fa-3x
               %p Sign Out
           %li.pink
