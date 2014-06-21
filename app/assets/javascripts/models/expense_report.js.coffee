@@ -35,34 +35,34 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
           @expenses = []
         @expenses.push(expense)
 
-      updateRate: (expense, callback = "") ->
+      updateRates: (callback = "") ->
         if @startTime and @endTime
-          promise = rateService.maximumRateBetween(expense.currency, @startTime, @endTime)
-          promise.then (response) ->
-            expense.exchangeRate = response.data.rate
+          promise = rateService.maximumRateBetween(@startTime, @endTime)
+          promise.then (response) =>
+            for exp in @expenses
+              exp.exchangeRate = response.data[exp.currency]
             callback() if callback
         else
-          expense.exchangeRate = 0
+          exp.exchangeRate = 0 for exp in @expenses
           callback() if callback
 
       removeExpense: (expenseToRemove) ->
         @expenses = (item for item in @expenses when item != expenseToRemove)
-        @perDiem = "" if expenseToRemove == @perDiem
 
       updatePerDiemExpense: ->
-        if @perDiem
-          @perDiem.quantity = @numberOfDays()
-        else
-          @addPerDiemExpense()
+        @perDiemExpense().quantity = @numberOfDays() if @perDiemExpense
 
       addPerDiemExpense: ->
-        @perDiem = new Expense({
+        perDiem = new Expense({
           description: "Per Diem",
           amount: @defaultPerDiemAmount(),
           quantity: @numberOfDays(),
           currency: "USD"
         })
-        @addExpense(@perDiem)
+        @addExpense(perDiem)
+
+      perDiemExpense: ->
+        (expense for expense in @expenses when expense.description == "Per Diem")[0]
 
       numberOfDays: ->
         if @startTime and @endTime
