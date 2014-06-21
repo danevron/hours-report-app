@@ -4,4 +4,4 @@
     $scope.expenseReports = reports
 
   $scope.redirectTo = (expenseReport) ->
-    $location.path("/users/#{expenseReport.userId}/expense_reports/#{expenseReport.id}")
+    $location.path("/users/#{expenseReport.userId}/expense_reports/#{expenseReport.id}/edit")
