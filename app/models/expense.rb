@@ -3,12 +3,12 @@ class Expense < ActiveRecord::Base
 
   def as_json(options = {})
     {
-      :amount        => self.amount,
+      :amount        => self.amount.to_f,
       :currency      => self.currency,
       :description   => self.description,
       :exchange_rate => self.exchange_rate,
       :id            => self.id,
-      :quantity      => self.quantity
+      :quantity      => self.quantity.to_f
     }
   end
 end
