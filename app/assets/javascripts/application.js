@@ -22,10 +22,10 @@
 //= require spin.min
 //= require jquery.blockUI
 //= require angular
+//= require angular-animate
 //= require angular-route
 //= require angularjs/rails/resource
 //= require moment
-//= require datetimepicker
 //= require hours_report/hours_report.js
 
 //= require_tree ./models

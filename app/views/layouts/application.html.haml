@@ -4,6 +4,8 @@
     %title HoursReport
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    %script{ src: "//oss.maxcdn.com/angular.strap/2.0.0/angular-strap.min.js" }
+    %script{ src: "//oss.maxcdn.com/angular.strap/2.0.0/angular-strap.tpl.min.js" }
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
   %body{ :class => "#{controller_name} #{action_name}", "ng-app" => "ExpenseReportApp" }

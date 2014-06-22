@@ -1,7 +1,7 @@
 #= require_self
 #= require_tree .
 
-@App = angular.module("ExpenseReportApp", ["rails", "ngRoute", "ui.bootstrap.datetimepicker", "cc"])
+@App = angular.module("ExpenseReportApp", ["rails", "ngRoute", "ngAnimate", "mgcrea.ngStrap", "cc"])
 
 @App.config ["$httpProvider", (provider) ->
   provider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest'
