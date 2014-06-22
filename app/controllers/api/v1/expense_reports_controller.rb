@@ -20,6 +20,9 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
     render :json => @expense_reports
   end
 
+  def update
+  end
+
   private
 
   def safe_params
