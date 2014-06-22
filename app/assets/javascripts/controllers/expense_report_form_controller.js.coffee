@@ -13,6 +13,7 @@
     $scope.expenseReport.addExpense()
 
   $scope.updateRates = ->
+    $scope.expenseReport.updatePerDiemExpense()
     $scope.showSpinner()
     $scope.expenseReport.updateRates($scope.hideSpinner)
 
@@ -29,18 +30,6 @@
       fadeOut: 250
       onUnblock: ->
         $("body").spin(false)
-
-  $scope.$watch("expenseReport", (before, after) ->
-
-    #if before and after
-    #  $scope.expenseReport.updatePerDiemExpense()
-    #  $scope.updateRates()
-  )
-
-  $scope.dateChanged = (newDate, oldDate) ->
-    $scope.expenseReport.updatePerDiemExpense()
-    $scope.updateRates()
-
 
   $scope.submitReport = ->
     $scope.expenseReport.create().then ((expenseReport) ->

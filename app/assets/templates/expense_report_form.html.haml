@@ -3,30 +3,33 @@
     .panel-body
       .row
         .col-md-3
-          .dropdown
-            %a.dropdown-toggle#start-time-select{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
-              .input-group
-                %input.input-lg.form-control{ "name" => "startDate", "type" => "text", "data-ng-model" => "expenseReport.startTime",
-                  "readable" => true, "placeholder" => "Departure Time", "required" => true }
-                %span.input-group-addon
-                  %span.glyphicon.glyphicon-calendar
-            %ul.dropdown-menu{ "role" => "menu"}
-              %datetimepicker{ "data-ng-model" => "expenseReport.startTime", "data-on-set-time" => "dateChanged",
-                "data-datetimepicker-config" => "{ dropdownSelector: '#start-time-select', minView: 'hour' }" }
+          .input-group
+            %input.input-lg.form-control#dani{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => true,
+              "data-max-date" => "{{expenseReport.endTime}}", "bs-datepicker" => true, "ng-change" => "updateRates()",
+              "placeholder" => "Outbound flight date" }
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-calendar
+          .input-group
+            %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => true,
+              "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
+              "placeholder" => "Outbound flight time" }
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-time
+        .col-md-3
+          .input-group
+            %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => true,
+              "data-min-date" => "{{expenseReport.startTime}}", "data-max-date" => "today", "bs-datepicker" => true,
+              "ng-change" => "updateRates()", "placeholder" => "Return flight date" }
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-calendar
+          .input-group
+            %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => true,
+              "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
+              "placeholder" => "Return flight time" }
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-time
 
-        .col-md-3.col-md-offset-1
-          .dropdown
-            %a.dropdown-toggle#end-time-select{ "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "href" => "" }
-              .input-group
-                %input.input-lg.form-control{ "name" => "endDate", "type" => "text", "data-ng-model" => "expenseReport.endTime",
-                  "readable" => true, "placeholder" => "Return Time", "required" => true }
-                %span.input-group-addon
-                  %span.glyphicon.glyphicon-calendar
-            %ul.dropdown-menu{ "role" => "menu"}
-              %datetimepicker{ "data-ng-model" => "expenseReport.endTime", "data-on-set-time" => "dateChanged",
-                "data-datetimepicker-config" => "{ dropdownSelector: '#end-time-select', minView: 'hour' }" }
-
-        .col-md-3.col-md-offset-1
+        .col-md-2
           %select.form-control.input-lg{ "name" => "country", "ng-model" => "expenseReport.country", "required" => true,
             "ng-options" => "country for country in expenseReport.availableCountries()" }
             %option{ "value" => "" } Destination

@@ -50,7 +50,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
         @expenses = (item for item in @expenses when item != expenseToRemove)
 
       updatePerDiemExpense: ->
-        @perDiemExpense().quantity = @numberOfDays() if @perDiemExpense
+        @perDiemExpense().quantity = @numberOfDays() if @perDiemExpense()
 
       addPerDiemExpense: ->
         perDiem = new Expense({
