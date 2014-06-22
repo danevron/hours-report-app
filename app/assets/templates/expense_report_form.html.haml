@@ -1,35 +1,43 @@
-%form{ "name" => "mainForm", "novalidate" => true }
+%form.form-horizontal{ "name" => "mainForm", "novalidate" => true }
   %div{ "ng-controller" => "ExpenseReportFormController" }
     .panel-body
-      .row
-        .col-md-3
-          .input-group
-            %input.input-lg.form-control#dani{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => true,
-              "data-max-date" => "{{expenseReport.endTime}}", "bs-datepicker" => true, "ng-change" => "updateRates()",
-              "placeholder" => "Outbound flight date" }
-            %span.input-group-addon
-              %span.glyphicon.glyphicon-calendar
-          .input-group
-            %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => true,
-              "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
-              "placeholder" => "Outbound flight time" }
-            %span.input-group-addon
-              %span.glyphicon.glyphicon-time
-        .col-md-3
-          .input-group
-            %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => true,
-              "data-min-date" => "{{expenseReport.startTime}}", "data-max-date" => "today", "bs-datepicker" => true,
-              "ng-change" => "updateRates()", "placeholder" => "Return flight date" }
-            %span.input-group-addon
-              %span.glyphicon.glyphicon-calendar
-          .input-group
-            %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => true,
-              "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
-              "placeholder" => "Return flight time" }
-            %span.input-group-addon
-              %span.glyphicon.glyphicon-time
+      .col-md-6
+        .form-group
+          %label.control-label.col-md-4
+            %i.fa.fa-plane.fa-2x.pull-right
+            %p.pull-right Outbound flight
+          .col-md-8
+            .input-group
+              %input.input-lg.form-control#dani{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
+                "data-max-date" => "{{expenseReport.endTime}}", "bs-datepicker" => true, "ng-change" => "updateRates()",
+                "placeholder" => "Outbound flight date", "data-date-format" => "MMM d, yyyy" }
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
+                "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
+                "placeholder" => "Outbound flight time", "data-time-format" => "HH:mm" }
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-time
+        .form-group
+          %label.control-label.col-md-4
+            %i.fa.fa-plane.fa-rotate-90.fa-2x.pull-right
+            %p.pull-right Return flight
+          .col-md-8
+            .input-group
+              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
+                "data-min-date" => "{{expenseReport.startTime}}", "data-max-date" => "today", "bs-datepicker" => true,
+                "ng-change" => "updateRates()", "placeholder" => "Return flight date", "data-date-format" => "MMM d, yyyy" }
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
+                "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
+                "placeholder" => "Return flight time", "data-time-format" => "HH:mm" }
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-time
 
-        .col-md-2
+      .col-md-4
+        %label.control-label.col-md-4 Country
+        .col-md-8
           %select.form-control.input-lg{ "name" => "country", "ng-model" => "expenseReport.country", "required" => true,
             "ng-options" => "country for country in expenseReport.availableCountries()" }
             %option{ "value" => "" } Destination
