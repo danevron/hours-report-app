@@ -10,12 +10,12 @@
             .input-group
               %input.input-lg.form-control#dani{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
                 "data-max-date" => "{{expenseReport.endTime}}", "bs-datepicker" => true, "ng-change" => "updateRates()",
-                "placeholder" => "Outbound flight date", "data-date-format" => "MMM d, yyyy" }
+                "placeholder" => "Outbound date", "data-date-format" => "MMM d, yyyy" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-calendar
               %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
                 "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
-                "placeholder" => "Outbound flight time", "data-time-format" => "HH:mm" }
+                "placeholder" => "Outbound time", "data-time-format" => "HH:mm" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-time
         .form-group
@@ -26,12 +26,12 @@
             .input-group
               %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
                 "data-min-date" => "{{expenseReport.startTime}}", "data-max-date" => "today", "bs-datepicker" => true,
-                "ng-change" => "updateRates()", "placeholder" => "Return flight date", "data-date-format" => "MMM d, yyyy" }
+                "ng-change" => "updateRates()", "placeholder" => "Return date", "data-date-format" => "MMM d, yyyy" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-calendar
               %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
                 "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
-                "placeholder" => "Return flight time", "data-time-format" => "HH:mm" }
+                "placeholder" => "Return time", "data-time-format" => "HH:mm" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-time
 
