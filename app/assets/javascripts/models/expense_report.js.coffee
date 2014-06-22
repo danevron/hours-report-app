@@ -29,12 +29,6 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
           sum += expense.total() for expense in @expenses
         sum
 
-      save: ->
-        if @id
-          @update()
-        else
-          @create()
-
       addExpense: (expense = "") ->
         expense = new Expense(ExpenseReport.defaults) unless expense
         unless @expenses

@@ -8,7 +8,7 @@
   provider.defaults.headers.common["X-CSRF-Token"] = $("meta[name=csrf-token]").attr("content")
 ]
 @App.config (RailsResourceProvider) ->
-  RailsResourceProvider.rootWrapping(false).updateMethod('patch')
+  RailsResourceProvider.updateMethod('patch')
 
 window.HoursReport =
   configs:
