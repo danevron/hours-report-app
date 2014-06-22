@@ -29,6 +29,12 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
           sum += expense.total() for expense in @expenses
         sum
 
+      save: ->
+        if @id
+          @update()
+        else
+          @create()
+
       addExpense: (expense = "") ->
         expense = new Expense(ExpenseReport.defaults) unless expense
         unless @expenses
@@ -66,7 +72,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
 
       numberOfDays: ->
         if @startTime and @endTime
-          moment.duration(@endTime - @startTime).days() + 1
+          moment.duration(moment(@endTime) - moment(@startTime)).days() + 1
         else
           0
 ]
