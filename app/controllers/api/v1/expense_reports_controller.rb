@@ -27,6 +27,14 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
   end
 
   def update
+    expense_report = ExpenseReport.find(params[:id])
+    expense_report.expenses.destroy_all
+    expense_report.update_attributes(safe_params)
+    if expense_report.save
+      render :json => expense_report
+    else
+      render :json => expense_report.errors, :status => :unprocessable_entity
+    end
   end
 
   private
