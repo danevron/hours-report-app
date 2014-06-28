@@ -4,8 +4,9 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
   before_action :load_user, :only => [:index]
   before_action :check_for_list_owner, :only => [:index]
 
-  after_action :load_user_from_respense, :only => [:show, :edit]
+  # The order of the after actions is important, it's not wrong!!
   after_action :check_for_list_owner, :only => [:show, :edit]
+  after_action :load_user_from_respense, :only => [:show, :edit]
 
   def create
     expense_report = ExpenseReport.new(safe_params)
