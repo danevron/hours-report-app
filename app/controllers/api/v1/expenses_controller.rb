@@ -1,6 +1,8 @@
 class Api::V1::ExpensesController < Api::V1::ApiController
   inherit_resources
 
+  before_action :check_for_list_owner, :only => [:index]
+
   def index
     @expenses = Expense.where({})
     [:expense_report_id].each do |p|
