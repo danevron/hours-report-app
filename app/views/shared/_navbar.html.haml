@@ -22,5 +22,5 @@
               %i.fa.fa-sign-out.fa-3x
               %p Sign Out
           %li.pink
-            = link_to current_user, :class => '', :title => "#{current_user.name}" do
+            = link_to current_user, :target => "_self", :class => '', :title => "#{current_user.name}" do
               = image_tag current_user.image || "http://lorempixel.com/100/100/cats/", :size => "70x70", :class => "img-rounded"
