@@ -38,6 +38,15 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
     end
   end
 
+  def destroy
+    expense_report = ExpenseReport.find(params[:id])
+    if expense_report.destroy
+      render :json => expense_report, :status => :ok
+    else
+      render :json => expense_report.errors, :status => 403
+    end
+  end
+
   private
 
   def safe_params

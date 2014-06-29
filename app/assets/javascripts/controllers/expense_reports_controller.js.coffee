@@ -5,3 +5,8 @@
 
   $scope.redirectTo = (expenseReport) ->
     $location.path("/users/#{expenseReport.userId}/expense_reports/#{expenseReport.id}/edit")
+
+  $scope.removeExpenseReport = ($event, expenseReport) ->
+    $event.stopPropagation()
+    $scope.expenseReports = (report for report in $scope.expenseReports when report != expenseReport)
+    expenseReport.delete()
