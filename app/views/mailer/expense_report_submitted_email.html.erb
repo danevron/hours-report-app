@@ -1,0 +1,17 @@
+<td class="w580" width="580">
+  <p align="left" class="article-title">
+    <singleline label="Title">
+      <%= "Hi #{@admin.name}" %>
+    </singleline>
+  </p>
+  <div align="left" class="article-content">
+    <multiline label="Description">
+    <p>
+      <%= "New expense report was submmited by #{@submitter.name} and is waiting for approval." %><br>
+      To go to the expense report click
+      <%= link_to "Here", login_url %>.<br>
+      TODO: Add a real link here
+    </p>
+    </multiline>
+  </div>
+</td>

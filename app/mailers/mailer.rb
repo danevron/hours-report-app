@@ -21,4 +21,14 @@ class Mailer < ActionMailer::Base
       subject: "Please fill your Hours Report"
     )
   end
+
+  def expense_report_submitted_email(submitter_user_id, admin_user_id)
+    @submitter = User.find(submitter_user_id)
+    @admin = User.find(admin_user_id)
+
+    mail(
+      to: @admin.email,
+      subject: "New expense report submitted"
+    )
+  end
 end
