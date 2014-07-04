@@ -6,7 +6,7 @@
   else
     $scope.expenseReport = new ExpenseReport
       userId: $routeParams.user_id
-      status: "open"
+      status: "waiting_for_approval"
     $scope.expenseReport.addPerDiemExpense()
 
   $scope.addExpense = ->
