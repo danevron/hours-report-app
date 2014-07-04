@@ -7,6 +7,9 @@ class ExpenseReport < ActiveRecord::Base
 
   accepts_nested_attributes_for :expenses
   validates_associated :expenses
+  validates :status, inclusion: { in: %w(waiting_for_approval approved archived) }
+
+  after_create :notify_admins
 
   def as_json(options = {})
     {
@@ -19,5 +22,11 @@ class ExpenseReport < ActiveRecord::Base
       :status     => self.status,
       :user_id    => self.user_id
     }
+  end
+
+  def notify_admins
+    User.admins.each do |admin|
+      Mailer.delay.expense_report_submitted_email(self.user_id, admin.id)
+    end
   end
 end
