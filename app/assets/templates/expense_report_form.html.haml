@@ -11,7 +11,7 @@
             %p.pull-right Outbound flight
           .col-md-8
             .input-group
-              %input.input-lg.form-control#dani{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
+              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
                 "data-max-date" => "{{expenseReport.endTime}}", "bs-datepicker" => true, "ng-change" => "updateRates()",
                 "placeholder" => "Outbound date", "data-date-format" => "MMM d, yyyy" }
               %span.input-group-addon
