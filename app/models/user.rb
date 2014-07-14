@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   delegate :active?, :inactive?, :to => :status
 
   def self.from_auth(auth)
+    puts auth.credentials
     where(provider: auth["provider"], uid: auth["uid"]).first
   end
 
