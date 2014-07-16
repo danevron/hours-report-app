@@ -30,4 +30,16 @@ HoursReport.Timesheets.Edit =
     $("#extract-calendar-events").click ->
       $("#timesheet_calendar_events").attr("checked", true)
 
+    $("form.edit_timesheet").submit (event) ->
+      debugger
+      totalHours = 0
+      for day in $(".edit_timesheet fieldset")
+        dayType = $(day).find(".day-type").val()
+        totalHours += parseFloat($(day).find(".day-value").val()) if dayType == "workday"
+
+      debugger
+      if totalHours == 0 and !confirm("There are no hours in the timesheet, are you sure you want to continue?")
+        event.preventDefault()
+
+
     modules: -> []
