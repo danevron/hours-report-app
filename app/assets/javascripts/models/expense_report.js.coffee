@@ -20,8 +20,8 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
         86
 
       availableCountries: ->
-        [ "USA", "Great Britain", "Japan", "European Union", "Australia", "Canada",
-          "Denmark", "Norway", "South Africa", "Sweden", "Switzerland" ]
+        [ "USA", "Great Britain", "European Union", "Australia", "Canada",
+          "Denmark", "Norway", "Sweden", "Switzerland" ]
 
       total: ->
         sum = 0
@@ -66,7 +66,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
 
       numberOfDays: ->
         if @startTime and @endTime
-          moment.duration(moment(@endTime) - moment(@startTime)).days() + 1
+          moment.duration(moment(@endTime) - moment(@startTime)).as("days") + 1
         else
           0
 ]
