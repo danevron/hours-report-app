@@ -7,20 +7,30 @@ class Api::V1::RatesController < Api::V1::ApiController
   private
 
   def get_rates(start_date, end_date)
+
     start_date.upto(end_date) do |date|
-      begin
-        returned_rates_data = BankOfIsrael.rates(date)
-        if returned_rates_data.delete(:release_date)
-          returned_rates_data.each do |currency, data|
-            calculated_rate = (data[:rate].to_d / data[:unit].to_d)
-            rates[currency.to_s.upcase] = calculated_rate unless rates[currency.to_s.upcase] > calculated_rate
-          end
+      unless date.saturday? || date.sunday?
+        rates.map do |cur, max_rate|
+          latest_rate = bank.exchange(100, cur, "ILS", date).to_f
+          rates[cur] = latest_rate if latest_rate > rates[cur]
         end
-      rescue RuntimeError
       end
     end
 
     rates
+  end
+
+  def bank
+    @bank ||= create_bank
+  end
+
+  def create_bank
+    bank = EuCentralBank.new
+    if !bank.rates_updated_at || bank.rates_updated_at < Time.now - 1.days
+      bank.update_historical_rates
+      bank.update_rates
+    end
+    bank
   end
 
   def rates
@@ -28,18 +38,13 @@ class Api::V1::RatesController < Api::V1::ApiController
       "ILS" => 1,
       "USD" => 0,
       "GBP" => 0,
-      "JPY" => 0,
       "EUR" => 0,
-      "AUD" => 0,
-      "CAD" => 0,
       "DKK" => 0,
       "NOK" => 0,
-      "ZAR" => 0,
       "SEK" => 0,
       "CHF" => 0,
-      "JOD" => 0,
-      "EGP" => 0,
-      "LBP" => 0
+      "CAD" => 0,
+      "AUD" => 0
     }
   end
 end
