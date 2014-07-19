@@ -1,5 +1,5 @@
-@ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location, flashService) ->
-
+@ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location, flashService, ccCurrencySymbol) ->
+  $scope.currencySymbol = ccCurrencySymbol
   if $routeParams.id
     ExpenseReport.get($routeParams.id).then (report) ->
       $scope.expenseReport = report
