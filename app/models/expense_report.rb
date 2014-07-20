@@ -11,6 +11,9 @@ class ExpenseReport < ActiveRecord::Base
 
   after_create :notify_admins
 
+  scope :approved, -> { where(:status => "approved") }
+  scope :for_user, ->(user) { where(:user_id => user.id) }
+
   def as_json(options = {})
     {
       :country    => self.country,
@@ -28,5 +31,9 @@ class ExpenseReport < ActiveRecord::Base
     User.admins.each do |admin|
       Mailer.delay.expense_report_submitted_email(self.user_id, admin.id)
     end
+  end
+
+  def total
+    expenses.inject(0) { |sum, expense| sum += expense.total }
   end
 end

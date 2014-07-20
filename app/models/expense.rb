@@ -11,4 +11,8 @@ class Expense < ActiveRecord::Base
       :quantity      => self.quantity.to_f
     }
   end
+
+  def total
+    amount * exchange_rate * quantity
+  end
 end
