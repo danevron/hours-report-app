@@ -21,6 +21,7 @@ class Timesheet < ActiveRecord::Base
     users.map do |user|
       timesheet = new(:user_id => user.id, :status => "open")
       timesheet.days = Day.build_days(start_date, end_date)
+      timesheet.expense_reports = ExpenseReport.for_user(user).approved
       timesheet
     end
   end
@@ -51,7 +52,7 @@ class Timesheet < ActiveRecord::Base
   end
 
   def expenses_abroad
-    #TODO add expense_reports aggragation
+    expense_reports.inject(0) { |sum, report| sum += report.total }
   end
 
   def comments_number
