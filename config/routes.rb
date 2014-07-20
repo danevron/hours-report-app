@@ -21,6 +21,8 @@ HoursReport::Application.routes.draw do
     resources :expense_reports, only: [:index, :new]
   end
 
+  resources :expense_reports, module: 'admin'
+
   match "users/all" => "users#update_all", :as => :update_all, :via => :put
 
   resources :reports,        only: [:index, :show, :new, :create, :destroy, :update] do
