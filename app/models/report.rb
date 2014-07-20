@@ -67,6 +67,7 @@ class Report < ActiveRecord::Base
                   timesheet.sickness_days,
                   timesheet.army_reserve_days,
                   timesheet.tenbis_usage,
+                  timesheet.expenses_abroad,
                   timesheet.status,
                   timesheet.comments_number)
     end
@@ -94,6 +95,7 @@ class Report < ActiveRecord::Base
                :sickness_days,
                :army_reserve_days,
                :tenbis,
+               :expenses_abroad,
                :status,
                :comments_number)
   end

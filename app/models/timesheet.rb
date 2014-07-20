@@ -3,6 +3,7 @@ class Timesheet < ActiveRecord::Base
   belongs_to :report
 
   has_many :days, dependent: :destroy
+  has_many :expense_reports
 
   validates_associated :days
   validates :status, inclusion: { in: %w(open submitted reopened) }
@@ -47,6 +48,10 @@ class Timesheet < ActiveRecord::Base
 
   def tenbis
 
+  end
+
+  def expenses_abroad
+    #TODO add expense_reports aggragation
   end
 
   def comments_number
