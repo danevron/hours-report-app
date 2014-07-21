@@ -1,3 +1,12 @@
+%form#expense_report_filters
+  %label Status:
+  %select.expense_reports_filter{name: 'status'}
+    - @status_options.each do |value, name, selected|
+      %option{value: value, selected: selected}=name
+  %label User:
+  %select.expense_reports_filter{name: 'user_id'}
+    - @user_options.each do |value, name, selected|
+      %option{value: value, selected: selected}=name
 .row
   %table.table.hoverable-row
     %thead
@@ -10,8 +19,8 @@
     %tbody
       - @expense_reports.each do |expense_report|
         %tr
-          %td= "#{expense_report.user.first_name} #{expense_report.user.last_name}"
+          %td= expense_report.user.name
           %td= "#{expense_report.start_time.strftime('%B %d, %Y')} - #{expense_report.end_time.strftime('%B %d, %Y')}"
           %td= expense_report.country
           %td= expense_report.total
-          %td= expense_report.status
+          %td= expense_report.status.humanize

@@ -1,4 +1,6 @@
 class ExpenseReport < ActiveRecord::Base
+  STATUSES = ['waiting_for_approval', 'approved', 'archived']
+
   belongs_to :user
   has_many :expenses
 
@@ -7,7 +9,7 @@ class ExpenseReport < ActiveRecord::Base
 
   accepts_nested_attributes_for :expenses
   validates_associated :expenses
-  validates :status, inclusion: { in: %w(waiting_for_approval approved archived) }
+  validates :status, inclusion: { in: STATUSES }
 
   after_create :notify_admins
 
@@ -26,6 +28,15 @@ class ExpenseReport < ActiveRecord::Base
       :user_id    => self.user_id
     }
   end
+
+  def self.filter(status, user_id)
+    if user_id.blank?
+      ExpenseReport.where(status: status)
+    else
+      ExpenseReport.where(status: status, user_id: user_id)
+    end
+  end
+
 
   def notify_admins
     User.admins.each do |admin|
