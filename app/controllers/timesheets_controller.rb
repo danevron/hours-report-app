@@ -26,24 +26,16 @@ class TimesheetsController < ApplicationController
 
   def redirect_user
     if user_submitted?
-      track_event("Submission", distinct_id: @user.id, "Of" => "Timesheet",
-                  "Start date" => @timesheet.start_date, "End date" => @timesheet.end_date, "$first_name" => @user.first_name,
-                  "$last_name" => @user.last_name, "$email" => @user.email)
+      mixpanel_event("Timesheet Submission", @user, @timesheet)
       redirect_to @user, notice: "Your timesheet has been submitted"
     elsif user_reopened?
-      track_event("Reopening", distinct_id: @user.id, "Of" => "Timesheet",
-                  "Start date" => @timesheet.start_date, "End date" => @timesheet.end_date, "$first_name" => @user.first_name,
-                  "$last_name" => @user.last_name, "$email" => @user.email)
+      mixpanel_event("Timesheet Reopening", @user, @timesheet)
       redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet reopened"
     elsif @timesheet.calendar_events
-      track_event("Calendar events extraction", distinct_id: @user.id, "Of" => "Timesheet",
-                  "Start date" => @timesheet.start_date, "End date" => @timesheet.end_date, "$first_name" => @user.first_name,
-                  "$last_name" => @user.last_name, "$email" => @user.email)
+      mixpanel_event("Calendar events extraction", @user, @timesheet)
       redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Calendar events extracted"
     else
-      track_event("Saving", distinct_id: @user.id, "Of" => "Timesheet",
-                  "Start date" => @timesheet.start_date, "End date" => @timesheet.end_date, "$first_name" => @user.first_name,
-                  "$last_name" => @user.last_name, "$email" => @user.email)
+      mixpanel_event("Timesheet Saving", @user, @timesheet)
       redirect_to edit_user_timesheet_path(@user, @timesheet), notice: "Timesheet saved"
     end
   end
@@ -85,5 +77,11 @@ class TimesheetsController < ApplicationController
   def timesheet_params
     params.require(:timesheet).permit(:comments, :status, :tenbis_usage, :calendar_events,
       :days_attributes => [:id, :day_type, :value, :comment])
+  end
+
+  def mixpanel_event(event_name, user, timesheet)
+    track_event(event_name, distinct_id: user.id,
+                "Start date" => timesheet.start_date, "End date" => timesheet.end_date, "$first_name" => user.first_name,
+                "$last_name" => user.last_name, "$email" => user.email)
   end
 end
