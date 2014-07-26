@@ -1,26 +1,14 @@
-%form#expense_report_filters
-  %label Status:
-  %select.expense_reports_filter{name: 'status'}
-    - @status_options.each do |value, name, selected|
-      %option{value: value, selected: selected}=name
-  %label User:
-  %select.expense_reports_filter{name: 'user_id'}
-    - @user_options.each do |value, name, selected|
-      %option{value: value, selected: selected}=name
-.row
-  %table.table.hoverable-row
-    %thead
-      %tr
-        %th Name
-        %th Period
-        %th Country
-        %th Total
-        %th Status
-    %tbody
-      - @expense_reports.each do |expense_report|
-        %tr
-          %td= expense_report.user.name
-          %td= "#{expense_report.start_time.strftime('%B %d, %Y')} - #{expense_report.end_time.strftime('%B %d, %Y')}"
-          %td= expense_report.country
-          %td= expense_report.total
-          %td= expense_report.status.humanize
+.well
+  = form_for @filterrific, :html => { :class => 'form-inline' } do |f|
+    .row
+      %label User
+      = f.select :with_user_id, options_from_collection_for_select(User.all, 'id', 'name'), { :include_blank => '- Any -' }, :class => 'form-control'
+      %label Status
+      = f.select :with_status, options_for_select(ExpenseReport::STATUSES.map { |s| [s.humanize, s] }), { :include_blank => '- Any -' }, :class => 'form-control'
+      %label Starts after
+      = f.text_field :with_start_time_gte, :class => 'span2 form-control datepicker'
+      .pull-right
+        = link_to "Reset filters", reset_filterrific_expense_reports_path, :class => 'btn'
+
+#results
+  = render :partial => 'admin/expense_reports/list', :locals => { :expense_reports => @expense_reports }

@@ -1,11 +1,11 @@
 $ ->
   class ExpenseReports
     constructor: ->
-      $('.expense_reports_filter').bind 'change', (event) =>
-        @filterExpenseReports()
+      $(".datepicker").pickadate
+        format: 'mmmm dd, yyyy'
+        editable: true
+        selectYears: true
+        selectMonths: true
 
-    filterExpenseReports: (data)->
-      params = $('#expense_report_filters').serialize()
-      window.location = "/expense_reports?#{params}"
 
   new ExpenseReports()

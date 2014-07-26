@@ -4,10 +4,32 @@ module Admin
     before_action :check_for_list_owner, :only => [:index]
 
     def index
-      @status_options  = status_options
-      @user_options    = user_options
-      @expense_reports = ExpenseReport.filter(status, user_id)
+      @filterrific = Filterrific.new(
+        ExpenseReport,
+        params[:filterrific] || session[:filterrific_expense_reports]
+      )
+      @expense_reports = ExpenseReport.filterrific_find(@filterrific).page(params[:page])
+      session[:filterrific_expense_reports] = @filterrific.to_hash
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
+
+    def reset_filterrific
+      session[:filterrific_expense_reports] = nil
+      redirect_to :action => :index
+    end
+
+
+
+
+    #def index
+      #@status_options  = status_options
+      #@user_options    = user_options
+      #@expense_reports = ExpenseReport.filter(status, user_id)
+    #end
 
     private
 

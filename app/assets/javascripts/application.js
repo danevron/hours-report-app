@@ -21,6 +21,8 @@
 //= require picker.date
 //= require spin.min
 //= require jquery.blockUI
+//= require filterrific-jquery
+
 //= require angular
 //= require angular-animate
 //= require angular-route

@@ -1,6 +1,14 @@
 class ExpenseReport < ActiveRecord::Base
   STATUSES = ['waiting_for_approval', 'approved', 'archived']
 
+  filterrific :filter_names => %w[ with_user_id with_start_time_gte with_status]
+
+  scope :with_user_id, lambda { |user_ids| where(:user_id => [*user_ids]) }
+  scope :with_status, lambda { |statuses| where(:status => [*statuses]) }
+  scope :with_start_time_gte, lambda { |start_time| where('expense_reports.start_time >= ?', start_time) }
+
+  self.per_page = 8
+
   belongs_to :user
   has_many :expenses
 
@@ -28,15 +36,6 @@ class ExpenseReport < ActiveRecord::Base
       :user_id    => self.user_id
     }
   end
-
-  def self.filter(status, user_id)
-    if user_id.blank?
-      ExpenseReport.where(status: status)
-    else
-      ExpenseReport.where(status: status, user_id: user_id)
-    end
-  end
-
 
   def notify_admins
     User.admins.each do |admin|

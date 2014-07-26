@@ -21,7 +21,11 @@ HoursReport::Application.routes.draw do
     resources :expense_reports, only: [:index, :new]
   end
 
-  resources :expense_reports, module: 'admin'
+  resources :expense_reports, module: 'admin' do
+    collection do
+      get :reset_filterrific
+    end
+  end
 
   match "users/all" => "users#update_all", :as => :update_all, :via => :put
 
