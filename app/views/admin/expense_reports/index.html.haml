@@ -1,12 +1,12 @@
 .well
   = form_for @filterrific, :html => { :class => 'form-inline' } do |f|
     .row
-      %label User
-      = f.select :with_user_id, options_from_collection_for_select(User.all, 'id', 'name'), { :include_blank => '- Any -' }, :class => 'form-control'
-      %label Status
-      = f.select :with_status, options_for_select(ExpenseReport::STATUSES.map { |s| [s.humanize, s] }), { :include_blank => '- Any -' }, :class => 'form-control'
-      %label Starts after
-      = f.text_field :with_start_time_gte, :class => 'span2 form-control datepicker'
+      .form-group
+        = f.select :with_user_id, options_from_collection_for_select(User.all, 'id', 'name'), { :include_blank => '- All Users -' }, :class => 'form-control'
+      .form-group
+        = f.select :with_status, options_for_select(ExpenseReport::STATUSES.map { |s| [s.humanize, s] }), { :include_blank => '- All Status -' }, :class => 'form-control'
+      .form-group
+        = f.text_field :with_start_time_gte, :class => 'span2 form-control datepicker', :placeholder => 'Since', :autocomplete => 'off'
       .pull-right
         = link_to "Reset filters", reset_filterrific_expense_reports_path, :class => 'btn'
 
