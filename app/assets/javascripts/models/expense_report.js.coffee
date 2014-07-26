@@ -66,7 +66,7 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
 
       numberOfDays: ->
         if @startTime and @endTime
-          moment.duration(moment(@endTime) - moment(@startTime)).as("days") + 1
+          parseFloat(moment.duration(moment(@endTime) - moment(@startTime)).as("days").toPrecision(3))
         else
           0
 ]
