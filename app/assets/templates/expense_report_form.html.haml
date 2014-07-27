@@ -1,4 +1,4 @@
-%form.form-horizontal{ "name" => "mainForm", "novalidate" => true }
+%form.expense_report.form-horizontal{ "name" => "mainForm", "novalidate" => true }
   %div{ "ng-controller" => "ExpenseReportFormController" }
     .action-header
       %button.btn.btn-primary.btn-lg{ "type" => "button", "ng-disabled" => "mainForm.$invalid",
@@ -48,56 +48,57 @@
             %option{ "value" => "" } Destination
 
       .row.top-buffer
-        %table.table
-          %thead
-            %tr
-              %th
-              %th Description
-              %th Amount
-              %th Currency
-              %th Quantity
-              %th Exchange Rate
-              %th Total (Local)
-              %th Total (ILS)
-          %tbody
-            %tr{ "ng-repeat" => "expense in expenseReport.expenses", "ng-form" => "subForm" }
-              %td
-                %a.simplebox.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "expenseReport.removeExpense(expense)" }
-              %td
-                %input.simplebox{ "type" => "text", "name" => "description", "data-ng-model" => "expense.description", "placeholder" => "Description",
-                  "required" => true }
-              %td
-                %input.simplebox{ "type" => "number", "name" => "amount", "data-ng-model" => "expense.amount", "placeholder" => "Amount",
-                  "min" => "1", "required" => true }
-              %td
-                %select.simplebox{ "type" => "text", "data-ng-model" => "expense.currency", "ng-change" => "updateRates()", "required" => true,
-                  "ng-options" => "currency.id as currency.name for currency in expense.availableCurrencies()" }
-              %td
-                %input.simplebox{ "type" => "number", "name" => "quantity", "data-ng-model" => "expense.quantity", "placeholder" => "Quantity",
-                  "min" => "1", "required" => true }
-              %td
-                %span {{expense.exchangeRate}}
-              %td
-                %span {{(expense.localTotal() | number:2) + " " + currencySymbol[expense.currency] }}
-              %td
-                %span {{(expense.total() | number:2) + " " + currencySymbol['ILS'] }}
-            %tr
-              %td
-                %a.glyphicon.glyphicon-plus{ "href" => "", "ng-click" => "addExpense()" }
-              %td
-              %td
-              %td
-              %td
-              %td
-              %td
-              %td
-            %tr
-              %td.no-top-border
-              %td.no-top-border
-              %td.no-top-border
-              %td.no-top-border
-              %td.no-top-border
-              %td.no-top-border
-              %td.no-top-border.total-left
-                %span.pull-right Expense report total:
-              %td.no-top-border.total-right {{ (expenseReport.total() | number:2) + " " + currencySymbol['ILS'] }}
+        %div{class:"{{ expenseReport.status }}"}
+          %table.table
+            %thead
+              %tr
+                %th
+                %th Description
+                %th Amount
+                %th Currency
+                %th Quantity
+                %th Exchange Rate
+                %th Total (Local)
+                %th Total (ILS)
+            %tbody
+              %tr{ "ng-repeat" => "expense in expenseReport.expenses", "ng-form" => "subForm" }
+                %td
+                  %a.simplebox.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "expenseReport.removeExpense(expense)" }
+                %td
+                  %input.simplebox{ "type" => "text", "name" => "description", "data-ng-model" => "expense.description", "placeholder" => "Description",
+                    "required" => true }
+                %td
+                  %input.simplebox{ "type" => "number", "name" => "amount", "data-ng-model" => "expense.amount", "placeholder" => "Amount",
+                    "min" => "1", "required" => true }
+                %td
+                  %select.simplebox{ "type" => "text", "data-ng-model" => "expense.currency", "ng-change" => "updateRates()", "required" => true,
+                    "ng-options" => "currency.id as currency.name for currency in expense.availableCurrencies()" }
+                %td
+                  %input.simplebox{ "type" => "number", "name" => "quantity", "data-ng-model" => "expense.quantity", "placeholder" => "Quantity",
+                    "min" => "1", "required" => true }
+                %td
+                  %span {{expense.exchangeRate}}
+                %td
+                  %span {{(expense.localTotal() | number:2) + " " + currencySymbol[expense.currency] }}
+                %td
+                  %span {{(expense.total() | number:2) + " " + currencySymbol['ILS'] }}
+              %tr
+                %td
+                  %a.glyphicon.glyphicon-plus{ "href" => "", "ng-click" => "addExpense()" }
+                %td
+                %td
+                %td
+                %td
+                %td
+                %td
+                %td
+              %tr
+                %td.no-top-border
+                %td.no-top-border
+                %td.no-top-border
+                %td.no-top-border
+                %td.no-top-border
+                %td.no-top-border
+                %td.no-top-border.total-left
+                  %span.pull-right Expense report total:
+                %td.no-top-border.total-right {{ (expenseReport.total() | number:2) + " " + currencySymbol['ILS'] }}
