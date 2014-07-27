@@ -7,7 +7,7 @@ class ExpenseReport < ActiveRecord::Base
   scope :with_status, lambda { |statuses| where(:status => [*statuses]) }
   scope :with_start_time_gte, lambda { |start_time| where('expense_reports.start_time >= ?', start_time) }
 
-  self.per_page = 8
+  self.per_page = 30
 
   belongs_to :user
   has_many :expenses
