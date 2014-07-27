@@ -38,3 +38,13 @@
       $location.path("/users/#{expenseReport.userId}/expense_reports")
     ), (error) ->
       flashService.flash("danger", "Expense report was not saved due to errors")
+
+
+  $scope.approveReport = ->
+    $scope.expenseReport.status = "approved"
+    $scope.expenseReport.save().then ((expenseReport) ->
+      $scope.expenseReport = ""
+      flashService.flash("success", "Expense report approved")
+      window.location = "/expense_reports"
+    ), (error) ->
+      flashService.flash("danger", "Expense report was not approved")
