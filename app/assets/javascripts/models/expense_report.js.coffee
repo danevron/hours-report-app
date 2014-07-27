@@ -64,6 +64,9 @@ App.factory "ExpenseReport", ['RailsResource', 'railsSerializer', 'Expense', 'ra
       perDiemExpense: ->
         (expense for expense in @expenses when expense.description == "Per Diem")[0]
 
+      waitingForApproval: ->
+        @status == "waiting_for_approval"
+
       numberOfDays: ->
         if @startTime and @endTime
           parseFloat(moment.duration(moment(@endTime) - moment(@startTime)).as("days").toPrecision(3))
