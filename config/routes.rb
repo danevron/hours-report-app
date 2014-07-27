@@ -18,7 +18,7 @@ HoursReport::Application.routes.draw do
   resources :invitations,       only: [:new, :create]
   resources :users,             only: [:index, :show] do
     resources :timesheets,      only: [:edit, :update, :index]
-    resources :expense_reports, only: [:index, :new]
+    resources :expense_reports, only: [:index, :new, :edit]
   end
 
   resources :expense_reports, module: 'admin' do

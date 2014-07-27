@@ -7,5 +7,8 @@ $ ->
         selectYears: true
         selectMonths: true
 
+      $("tr").click ->
+        href = $(@).find("a").attr("href")
+        window.location = href if href
 
   new ExpenseReports()

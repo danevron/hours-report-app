@@ -14,6 +14,7 @@
     %tbody
       - expense_reports.each do |expense_report|
         %tr
+          %td.hidden= link_to "", edit_user_expense_report_path(expense_report.user, expense_report)
           %td= expense_report.user.name
           %td= "#{expense_report.start_time.strftime('%B %d, %Y')} - #{expense_report.end_time.strftime('%B %d, %Y')}"
           %td= expense_report.country
