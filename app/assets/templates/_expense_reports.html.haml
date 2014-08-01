@@ -2,18 +2,19 @@
   %table.table.hoverable-row
     %thead
       %tr
+        %th
         %th From
         %th To
         %th Country
         %th Total in ILS
         %th Status
-        %th
     %tbody
       %tr{ "ng-repeat" => "report in expenseReports", "ng-click" => "redirectTo(report)" }
+        %td
+          %a.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "removeExpenseReport($event, report)",
+            "ng-show" => "report.waitingForApproval()" }
         %td {{ report.startTime | date }}
         %td {{ report.endTime | date }}
         %td {{ report.country }}
         %td {{ (report.total() | number:2) + " " + currencySymbol['ILS'] }}
         %td {{ report.status }}
-        %td
-          %a.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "removeExpenseReport($event, report)" }
