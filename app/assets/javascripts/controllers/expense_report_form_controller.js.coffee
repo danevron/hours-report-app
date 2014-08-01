@@ -39,6 +39,11 @@
     ), (error) ->
       flashService.flash("danger", "Expense report was not saved due to errors")
 
+  $scope.submitButtonText = ->
+    if $scope.expenseReport.isNew()
+      "Submit"
+    else
+      "Save"
 
   $scope.approveReport = ->
     $scope.expenseReport.status = "approved"
