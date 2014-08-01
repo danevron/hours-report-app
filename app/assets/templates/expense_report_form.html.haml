@@ -7,37 +7,42 @@
         "ng-click" => "approveReport()", "ng-show" => "expenseReport.waitingForApproval()"  } Approve
     .panel-body
       .col-md-6
-        .form-group
+        .form-group{ "show-errors" => true }
           %label.control-label.col-md-4
             %i.fa.fa-plane.fa-2x.pull-right
             %p.pull-right Outbound flight
           .col-md-8
             .input-group
-              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
+              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime",
+                "data-autoclose" => "1", "name" => "startTime", "required" => true,
                 "data-max-date" => "{{expenseReport.endTime}}", "bs-datepicker" => true, "ng-change" => "updateRates()",
                 "placeholder" => "Outbound date", "data-date-format" => "MMM d, yyyy",
                 "ng-disabled" => "!expenseReport.waitingForApproval()" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-calendar
-              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime", "data-autoclose" => "1",
+              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime",
+                "data-autoclose" => "1", "name" => "startTime", "required" => true,
                 "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
                 "placeholder" => "Outbound time", "data-time-format" => "HH:mm",
                 "ng-disabled" => "!expenseReport.waitingForApproval()" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-time
-        .form-group
+
+        .form-group{ "show-errors" => true }
           %label.control-label.col-md-4
             %i.fa.fa-plane.fa-rotate-90.fa-2x.pull-right
             %p.pull-right Return flight
           .col-md-8
             .input-group
-              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
+              %input.input-lg.form-control{ type: "text", "name" => "endTime", "required" => true,
+                "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
                 "data-min-date" => "{{expenseReport.startTime}}", "data-max-date" => "today", "bs-datepicker" => true,
                 "ng-change" => "updateRates()", "placeholder" => "Return date", "data-date-format" => "MMM d, yyyy",
                 "ng-disabled" => "!expenseReport.waitingForApproval()" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-calendar
-              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
+              %input.input-lg.form-control{ type: "text", "name" => "endTime", "required" => true,
+                "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
                 "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
                 "placeholder" => "Return time", "data-time-format" => "HH:mm",
                 "ng-disabled" => "!expenseReport.waitingForApproval()" }
@@ -45,12 +50,13 @@
                 %span.glyphicon.glyphicon-time
 
       .col-md-4
-        %label.control-label.col-md-4 Country
-        .col-md-8
-          %select.form-control.input-lg{ "name" => "country", "ng-model" => "expenseReport.country", "required" => true,
-            "ng-options" => "country for country in expenseReport.availableCountries()",
-            "ng-disabled" => "!expenseReport.waitingForApproval()" }
-            %option{ "value" => "" } Destination
+        .form-group{ "show-errors" => true }
+          %label.control-label.col-md-4 Country
+          .col-md-8
+            %select.form-control.input-lg{ "name" => "country", "ng-model" => "expenseReport.country", "required" => true,
+              "ng-options" => "country for country in expenseReport.availableCountries()",
+              "ng-disabled" => "!expenseReport.waitingForApproval()" }
+              %option{ "value" => "" } Destination
 
       .row.top-buffer
         %div{class:"{{ expenseReport.status }}"}
@@ -70,7 +76,7 @@
                 %td
                   %a.simplebox.glyphicon.glyphicon-trash{ "href" => "", "ng-click" => "expenseReport.removeExpense(expense)",
                     "ng-show" => "expenseReport.waitingForApproval()" }
-                %td
+                %td.form-group{ "show-errors" => true }
                   %input.simplebox{ "type" => "text", "name" => "description", "data-ng-model" => "expense.description",
                     "placeholder" => "Description", "required" => true,
                     "ng-disabled" => "!expenseReport.waitingForApproval()" }

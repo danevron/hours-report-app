@@ -27,6 +27,7 @@
 //= require angular-animate
 //= require angular-route
 //= require angularjs/rails/resource
+//= require showErrors.min
 //= require moment
 //= require hours_report/hours_report.js
 
