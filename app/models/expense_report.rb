@@ -19,7 +19,10 @@ class ExpenseReport < ActiveRecord::Base
   validates_associated :expenses
   validates :status, inclusion: { in: STATUSES }
 
+  delegate :current_timesheet, :to => :user
+
   after_create :notify_admins
+  before_update :attach_to_timesheet, :if => :status_changed?
 
   scope :approved, -> { where(:status => "approved") }
   scope :for_user, ->(user) { where(:user_id => user.id) }
@@ -40,6 +43,22 @@ class ExpenseReport < ActiveRecord::Base
   def notify_admins
     User.admins.each do |admin|
       Mailer.delay.expense_report_submitted_email(self.user_id, admin.id)
+    end
+  end
+
+  def archive!
+    self.status = 'archived'
+    save
+  end
+
+  def approve!
+    self.status = 'approved'
+    save
+  end
+
+  def attach_to_timesheet
+    if status == 'approved' && current_timesheet
+      self.timesheet_id = current_timesheet.id
     end
   end
 

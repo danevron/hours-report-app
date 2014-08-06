@@ -2,6 +2,7 @@ class Report < ActiveRecord::Base
   has_many :timesheets, dependent: :destroy
   has_many :reminders, dependent: :destroy
   has_many :users, :through => :timesheets
+  has_many :expense_reports, :through => :timesheets
 
   validates :current, uniqueness: true, if: "current?"
   validates_datetime :start_date
@@ -17,6 +18,7 @@ class Report < ActiveRecord::Base
   scope :unsubmitted, -> { where.not(:status => "submitted") }
 
   after_create :extract_tenbis_usage
+  after_update :archive_expense_reports, :if => :status_changed?
 
   delegate :submitted?, :open?, :reopened?, :to => :status
 
@@ -54,6 +56,14 @@ class Report < ActiveRecord::Base
   def add_new_user(user)
     self.timesheets << Timesheet.build_timesheets([user], self.start_date, self.end_date)
     TenbisUsageCollector.perform_in(2.minutes, self.id)
+  end
+
+  def archive_expense_reports
+    if submitted?
+      self.expense_reports.each(&:archive!)
+    elsif reopened?
+      self.expense_reports.each(&:approve!)
+    end
   end
 
   def timesheet_summaries
