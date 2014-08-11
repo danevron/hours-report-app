@@ -38,6 +38,15 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
     end
   end
 
+  def show
+    @expense_report = ExpenseReport.find(params[:id])
+
+    respond_to do |format|
+      format.json { render :json => @expense_report }
+      format.pdf
+    end
+  end
+
   def destroy
     expense_report = ExpenseReport.find(params[:id])
     if expense_report.destroy

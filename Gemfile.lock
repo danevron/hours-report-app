@@ -231,6 +231,7 @@ GEM
     omniauth-oauth2 (1.0.2)
       oauth2 (~> 0.6.0)
       omniauth (~> 1.0)
+    pdf-core (0.2.5)
     pg (0.17.1)
     poltergeist (1.5.0)
       capybara (~> 2.1)
@@ -239,6 +240,12 @@ GEM
       websocket-driver (>= 0.2.0)
     polyglot (0.3.4)
     posix-spawn (0.3.8)
+    prawn (1.2.1)
+      pdf-core (~> 0.2.5)
+      ttfunk (~> 1.2.0)
+    prawn-rails (0.0.2)
+      prawn
+    prawn-table (0.1.0)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -377,6 +384,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.2.0)
     turbolinks (2.2.2)
       coffee-rails
     typhoeus (0.6.8)
@@ -438,6 +446,9 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg
   poltergeist
+  prawn
+  prawn-rails
+  prawn-table
   rails (= 4.1.0)
   rails_12factor
   roadie (= 2.4.1)

@@ -18,7 +18,7 @@ class Report < ActiveRecord::Base
   scope :unsubmitted, -> { where.not(:status => "submitted") }
 
   after_create :extract_tenbis_usage
-  after_update :archive_expense_reports, :if => :status_changed?
+  after_update :update_expense_reports, :if => :status_changed?
 
   delegate :submitted?, :open?, :reopened?, :to => :status
 
@@ -58,7 +58,7 @@ class Report < ActiveRecord::Base
     TenbisUsageCollector.perform_in(2.minutes, self.id)
   end
 
-  def archive_expense_reports
+  def update_expense_reports
     if submitted?
       self.expense_reports.each(&:archive!)
     elsif reopened?
