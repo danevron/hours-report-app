@@ -1,5 +1,6 @@
 class Api::V1::ExpenseReportsController < Api::V1::ApiController
   inherit_resources
+  include ExpenseReportsHelper
 
   before_action :load_user, :only => [:index]
   before_action :check_for_list_owner, :only => [:index]
@@ -43,7 +44,10 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
 
     respond_to do |format|
       format.json { render :json => @expense_report }
-      format.pdf
+      format.pdf  do
+        pdf = ExpenseReportPDF.build(@expense_report)
+        send_data pdf.render, type: "application/pdf", disposition: "inline"
+      end
     end
   end
 
