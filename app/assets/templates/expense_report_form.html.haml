@@ -5,6 +5,7 @@
         "ng-click" => "submitReport()", "ng-show" => "expenseReport.waitingForApproval()" } {{ submitButtonText() }}
       %button.btn.btn-success.btn-lg{ "type" => "button", "ng-disabled" => "mainForm.$invalid",
         "ng-click" => "approveReport()", "ng-show" => "expenseReport.waitingForApproval()"  } Approve
+      %a{ href: 'http://localhost:3000/api/v1/expense_reports/5.pdf', target: '_blank' } PDF
     .panel-body
       .col-md-6
         .form-group{ "show-errors" => true }
