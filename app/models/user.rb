@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   delegate :active?, :inactive?, :to => :status
 
   def self.from_auth(auth)
-    puts auth.credentials
-    where(provider: auth["provider"], uid: auth["uid"]).first
+    user = where(provider: auth["provider"], uid: auth["uid"]).first
+    user.update_tokens!(auth["credentials"])
   end
 
   def self.create_from_auth(auth)
@@ -65,6 +65,16 @@ class User < ActiveRecord::Base
     hash = Digest::MD5.hexdigest(email)
 
     "http://www.gravatar.com/avatar/#{hash}"
+  end
+
+  def update_tokens!(token_data)
+    if self.access_token != token_data["token"] || self.refresh_token != token_data["refresh_token"]
+      self.access_token = token_data["token"]
+      self.refresh_token = token_data["refresh_token"]
+      self.expires = token_data["expires_at"]
+      self.save
+    end
+    self
   end
 
   private
