@@ -31,6 +31,9 @@
       onUnblock: ->
         $("body").spin(false)
 
+  $scope.ExpenseReportPDFLocation = ->
+    "/api/v1/expense_reports/#{$scope.expenseReport.id}.pdf"
+
   $scope.submitReport = ->
     $scope.expenseReport.save().then ((expenseReport) ->
       $scope.expenseReport = ""

@@ -4,8 +4,9 @@
       %button.btn.btn-primary.btn-lg{ "type" => "button", "ng-disabled" => "mainForm.$invalid",
         "ng-click" => "submitReport()", "ng-show" => "expenseReport.waitingForApproval()" } {{ submitButtonText() }}
       %button.btn.btn-success.btn-lg{ "type" => "button", "ng-disabled" => "mainForm.$invalid",
-        "ng-click" => "approveReport()", "ng-show" => "expenseReport.waitingForApproval()"  } Approve
-      %a{ href: 'http://localhost:3000/api/v1/expense_reports/5.pdf', target: '_blank' } PDF
+        "ng-click" => "approveReport()", "ng-show" => "expenseReport.waitingForApproval()" } Approve
+      %a.btn.btn-default.pull-right{:href => "{{ ExpenseReportPDFLocation() }}", target: '_blank', :title => "Export to PDF"}
+        %img{:alt => "PDF icon", :src => "/assets/pdf_icon.ico", :height => "30", :width => "30"}/
     .panel-body
       .col-md-6
         .form-group{ "show-errors" => true }
