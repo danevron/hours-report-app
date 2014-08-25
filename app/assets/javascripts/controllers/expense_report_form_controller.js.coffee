@@ -1,4 +1,6 @@
-@ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location, flashService, ccCurrencySymbol) ->
+@ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location, flashService, ccCurrencySymbol, authService) ->
+  $scope.isAuthorized = authService.isAuthorized
+
   $scope.currencySymbol = ccCurrencySymbol
   if $routeParams.id
     ExpenseReport.get($routeParams.id).then (report) ->
