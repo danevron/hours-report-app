@@ -42,7 +42,7 @@ class ExpenseReport < ActiveRecord::Base
 
   def notify_admins
     User.admins.each do |admin|
-      Mailer.delay.expense_report_submitted_email(self.user_id, admin.id)
+      Mailer.delay.expense_report_submitted_email(self.id, admin.id)
     end
   end
 

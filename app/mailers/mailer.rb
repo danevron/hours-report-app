@@ -22,8 +22,9 @@ class Mailer < ActionMailer::Base
     )
   end
 
-  def expense_report_submitted_email(submitter_user_id, admin_user_id)
-    @submitter = User.find(submitter_user_id)
+  def expense_report_submitted_email(expense_report_id, admin_user_id)
+    @expense_report = ExpenseReport.find(expense_report_id)
+    @submitter = User.find(@expense_report.user_id)
     @admin = User.find(admin_user_id)
 
     mail(
