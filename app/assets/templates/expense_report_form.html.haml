@@ -23,13 +23,6 @@
                 "ng-disabled" => "!expenseReport.waitingForApproval()" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-calendar
-              %input.input-lg.form-control{ type: "text", "ng-model" => "expenseReport.startTime",
-                "data-autoclose" => "1", "name" => "startTime", "required" => true,
-                "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
-                "placeholder" => "Outbound time", "data-time-format" => "HH:mm",
-                "ng-disabled" => "!expenseReport.waitingForApproval()" }
-              %span.input-group-addon
-                %span.glyphicon.glyphicon-time
 
         .form-group{ "show-errors" => true }
           %label.control-label.col-md-4
@@ -44,13 +37,6 @@
                 "ng-disabled" => "!expenseReport.waitingForApproval()" }
               %span.input-group-addon
                 %span.glyphicon.glyphicon-calendar
-              %input.input-lg.form-control{ type: "text", "name" => "endTime", "required" => true,
-                "ng-model" => "expenseReport.endTime", "data-autoclose" => "1",
-                "data-minute-step" => 10, "bs-timepicker" => true, "ng-change" => "updateRates()",
-                "placeholder" => "Return time", "data-time-format" => "HH:mm",
-                "ng-disabled" => "!expenseReport.waitingForApproval()" }
-              %span.input-group-addon
-                %span.glyphicon.glyphicon-time
 
       .col-md-4
         .form-group{ "show-errors" => true }

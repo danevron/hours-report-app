@@ -47,7 +47,6 @@ class User < ActiveRecord::Base
     current_report.timesheets.find_by(:user_id => id) if current_report
   end
 
-
   def access_token_for_api
     refresh_access_token! unless token_is_valid?
     self.access_token
@@ -65,6 +64,10 @@ class User < ActiveRecord::Base
     hash = Digest::MD5.hexdigest(email)
 
     "http://www.gravatar.com/avatar/#{hash}"
+  end
+
+  def role_name
+    role.present? ? role.name : "user"
   end
 
   private

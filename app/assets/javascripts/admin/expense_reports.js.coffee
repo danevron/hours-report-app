@@ -7,7 +7,8 @@ $ ->
         selectYears: true
         selectMonths: true
 
-      $("tr").click ->
+      $("html").on "click", "tr", (event) ->
+        debugger
         href = $(@).find("a").attr("href")
         window.location = href if href
 

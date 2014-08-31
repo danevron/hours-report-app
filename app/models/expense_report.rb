@@ -13,7 +13,7 @@ class ExpenseReport < ActiveRecord::Base
   has_many :expenses
 
   validates_datetime :start_time, :end_time
-  validates_datetime :end_time, :after => :start_time
+  validates_datetime :end_time, :on_or_after => :start_time
 
   accepts_nested_attributes_for :expenses
   validates_associated :expenses
@@ -26,6 +26,10 @@ class ExpenseReport < ActiveRecord::Base
 
   scope :approved, -> { where(:status => "approved") }
   scope :for_user, ->(user) { where(:user_id => user.id) }
+
+  def self.options_for_select
+    ExpenseReport::STATUSES.map { |s| [s.humanize, s] }
+  end
 
   def as_json(options = {})
     {
