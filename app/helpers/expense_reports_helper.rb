@@ -117,10 +117,10 @@ module ExpenseReportsHelper
       pdf.move_down 30
       pdf.span(content_width) do
         pdf.formatted_text [
-          {:text => "Employee Signature:", :styles => [:bold], :size => font_size},
-          {:text => "    "},
-          {:text => "______________", :size => font_size},
-          {:text => "           "},
+          {:text => "#{@expense_report.user.name} submitted report on #{@expense_report.submitted_at.strftime("%Y-%m-%d %H:%M")}", :styles => [:bold], :size => font_size}
+        ]
+        pdf.move_down 20
+        pdf.formatted_text [
           {:text => "Manager Signature:", :styles => [:bold], :size => font_size},
           {:text => "    "},
           {:text => "______________", :size => font_size}

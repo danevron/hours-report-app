@@ -11,6 +11,8 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
 
   def create
     expense_report = ExpenseReport.new(safe_params)
+    update_submit_time(expense_report)
+
     if expense_report.save
       render :json => expense_report
     else
@@ -32,6 +34,8 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
     expense_report = ExpenseReport.find(params[:id])
     expense_report.expenses.destroy_all
     expense_report.update_attributes(safe_params)
+    update_submit_time(expense_report)
+
     if expense_report.save
       render :json => expense_report
     else
@@ -61,6 +65,12 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
   end
 
   private
+
+  def update_submit_time(expense_report)
+    if expense_report.status == "waiting_for_approval"
+      expense_report.submitted_at = Time.now
+    end
+  end
 
   def safe_params
     params.require(:expense_report).permit(:start_time, :end_time, :country, :currency, :user_id, :status,
