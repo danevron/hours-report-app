@@ -5,7 +5,7 @@
         "ng-click" => "submitReport()", "ng-show" => "expenseReport.waitingForApproval()" } {{ submitButtonText() }}
       %button.btn.btn-success.btn-lg{ "ng-if" => "isAuthorized()", "type" => "button", "ng-disabled" => "mainForm.$invalid",
         "ng-click" => "approveReport()", "ng-show" => "expenseReport.waitingForApproval()" } Approve
-      %a.btn.btn-default.pull-right{"ng-if" => "isAuthorized()", :href => "/api/v1/expense_reports/{{expenseReport.id}}.pdf",
+      %a.btn.btn-default.pull-right{:href => "/api/v1/expense_reports/{{expenseReport.id}}.pdf",
         :target => '_blank', :title => "Export to PDF"}
         %img{:alt => "PDF icon", :src => "/assets/pdf_icon.ico", :height => "30", :width => "30"}/
     .panel-body
