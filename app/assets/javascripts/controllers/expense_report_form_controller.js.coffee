@@ -1,5 +1,7 @@
 @ExpenseReportFormController = ($scope, $routeParams, ExpenseReport, Expense, $location, flashService, ccCurrencySymbol, authService) ->
   $scope.isAuthorized = authService.isAuthorized
+  $scope.outboundFlightPopover = { "content": "Your outgoing flight takeoff date" }
+  $scope.returnFlightPopover = { "content": "Your return flight takeoff date" }
 
   $scope.currencySymbol = ccCurrencySymbol
   if $routeParams.id
