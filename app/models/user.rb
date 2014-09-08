@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   def self.from_auth(auth)
     user = where(provider: auth["provider"], uid: auth["uid"]).first
-    user.update_tokens!(auth["credentials"])
+    user.present? ? user.update_tokens!(auth["credentials"]) : nil
   end
 
   def self.create_from_auth(auth)
