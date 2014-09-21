@@ -7,7 +7,7 @@
         "ng-click" => "approveReport()", "ng-show" => "expenseReport.waitingForApproval() && !expenseReport.isNew()" } Approve
       %a.btn.btn-default.pull-right{:href => "/api/v1/expense_reports/{{expenseReport.id}}.pdf", "ng-disabled" => "mainForm.$invalid",
         :target => '_blank', :title => "Export to PDF"}
-        %img{:alt => "PDF icon", :src => "/assets/pdf_icon.ico", :height => "30", :width => "30"}/
+        %img{:alt => "PDF icon", :src => "#{asset_path('pdf_icon.ico')}", :height => "30", :width => "30"}/
     .panel-body
       .col-md-6
         .form-group{ "show-errors" => true }
