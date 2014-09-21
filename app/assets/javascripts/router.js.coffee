@@ -1,4 +1,4 @@
-App.config ($routeProvider, $locationProvider) ->
+App.config ["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
 
   $routeProvider
@@ -18,3 +18,4 @@ App.config ($routeProvider, $locationProvider) ->
       templateUrl: "/assets/expense_report.html",
       controller: "ExpenseReportController"
     })
+]
