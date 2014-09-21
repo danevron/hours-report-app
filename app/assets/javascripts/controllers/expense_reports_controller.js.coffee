@@ -10,3 +10,5 @@
     $event.stopPropagation()
     $scope.expenseReports = (report for report in $scope.expenseReports when report != expenseReport)
     expenseReport.delete()
+
+@ExpenseReportsController.$inject = ['$scope', '$routeParams', 'ExpenseReport', 'ccCurrencySymbol', 'rateService', '$location']

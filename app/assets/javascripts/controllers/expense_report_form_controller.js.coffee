@@ -57,3 +57,5 @@
       window.location = "/expense_reports"
     ), (error) ->
       flashService.flash("danger", "Expense report was not approved")
+
+@ExpenseReportFormController.$inject = ['$scope', '$routeParams', 'ExpenseReport', 'Expense', '$location', 'flashService', 'ccCurrencySymbol', 'authService']
