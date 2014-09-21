@@ -427,6 +427,7 @@ DEPENDENCIES
   debugger
   doc_raptor
   dotenv-rails
+  event_tracker
   eu_central_bank!
   factory_girl_rails (~> 4.0)
   filterrific

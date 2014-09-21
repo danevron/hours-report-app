@@ -7,6 +7,12 @@ class SessionsController < ApplicationController
 
     if user.save
       session[:user_id] = user.id
+      mixpanel_people_set("$first_name" => user.first_name,
+                          "$last_name" => user.last_name,
+                          "$email" => user.email,
+                          "10Bis number" => user.tenbis_number,
+                          "Employee number" => user.employee_number
+      )
       redirect_to user, notice: "Signed in!"
     elsif user.not_invited?
       redirect_to login_path, :alert => "You are not invited!"

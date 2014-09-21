@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include TheRole::Controller
+  around_filter :append_event_tracking_tags
 
   protect_from_forgery with: :exception
 
@@ -14,6 +15,14 @@ class ApplicationController < ActionController::Base
 
   def login_required
     authenticate_user
+  end
+
+  def mixpanel_name_tag
+    current_user && current_user.email if current_user
+  end
+
+  def mixpanel_distinct_id
+    current_user.id if current_user
   end
 
   private
