@@ -38,13 +38,15 @@ class Api::V1::RatesController < Api::V1::ApiController
       "ILS" => 1,
       "USD" => 0,
       "GBP" => 0,
+      "JPY" => 0,
       "EUR" => 0,
+      "AUD" => 0,
+      "CAD" => 0,
       "DKK" => 0,
       "NOK" => 0,
+      "ZAR" => 0,
       "SEK" => 0,
-      "CHF" => 0,
-      "CAD" => 0,
-      "AUD" => 0
+      "CHF" => 0
     }
   end
 end
