@@ -8,8 +8,7 @@ $ ->
         selectMonths: true
 
       $("html").on "click", "tr", (event) ->
-        debugger
         href = $(@).find("a").attr("href")
-        window.location = href if href
+        window.location = href if href && !event.target.href
 
   new ExpenseReports()
