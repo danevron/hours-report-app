@@ -27,9 +27,10 @@
         %th Vacation Days
         %th Sickness Days
         %th Army Reserve Days
+        %th Leave of absence Days
         %th 10Bis
         %th Expenses Abroad
         %th Status
-        %th No. of comments
+        %th Comments
     %tbody
       = render :partial => "timesheets/summary", :collection =>  @report.timesheet_summaries, :as => :summary

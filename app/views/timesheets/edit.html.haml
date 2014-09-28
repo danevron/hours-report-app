@@ -15,7 +15,7 @@
         .col-md-1.input-height
           %span= days_form.object.weekday
         .col-md-2
-          = days_form.select(:day_type, Day::DAY_TYPES.map { |dt| [add_units(dt.capitalize), dt] }, { :disabled => "holiday" }, :class => "day-type form-control #{day_type}")
+          = days_form.select(:day_type, Day::DAY_TYPES.map { |dt| [add_units(dt.humanize), dt] }, { :disabled => "holiday" }, :class => "day-type form-control #{day_type}")
         .col-md-1
           = days_form.text_field :value,
             :value => number_with_precision(days_form.object.value, precision: 2, significant: true, strip_insignificant_zeros: true),

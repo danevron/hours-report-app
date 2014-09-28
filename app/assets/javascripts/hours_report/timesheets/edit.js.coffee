@@ -3,7 +3,7 @@ HoursReport.Timesheets ?= {}
 HoursReport.Timesheets.Edit =
   init: ->
     $(".day-type").change ->
-      classes = "workday weekend holiday sickness vacation army"
+      classes = "workday weekend holiday sickness vacation army leave_of_absence"
       valueInput = $(@).parent().next().children(".day-value")
       commentInput = $(@).parent().next().next().children("input")
 
@@ -14,7 +14,7 @@ HoursReport.Timesheets.Edit =
       if @.value == "workday"
         valueInput.val(9)
         valueInput.prop('disabled', false)
-      if @.value == "sickness" or @.value == "vacation" or @.value == "army"
+      if @.value == "sickness" or @.value == "vacation" or @.value == "army" or @.value == "leave_of_absence"
         valueInput.val(1)
         valueInput.prop('disabled', false)
       if @.value == "weekend" or @.value == "holiday"

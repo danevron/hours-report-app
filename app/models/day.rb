@@ -4,10 +4,11 @@ class Day < ActiveRecord::Base
     /.*Half PTO.*/ => { :type => "vacation", :value => 0.5 },
     /.*PTO.*/      => { :type => "vacation", :value => 1 },
     /.*Army.*/     => { :type => "army", :value => 1 },
-    /.*Sick.*/     => { :type => "sickness", :value => 1 }
+    /.*Sick.*/     => { :type => "sickness", :value => 1 },
+    /.*LOA.*/      =>  { :type => "leave_of_absence", :value => 1 }
   }
 
-  DAY_TYPES = %w(workday weekend holiday sickness vacation army)
+  DAY_TYPES = %w(workday weekend holiday sickness vacation army leave_of_absence)
   WEEKEND_DAYS = %w(Friday Saturday)
 
   belongs_to :timesheet

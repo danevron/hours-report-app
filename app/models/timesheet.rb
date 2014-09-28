@@ -42,6 +42,10 @@ class Timesheet < ActiveRecord::Base
     summarize("vacation")
   end
 
+  def leave_of_absence_days
+    summarize("leave_of_absence")
+  end
+
   def army_reserve_days
     summarize("army")
   end
