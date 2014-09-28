@@ -40,7 +40,8 @@ class ExpenseReport < ActiveRecord::Base
       :id         => self.id,
       :start_time => self.start_time,
       :status     => self.status,
-      :user_id    => self.user_id
+      :user_id    => self.user_id,
+      :user_name  => self.user.name
     }
   end
 
@@ -68,5 +69,9 @@ class ExpenseReport < ActiveRecord::Base
 
   def total
     expenses.inject(0) { |sum, expense| sum += expense.total }
+  end
+
+  def waiting_for_approval?
+    status == "waiting_for_approval"
   end
 end
