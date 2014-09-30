@@ -50,7 +50,8 @@
               "ng-disabled" => "!expenseReport.waitingForApproval()" }
               %option{ "value" => "" } Destination
 
-      .row.top-buffer
+    .row
+      .top-buffer
         %div{class:"{{ expenseReport.status }}"}
           %table.table
             %thead
