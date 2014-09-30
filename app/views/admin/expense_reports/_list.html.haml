@@ -21,6 +21,8 @@
           %td= expense_report.country
           %td= expense_report.total
           %td= expense_report.status.humanize
-          %td= link_to image_tag('pdf_icon.ico', size: "25x25"), api_v1_expense_report_path(expense_report, format: :pdf), target: "_blank" unless expense_report.waiting_for_approval?
+          %td
+            %span= link_to image_tag('pdf_icon.ico', size: "25x25"), api_v1_expense_report_path(expense_report, format: :pdf), target: "_blank" unless expense_report.waiting_for_approval?
+            %span.print-button= image_tag('printer_icon.ico', size: "25x25", href: api_v1_expense_report_path(expense_report, format: :pdf)) unless expense_report.waiting_for_approval?
 
 = will_paginate expense_reports, renderer: BootstrapPagination::Rails
