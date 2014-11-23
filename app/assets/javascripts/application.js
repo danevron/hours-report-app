@@ -15,12 +15,14 @@
 //= require turbolinks
 //= require twitter/bootstrap
 //= require init.js
+//= require jstz-1.0.4.js
 //= require the_role_editinplace
 //= require jquery.countdown.min
 //= require picker
 //= require picker.date
 //= require spin.min
 //= require jquery.blockUI
+//= require jquery.cookie
 //= require filterrific-jquery
 
 //= require angular
@@ -30,6 +32,7 @@
 //= require showErrors.min
 //= require moment
 //= require hours_report/hours_report.js
+//= require timezone_cookie
 
 //= require_tree ./models
 //= require_tree ./controllers

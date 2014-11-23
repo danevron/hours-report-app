@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include TheRole::Controller
-  around_filter :append_event_tracking_tags
+  around_filter :append_event_tracking_tags, :set_time_zone
 
   protect_from_forgery with: :exception
 
@@ -26,6 +26,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_time_zone(&block)
+    if cookies['timezone'].present?
+      timezone = cookies['timezone']
+    else
+      timezone = Time.zone
+    end
+
+    Time.use_zone(timezone, &block)
+  end
 
   def authenticate_user
     redirect_to login_path unless current_user
