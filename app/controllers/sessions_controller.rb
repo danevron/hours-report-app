@@ -2,8 +2,14 @@ class SessionsController < ApplicationController
 
   def create
     user = User.from_auth(omnihash) || User.create_from_auth(omnihash)
-    user.employee_number = Invitation.find_by(:recipient => user.email).employee_number if user.new_record?
-    user.tenbis_number = Invitation.find_by(:recipient => user.email).tenbis_number if user.new_record?
+
+    redirect_to login_path, :alert => "You are not invited!" if user.not_invited?
+
+    if user.new_record?
+      user_invitation = Invitation.find_by(:recipient => user.email)
+      user.employee_number = user_invitation.employee_number
+      user.tenbis_number = user_invitation.tenbis_number
+    end
 
     if user.save
       session[:user_id] = user.id
@@ -14,8 +20,6 @@ class SessionsController < ApplicationController
                           "Employee number" => user.employee_number
       )
       redirect_to user, notice: "Signed in!"
-    elsif user.not_invited?
-      redirect_to login_path, :alert => "You are not invited!"
     else
       raise "Failed to login"
     end
