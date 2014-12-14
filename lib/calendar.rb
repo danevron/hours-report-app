@@ -42,15 +42,19 @@ class Calendar
   end
 
 
-  def self.parse(google_data, organizer)
-    events = {}
-    events_filtered_by_organizer = google_data.items.select { |item| item.organizer.email == organizer }
-    events_filtered_by_organizer.each do |event|
+  def self.parse(google_data, creator)
+    formatted_events = {}
+
+    full_day_events_filtered_by_creator = google_data.items.select { |event|
+      event.creator.email == creator && event.start.date.present?
+    }
+
+    full_day_events_filtered_by_creator.each do |event|
       (Date.parse(event.start.date)..Date.parse(event.end.date) - 1).each do |date|
-        events[date] = event.summary
+        formatted_events[date] = event.summary
       end
     end
-    events
+    formatted_events
   end
 
   def self.admin_access_token
