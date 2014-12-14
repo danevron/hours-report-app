@@ -81,12 +81,12 @@ class User < ActiveRecord::Base
     self
   end
 
-  private
-
   def status
     status = read_attribute(:status) || ''
     status.inquiry
   end
+
+  private
 
   def invited_user
     errors[:base] << "User is not invited" unless invited?

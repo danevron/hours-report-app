@@ -3,6 +3,9 @@ body.users {
     .user-box {
       margin-right: 10px;
       width: 32.5%;
+      .inactive {
+        opacity: 0.5;
+      }
     }
   }
 }
