@@ -11,7 +11,7 @@ class Api::V1::RatesController < Api::V1::ApiController
     start_date.upto(end_date) do |date|
       unless date.saturday? || date.sunday?
         rates.map do |cur, max_rate|
-          latest_rate = bank.exchange(100, cur, "ILS", date).to_f
+          latest_rate = set_precision(bank.exchange(10000, cur, "ILS", date).to_f / 100)
           rates[cur] = latest_rate if latest_rate > rates[cur]
         end
       end
@@ -46,7 +46,12 @@ class Api::V1::RatesController < Api::V1::ApiController
       "NOK" => 0,
       "ZAR" => 0,
       "SEK" => 0,
-      "CHF" => 0
+      "CHF" => 0,
+      "HUF" => 0
     }
+  end
+
+  def set_precision(my_float)
+    (my_float * 1000).round.to_f / 1000
   end
 end

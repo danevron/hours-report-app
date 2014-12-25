@@ -18,7 +18,8 @@ App.factory "Expense", ['RailsResource',
           { id: "NOK", name: "Norway Kroner" },
           { id: "ZAR", name: "South Africa Rand" },
           { id: "SEK", name: "Sweden Krona" },
-          { id: "CHF", name: "Switzerland Francs" }
+          { id: "CHF", name: "Switzerland Francs" },
+          { id: "HUF", name: "Hungarian Forint" }
         ]
 
       total: ->
