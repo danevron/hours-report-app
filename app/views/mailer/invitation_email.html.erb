@@ -1,16 +1,27 @@
-<td class="w580" width="580">
-  <p align="left" class="article-title">
-    <singleline label="Title">
-      <%= "Hi #{@invitation.recipient_name}" %>
-    </singleline>
-  </p>
-  <div align="left" class="article-content">
-    <multiline label="Description">
-    <p>
-      Please register
-      <%= link_to "Here", login_url %>
-      to start getting monthly notifications and fill in your hours
-    </p>
-    </multiline>
-  </div>
-</td>
+<table class="body-wrap">
+  <tr>
+    <td></td>
+    <td class="container" bgcolor="#FFFFFF">
+
+      <div class="content">
+      <table>
+        <tr>
+          <td>
+            <h3><%= "Hi #{@invitation.recipient_name}" %></h3>
+            <p class="lead">
+              Welcome to Hours Report!!
+            </p>
+            <p class="lead">
+              Please register
+              <%= link_to "Here", login_url %>
+              to start getting monthly notifications and fill in your hours
+            </p>
+          </td>
+        </tr>
+      </table>
+      </div><!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table><!-- /BODY -->

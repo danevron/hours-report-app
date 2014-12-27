@@ -29,7 +29,7 @@ class Mailer < ActionMailer::Base
 
     mail(
       to: @admin.email,
-      subject: "New expense report submitted"
+      subject: "New expense report submitted by #{@submitter.name}"
     )
   end
 end
