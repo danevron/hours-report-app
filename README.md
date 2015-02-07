@@ -22,6 +22,11 @@ The workflow that the application is intended for is the following:
 * Authetication system using Google (Klarna is using Gmail as an email provider).
 * Company vacations support according to provided Google calendar (maintained seperatly).
 * Personal vacations, sickness days and army days extraction from personal Google calendar.
+  To use, create a *full day* event and add `@hrs` to the title along with one of the following (e.g. Dani PTO in Mexico @hrs):
+  * **PTO** - Vacation day
+  * **Half PTO** - Half of a vacation day
+  * **Army** - Army reserve day
+  * **Sick** - Sick day
 * 10Bis data extraction (User and password for 10Bis needed).
 * Emails sending using Sidekiq
 
