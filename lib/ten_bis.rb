@@ -48,6 +48,7 @@ class TenBisCrawler
 
   def login
     visit BASE_URL
+    sleep 3
     begin
       find('[data-home-page-logon-button]').click
     rescue Capybara::ElementNotFound => e

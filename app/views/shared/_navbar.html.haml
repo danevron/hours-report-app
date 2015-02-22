@@ -19,7 +19,7 @@
             %h1= Time.now.strftime('%b %d, %Y')
           %li.pink
             = link_to logout_path, target: "_self" do
-              %i.fa.fa-sign-out.fa-3x
+              = fa_icon "sign-out 3x"
               %p Sign Out
           %li.pink
             = link_to current_user, :target => "_self", :class => '', :title => "#{current_user.name}" do
