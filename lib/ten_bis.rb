@@ -4,7 +4,7 @@ class TenBisCrawler
 
   include Capybara::DSL
 
-  BASE_URL = "http://www.10bis.co.il/"
+  BASE_URL = "https://www.10bis.co.il/"
 
   attr_reader :user_name, :password, :month, :year
 
@@ -18,7 +18,8 @@ class TenBisCrawler
     Capybara.register_driver :poltergeist do |app|
         Capybara::Poltergeist::Driver.new(app, {
           :js_errors => false,
-          :timeout => 120
+          :timeout => 120,
+          :phantomjs_options => ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
         })
     end
     Capybara.current_driver = :poltergeist
@@ -48,7 +49,7 @@ class TenBisCrawler
 
   def login
     visit BASE_URL
-    sleep 3
+    sleep 1
     begin
       find('[data-home-page-logon-button]').click
     rescue Capybara::ElementNotFound => e
