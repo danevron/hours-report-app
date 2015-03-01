@@ -7,7 +7,7 @@ class TenbisUsageCollector
 
     report.timesheets.each do |timesheet|
       if timesheet.tenbis_usage.nil?
-        timesheet.tenbis_usage = tenbis.usage[timesheet.user.tenbis_number] || 0
+        timesheet.tenbis_usage = tenbis.usage[timesheet.user.tenbis_number.to_i.to_s] || 0
         timesheet.save
       end
     end
