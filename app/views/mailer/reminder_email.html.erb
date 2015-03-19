@@ -14,7 +14,7 @@
               <%= link_to "Your hours report", edit_user_timesheet_url(@user, @timesheet) %>
             </p><!-- /Callout Panel -->
             <p class="lead">
-              <%= "The last day you can fill your hours is #{@report.end_date.strftime('%B %d, %Y')}" %>
+              <%= "The last day you can fill your hours is #{@report.end_date.in_time_zone('Jerusalem').strftime('%B %d, %Y')}" %>
              </p>
           </td>
         </tr>
