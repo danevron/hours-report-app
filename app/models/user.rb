@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include TheRole::User
 
+  default_scope { order(department_id: :asc, employee_number: :asc) }
+  belongs_to :department
   has_many :expense_reports
   has_many :timesheets
   has_many :reports, :through => :timesheets

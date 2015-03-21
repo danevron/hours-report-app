@@ -10,4 +10,6 @@
     = f.label :tenbis_number
     %i.fa.fa-question{"data-container" => "body", "data-content" => "Last 4 digits of the employee's 10Bis number (remove left zeros if exists)", "data-placement" => "right", "data-toggle" => "popover"}
     = f.input :tenbis_number, label_html: { class: 'sr-only' }
+    = f.input :department_id, collection: Department.all, selected: Department.find_by(name: "Engineering").id
+
     = f.submit "Send invitation", class: "btn btn-primary"

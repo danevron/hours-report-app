@@ -9,6 +9,7 @@
       = f.input :employee_number
       = f.input :tenbis_number
       = f.input :status, :collection => ["active", "inactive"]
+      = f.input :department_id, collection: Department.all
   .row
     .col-md-12
       = f.error :base, :error_method => :to_sentence
