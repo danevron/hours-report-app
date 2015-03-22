@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905135608) do
+ActiveRecord::Schema.define(version: 20150321065142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20140905135608) do
     t.string   "day_type"
     t.float    "value"
     t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "departments", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,6 +66,7 @@ ActiveRecord::Schema.define(version: 20140905135608) do
     t.string  "sender"
     t.integer "employee_number"
     t.string  "tenbis_number",   default: ""
+    t.integer "department_id"
   end
 
   create_table "reminders", force: true do |t|
@@ -120,6 +127,7 @@ ActiveRecord::Schema.define(version: 20140905135608) do
     t.integer  "role_id"
     t.integer  "employee_number"
     t.string   "tenbis_number",   default: ""
+    t.integer  "department_id"
   end
 
 end

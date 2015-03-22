@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       user_invitation = Invitation.find_by(:recipient => user.email)
       user.employee_number = user_invitation.employee_number
       user.tenbis_number = user_invitation.tenbis_number
+      user.department_id = user_invitation.department_id
     end
 
     if user.save
