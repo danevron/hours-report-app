@@ -67,7 +67,7 @@ class Report < ActiveRecord::Base
   end
 
   def timesheet_summaries
-    timesheets.joins(:user).order("users.employee_number").map do |timesheet|
+    timesheets.joins(:user).order("users.department_id ASC, users.employee_number ASC").map do |timesheet|
       summary.new(timesheet.id,
                   timesheet.user_id,
                   timesheet.user_name,
