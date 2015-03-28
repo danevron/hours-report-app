@@ -23,6 +23,9 @@ window.HoursReport =
 
   init: ->
     # Something here. This is called in every page.
+    $('.dropdown').hover ->
+      $('.dropdown-toggle', @).trigger('click')
+
     $(".fa-question").popover()
 
     currentTimesheetEndingTime = $(".current-timesheet-ending-time")

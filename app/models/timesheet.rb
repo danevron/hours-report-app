@@ -11,6 +11,7 @@ class Timesheet < ActiveRecord::Base
   validates_associated :days
   validates :status, inclusion: { in: %w(open submitted reopened) }
   validate :report_open, :if => :reopened?
+  validate :user_is_active, :if => :reopened?
 
   accepts_nested_attributes_for :days
   delegate :current?, :start_date, :end_date, :to => :report
@@ -90,7 +91,7 @@ class Timesheet < ActiveRecord::Base
     errors[:base] << "Timesheet cannot be reopened due to submitted report" if self.report.submitted?
   end
 
-  def report_open
+  def user_is_active
     errors[:base] << "Timesheet cannot be reopened due to inactive user" if self.user.inactive?
   end
 end
