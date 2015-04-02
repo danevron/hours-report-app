@@ -1,35 +1,54 @@
-hours-report-app
-================
+# hours-report-app
+
 
 A simple hours report application for Klarna TLV.
 
 This application is customized for the Klarna TLV office. But, with small modification, can be used by any company or organization.
 
+## Objectives
+Provides a simple, fast and fun way for:
+
+1. Employees to fill working hours, vacations, sick leave etc.
+2. Employees to submit travel expense reports.
+3. HR to manage the procees and send the data to for salary calculation.          
+
+## workflow
+
 The workflow that the application is intended for is the following:
 
-1. Admin invites new users (employees) by filling some basic information.
-2. Users join using their Google (work) account.
-3. Admin creates a report for a month.
-4. Timesheets are created for all active users.
+1. Admin invites new Employees by filling some basic information.
+2. Employees gets an invitation e-mail and join using their Google (work) account.
+3. Admin creates a monthly report.
+4. Employees are filling their hours at their free time.
 5. Admin sends reminders to users to submit their hours.
-6. Users fill and submit their relevant timesheet.
-7. Admin closes the report and exports it to an Excel spreadsheet.
+6. Users submit their relevant timesheet.
+7. Admin closes the report and sends it for salary calculation.
+
+### Expense report workflow
+
+1. Employee creates an expense report by filling flight times and destination + adding expenses.
+2. Per Diem is calucalated, exchange rates are extracted automaticly.
+3. Employee submits the report for approval.
+4. Admins are notified to review and approve by email.
+5. All approved expense reports are aggrageted and the final sum gets added to the monthly hour report sent to salary calculation.  
 
 
-
-## Features
+## Main components
 
 * Authetication system using Google (Klarna is using Gmail as an email provider).
-* Company vacations support according to provided Google calendar (maintained seperatly).
-* Personal vacations, sickness days and army days extraction from personal Google calendar.
+* Company vacations are automaticly added to employees timesheets - Admins maintain a Google calendar.
+* Personal vacations, sickness days and army days extraction from personal Google calendar using labels.
+  
   To use, create a **full day** event and add `@hrs` to the title along with one of the following:
   * **PTO** - Vacation day (e.g. "Dani PTO in Mexico @hrs")
   * **Half PTO** - Half of a vacation day (e.g. "Dani Half PTO @hrs")
   * **Army** - Army reserve day (e.g. "Dani Army Reserve @hrs")
   * **Sick** - Sick day (e.g. "Dani out sick @hrs")
 * 10Bis data extraction (User and password for 10Bis needed).
-* Emails sending using Sidekiq
+* Emails sending.
+* Online currency exchange calculation using the EU central bank.
 
+## Installation 
 
 ### Ruby
 
@@ -147,9 +166,9 @@ Due to a bug in the_role it isn't always populated with the correct data. if "th
 
 Now you should have a fully functional development environment!!
 
-## Deployment
+## Deployment (for the TLV application)
 
-This application is hosted on Heroku.
+This application is currently hosted on Heroku.
 In order to be able to deploy you should complete steps 1-3 in this [quickstart](https://devcenter.heroku.com/articles/quickstart)
 
 Next, to link to the existing Heroku app:
