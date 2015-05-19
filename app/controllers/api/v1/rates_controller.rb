@@ -9,7 +9,7 @@ class Api::V1::RatesController < Api::V1::ApiController
   def get_rates(start_date, end_date)
 
     start_date.upto(end_date) do |date|
-      unless date.saturday? || date.sunday?
+      if rates_for_date_exist?(date)
         rates.map do |cur, max_rate|
           latest_rate = set_precision(bank.exchange(10000, cur, "ILS", date).to_f / 100)
           rates[cur] = latest_rate if latest_rate > rates[cur]
@@ -18,6 +18,10 @@ class Api::V1::RatesController < Api::V1::ApiController
     end
 
     rates
+  end
+
+  def rates_for_date_exist?(date)
+    bank.rates["EUR_TO_USD_#{date.strftime("%Y-%m-%d")}"]
   end
 
   def bank
