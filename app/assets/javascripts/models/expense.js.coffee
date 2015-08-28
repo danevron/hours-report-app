@@ -16,7 +16,6 @@ App.factory "Expense", ['RailsResource',
           { id: "CAD", name: "Canada Dollars" },
           { id: "DKK", name: "Denmark Kroner" },
           { id: "NOK", name: "Norway Kroner" },
-          { id: "ZAR", name: "South Africa Rand" },
           { id: "SEK", name: "Sweden Krona" },
           { id: "CHF", name: "Switzerland Francs" },
           { id: "HUF", name: "Hungarian Forint" }
