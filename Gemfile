@@ -52,6 +52,7 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'will_paginate-bootstrap'
 
 group :development, :test do
+  gem 'pry'
 end
 
 group :test do

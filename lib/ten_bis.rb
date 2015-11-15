@@ -34,20 +34,32 @@ class TenBisCrawler
   private
 
   def get_report_and_logout
-    visit BASE_URL + "/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=#{year}&chosenMonth=#{month}&start_year=#{year}&start_mon=#{month}&start_day=1&end_year=#{year}&end_mon=#{month}&end_day=1"
+    path = "/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=#{year}&chosenMonth=#{month}&start_year=#{year}&start_mon=#{month}&start_day=1&end_year=#{year}&end_mon=#{month}&end_day=1"
+
+    puts "Visiting #{BASE_URL + path}"
+    visit BASE_URL + path
     sleep 8
+
     html = begin
              page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
            rescue Exception => e
              page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
            end
-    report = html.each_line.map{|s| row = s.split(/\t/); {row.second.to_i.to_s => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
-    logout
-    report.shift
-    report
+
+    if html
+      puts "Found 10Bis data for #{month}/#{year}!"
+      report = html.each_line.map{|s| row = s.split(/\t/); {row.second.to_i.to_s => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
+      logout
+      report.shift
+      report
+    else
+      logout
+      raise "Failed to find 10Bis data for #{month}/#{year}!"
+    end
   end
 
   def login
+    puts "visiting #{BASE_URL} for login"
     visit BASE_URL
     sleep 1
     begin
@@ -56,6 +68,12 @@ class TenBisCrawler
       logout
       find('[data-home-page-logon-button]').click
     end
+
+    submit_credentials
+  end
+
+  def submit_credentials
+    puts "Submitting credentials"
     first('[data-logon-popup-form-user-name-input]', :visible => false).set(user_name)
     first('[data-logon-popup-form-password-input]', :visible => false).set(password)
     first('[data-logon-popup-form-submit-btn]', :visible => false).click
@@ -64,5 +82,6 @@ class TenBisCrawler
 
   def logout
     visit BASE_URL + "/Account/LogOff"
+    sleep 8
   end
 end
