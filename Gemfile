@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.2'
 gem 'rails', '4.1.0'
 
 gem 'andand'
@@ -52,8 +52,6 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'will_paginate-bootstrap'
 
 group :development, :test do
-  gem 'debugger'
-  gem 'jazz_hands'
 end
 
 group :test do
