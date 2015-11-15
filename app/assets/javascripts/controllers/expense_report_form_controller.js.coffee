@@ -11,15 +11,21 @@
     $scope.expenseReport = new ExpenseReport
       userId: $routeParams.user_id
       status: "waiting_for_approval"
+      country: ExpenseReport.defaultCountry
     $scope.expenseReport.addPerDiemExpense()
 
   $scope.addExpense = ->
     $scope.expenseReport.addExpense()
 
+  $scope.updatePerDiemExpense = ->
+    $scope.expenseReport.updatePerDiemExpense()
+    return false
+
   $scope.updateRates = ->
     $scope.expenseReport.updatePerDiemExpense()
     $scope.showSpinner()
     $scope.expenseReport.updateRates($scope.hideSpinner)
+    return false
 
   $scope.showSpinner = ->
     $("body").spin()

@@ -47,7 +47,7 @@
           .col-md-8
             %select.form-control.input-lg{ "name" => "country", "ng-model" => "expenseReport.country", "required" => true,
               "ng-options" => "country for country in expenseReport.availableCountries()",
-              "ng-disabled" => "!expenseReport.waitingForApproval()" }
+              "ng-disabled" => "!expenseReport.waitingForApproval()", "ng-change" => "updatePerDiemExpense()" }
               %option{ "value" => "" } Destination
 
     .row
