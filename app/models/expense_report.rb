@@ -62,7 +62,7 @@ class ExpenseReport < ActiveRecord::Base
   end
 
   def attach_to_timesheet
-    if status == 'approved' && current_timesheet
+    if status == 'approved' && current_timesheet && status_was != "archived"
       self.timesheet_id = current_timesheet.id
     end
   end
