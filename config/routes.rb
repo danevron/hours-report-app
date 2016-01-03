@@ -48,5 +48,9 @@ HoursReport::Application.routes.draw do
         resources :expenses
       end
     end
+
+    namespace :v2 do
+      get 'current_timesheet', to: 'timesheets#current_timesheet'
+    end
   end
 end

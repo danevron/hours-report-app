@@ -71,6 +71,10 @@ class Timesheet < ActiveRecord::Base
     @calendar_events = (string_value == "1")
   end
 
+  def as_json(options={})
+    super(:include => :days)
+  end
+
   private
 
   def extract_calendar_events
