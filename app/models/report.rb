@@ -5,7 +5,7 @@ class Report < ActiveRecord::Base
   has_many :expense_reports, :through => :timesheets
 
   validates :current, uniqueness: true, if: "current?"
-  validates_datetime :start_date
+  validates_date :start_date, :end_date
 
   validates :status, inclusion: { in: %w(open submitted reopened) }
   validates_associated :timesheets

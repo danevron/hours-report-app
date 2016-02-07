@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321065142) do
+ActiveRecord::Schema.define(version: 20160207102831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "days", force: true do |t|
     t.integer  "timesheet_id"
-    t.datetime "date"
+    t.date     "date"
     t.string   "day_type"
     t.float    "value"
     t.string   "comment"
@@ -76,13 +76,13 @@ ActiveRecord::Schema.define(version: 20150321065142) do
   end
 
   create_table "reports", force: true do |t|
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.string   "status",      default: "open", null: false
     t.boolean  "current"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "tenbis_date"
+    t.date     "tenbis_date"
   end
 
   create_table "roles", force: true do |t|

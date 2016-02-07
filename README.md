@@ -1,5 +1,20 @@
 # hours-report-app
 
+## remove this!!!
+run this before running the migration on heroku:
+
+Report.all.each do |r|
+  r.update_attributes(start_date: r.start_date.in_time_zone('Jerusalem').to_date, end_date: r.end_date.in_time_zone('Jerusalem').to_date)
+end
+
+Day.all.each {|d| d.update_attributes(date: d.date.in_time_zone('Jerusalem').to_date) }
+
+Report.all.each do |r|
+  r.update_attributes(tenbis_date: r.tenbis_date.in_time_zone('Jerusalem').to_date)
+end
+
+
+
 
 A simple hours report application for Klarna TLV.
 
@@ -10,7 +25,7 @@ Provides a simple, fast and fun way for:
 
 1. Employees to fill working hours, vacations, sick leave etc.
 2. Employees to submit travel expense reports.
-3. HR to manage the procees and send the data to for salary calculation.          
+3. HR to manage the procees and send the data to for salary calculation.
 
 ## workflow
 
@@ -30,7 +45,7 @@ The workflow that the application is intended for is the following:
 2. Per Diem is calucalated, exchange rates are extracted automaticly.
 3. Employee submits the report for approval.
 4. Admins are notified to review and approve by email.
-5. All approved expense reports are aggrageted and the final sum gets added to the monthly hour report sent to salary calculation.  
+5. All approved expense reports are aggrageted and the final sum gets added to the monthly hour report sent to salary calculation.
 
 
 ## Main components
@@ -38,7 +53,7 @@ The workflow that the application is intended for is the following:
 * Authetication system using Google (Klarna is using Gmail as an email provider).
 * Company vacations are automaticly added to employees timesheets - Admins maintain a Google calendar.
 * Personal vacations, sickness days and army days extraction from personal Google calendar using labels.
-  
+
   To use, create a **full day** event and add `@hrs` to the title along with one of the following:
   * **PTO** - Vacation day (e.g. "Dani PTO in Mexico @hrs")
   * **Half PTO** - Half of a vacation day (e.g. "Dani Half PTO @hrs")
@@ -48,7 +63,7 @@ The workflow that the application is intended for is the following:
 * Emails sending.
 * Online currency exchange calculation using the EU central bank.
 
-## Installation 
+## Installation
 
 ### Ruby
 
