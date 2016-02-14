@@ -76,7 +76,7 @@ class Timesheet < ActiveRecord::Base
   def extract_calendar_events
     events = Calendar.personal_events(user.access_token_for_api, user.email, start_date, end_date)
     events.each do |date, title|
-      event_day = days.select { |d| d.date.to_time.in_time_zone('Athens').to_date.to_s == date.to_s }
+      event_day = days.select { |d| d.date.to_s == date.to_s }
       event_day.first.set_personal_calendar_event(title) unless event_day.empty?
     end
   end

@@ -3,7 +3,7 @@ class TenbisUsageCollector
 
   def perform(report_id)
     report = Report.find(report_id)
-    tenbis = Tenbis.find_by(:date => report.tenbis_date.to_time.in_time_zone('Athens').to_date)
+    tenbis = Tenbis.find_by(:date => report.tenbis_date)
 
     report.timesheets.each do |timesheet|
       if timesheet.tenbis_usage.nil?

@@ -1,21 +1,4 @@
 # hours-report-app
-
-## remove this!!!
-run this before running the migration on heroku:
-
-Report.all.each do |r|
-  r.update_attributes(start_date: r.start_date.in_time_zone('Jerusalem').to_date, end_date: r.end_date.in_time_zone('Jerusalem').to_date)
-end
-
-Day.all.each {|d| d.update_attributes(date: d.date.in_time_zone('Jerusalem').to_date) }
-
-Report.all.each do |r|
-  r.update_attributes(tenbis_date: r.tenbis_date.in_time_zone('Jerusalem').to_date)
-end
-
-
-
-
 A simple hours report application for Klarna TLV.
 
 This application is customized for the Klarna TLV office. But, with small modification, can be used by any company or organization.

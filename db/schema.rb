@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20160207102831) do
   end
 
   create_table "expense_reports", force: true do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.date     "start_time"
+    t.date     "end_time"
     t.string   "country"
     t.string   "currency"
     t.string   "status"
