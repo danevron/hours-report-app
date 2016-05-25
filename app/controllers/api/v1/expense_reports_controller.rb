@@ -4,6 +4,7 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
 
   before_action :load_user, :only => [:index]
   before_action :check_for_list_owner, :only => [:index]
+  before_action :convert_params_dates_to_utc!, :only => [:create, :update]
 
   # The order of the after actions is important, it's not wrong!!
   after_action :check_for_list_owner, :only => [:show, :edit]
@@ -83,5 +84,13 @@ class Api::V1::ExpenseReportsController < Api::V1::ApiController
 
   def load_user_from_respense
     @user = @expense_report.user
+  end
+
+  def convert_params_dates_to_utc!
+    utc_dates = {
+      "end_time" => Time.zone.parse(safe_params["end_time"]).to_date.to_s,
+      "start_time" =>  Time.zone.parse(safe_params["start_time"]).to_date.to_s
+    }
+    params["expense_report"].merge!(utc_dates)
   end
 end
