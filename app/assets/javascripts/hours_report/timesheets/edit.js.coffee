@@ -28,6 +28,7 @@ HoursReport.Timesheets.Edit =
       $(".edit_timesheet").submit()
 
     $("#extract-calendar-events").click ->
+      window.extractCalendarEventsClicked = true
       $("#timesheet_calendar_events").attr("checked", true)
 
     $("form.edit_timesheet").submit (event) ->
@@ -36,8 +37,14 @@ HoursReport.Timesheets.Edit =
         dayType = $(day).find(".day-type").val()
         totalHours += parseFloat($(day).find(".day-value").val()) if dayType == "workday"
 
-      if totalHours == 0 and !confirm("There are no hours in the timesheet, are you sure you want to continue?")
+      needToConfirm = true
+      if window.extractCalendarEventsClicked
+        needToConfirm = false
+        delete window.extractCalendarEventsClicked
+
+      if totalHours == 0 and needToConfirm and !confirm("There are no hours in the timesheet, are you sure you want to continue?")
         event.preventDefault()
+
 
 
     modules: -> []
