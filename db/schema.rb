@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207102831) do
+ActiveRecord::Schema.define(version: 20160925085056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160207102831) do
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "on_call",      default: false
   end
 
   create_table "departments", force: true do |t|
@@ -68,6 +69,16 @@ ActiveRecord::Schema.define(version: 20160207102831) do
     t.string  "tenbis_number",   default: ""
     t.integer "department_id"
   end
+
+  create_table "on_calls", force: true do |t|
+    t.date     "date"
+    t.string   "email"
+    t.string   "schedule"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "on_calls", ["date", "schedule"], name: "index_on_calls_on_date_and_schedule", unique: true, using: :btree
 
   create_table "reminders", force: true do |t|
     t.integer  "report_id"

@@ -117,6 +117,10 @@ class Report < ActiveRecord::Base
     TenbisUsageCollector.perform_in(2.minutes, self.id)
   end
 
+  def extract_on_call
+    OnCallWorker.perform_async(self.id)
+  end
+
   def timesheets_submitted
     self.timesheets.each do |timesheet|
       return errors[:base] << "Report cannot be submitted due to unsubmitted timesheets" unless timesheet.submitted?

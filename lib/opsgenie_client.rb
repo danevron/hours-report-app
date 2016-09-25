@@ -23,28 +23,43 @@ class OpsgenieClient
         schedule = JSON.parse(response.body)
         rotations = schedule["timeline"]["finalSchedule"]["rotations"]
 
-        unique_periods = {}
-        rotations.each do |rotation|
-          rotation["periods"].each do |period|
-            unique_periods["#{period["startTime"]}-#{period["endTime"]}"] = period
-          end
-        end
+        unique_periods = flatten_duplicate_periods(rotations)
 
-        periods_aggregation = {}
-        max_period_length = 0
-        on_call = ""
-        unique_periods.values.each do |period|
-          user = period["recipients"].first["name"]
-          current_count = periods_aggregation[user] || 0
-          periods_aggregation[user] = current_count + ( (period["endTime"] - period["startTime"])/(3600*1000) )
-          if (periods_aggregation[user] > max_period_length)
-            max_period_length = periods_aggregation[user]
-            on_call = user
-          end
-        end
-
-        on_callers[schedule_name][date] = on_call
+        on_callers[schedule_name][date] = calculate_daily_on_caller(unique_periods)
       end
     end
+
+    on_callers
+  end
+
+  private
+
+  def self.flatten_duplicate_periods(rotations)
+    unique_periods = {}
+    rotations.each do |rotation|
+      rotation["periods"].each do |period|
+        unique_periods["#{period["startTime"]}-#{period["endTime"]}"] = period
+      end
+    end
+
+    unique_periods
+  end
+
+  def self.calculate_daily_on_caller(unique_periods)
+    on_call_time = {}
+    longest_on_call_time_in_day = 0
+    on_caller = ""
+
+    unique_periods.values.each do |period|
+      user = period["recipients"].first["name"]
+      user_current_on_call_time = on_call_time[user] || 0
+      on_call_time[user] = user_current_on_call_time + ( (period["endTime"] - period["startTime"])/(3600*1000) )
+      if (on_call_time[user] > longest_on_call_time_in_day)
+        longest_on_call_time_in_day = on_call_time[user]
+        on_caller = user
+      end
+    end
+
+    on_caller
   end
 end
