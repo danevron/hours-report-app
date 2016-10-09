@@ -79,6 +79,7 @@ class Report < ActiveRecord::Base
                   timesheet.leave_of_absence_days,
                   timesheet.tenbis_usage,
                   timesheet.expenses_abroad,
+                  timesheet.on_call_compensation,
                   timesheet.status,
                   timesheet.comments_number)
     end
@@ -108,6 +109,7 @@ class Report < ActiveRecord::Base
                :leave_of_absence_days,
                :tenbis,
                :expenses_abroad,
+               :on_call_compensation,
                :status,
                :comments_number)
   end

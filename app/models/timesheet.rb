@@ -63,12 +63,22 @@ class Timesheet < ActiveRecord::Base
     expense_reports.inject(0) { |sum, report| sum += report.total }
   end
 
+  def on_call_compensation
+    on_call_days.inject(0) do |sum, day|
+      ["holiday", "weekend"].include?(day.day_type) ? sum += 1000 : sum += 500
+    end
+  end
+
   def comments_number
     self.days.select { |d| d.comment? }.count + (self.comments? ? 1 : 0)
   end
 
   def calendar_events=(string_value)
     @calendar_events = (string_value == "1")
+  end
+
+  def on_call_days
+    days.select { |d| d.on_call }
   end
 
   private
