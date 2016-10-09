@@ -352,8 +352,8 @@ GEM
       rack
       raindrops (~> 0.7)
     uuidtools (2.1.4)
-    validates_overlap (0.3.0)
-      validates_overlap
+    validates_overlap (0.6.0)
+      rails (>= 3.0.0)
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
     websocket (1.0.7)
@@ -387,6 +387,7 @@ DEPENDENCIES
   google-api-client
   haml
   haml-rails
+  httparty
   inherited_resources
   initjs!
   jbuilder (~> 1.2)
@@ -422,3 +423,9 @@ DEPENDENCIES
   validates_timeliness (~> 3.0)
   will_paginate (~> 3.0.5)
   will_paginate-bootstrap
+
+RUBY VERSION
+   ruby 2.1.2p95
+
+BUNDLED WITH
+   1.12.5
