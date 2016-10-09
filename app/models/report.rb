@@ -17,6 +17,7 @@ class Report < ActiveRecord::Base
   scope :unsubmitted, -> { where.not(:status => "submitted") }
 
   after_create :extract_tenbis_usage
+  after_create :extract_on_call
   after_update :update_expense_reports, :if => :status_changed?
 
   delegate :submitted?, :open?, :reopened?, :to => :status
