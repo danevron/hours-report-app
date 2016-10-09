@@ -31,6 +31,13 @@ form.edit_timesheet select.vacation {
   background-color: $vacation-row-color;
 }
 
+form.edit_timesheet div.on_call {
+  background-color: darksalmon;
+  padding: 4px 2px;
+  border: 1px solid gray;
+  border-radius: 20px;
+}
+
 label {
   font-size: $secondary-font-size;
   color: $text-color;

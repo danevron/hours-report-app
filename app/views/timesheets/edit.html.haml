@@ -6,6 +6,7 @@
     = f.error :base
     = f.submit "Extract calendar events", class: "btn btn-warning", :id => "extract-calendar-events" unless @timesheet.reload.submitted?
     = f.submit "Submit Timesheet", class: "btn btn-success pull-right" unless @timesheet.reload.submitted?
+  - show_on_call_column = @timesheet.on_call_days.present?
   = f.fields_for :days, @timesheet.days.sort do |days_form|
     - day_type = days_form.object.day_type
     .row
@@ -20,8 +21,17 @@
           = days_form.text_field :value,
             :value => number_with_precision(days_form.object.value, precision: 2, significant: true, strip_insignificant_zeros: true),
             class: "day-value form-control #{day_type}", disabled: (day_type == 'weekend') ? true : nil
-        .col-md-6
-          = days_form.text_field :comment, class: "form-control #{day_type}"
+        - if show_on_call_column
+          .col-md-5
+            = days_form.text_field :comment, class: "form-control #{day_type}"
+          .col-md-1
+            - if days_form.object.on_call
+              .on_call
+                %span.glyphicon.glyphicon-earphone
+                %span="On Call"
+        - else
+          .col-md-6
+            = days_form.text_field :comment, class: "form-control #{day_type}"
 
   .row
     .col-md-12
