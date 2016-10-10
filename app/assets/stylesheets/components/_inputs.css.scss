@@ -31,11 +31,24 @@ form.edit_timesheet select.vacation {
   background-color: $vacation-row-color;
 }
 
-form.edit_timesheet div.on_call {
-  background-color: darksalmon;
-  padding: 4px 2px;
-  border: 1px solid gray;
-  border-radius: 20px;
+form.edit_timesheet {
+
+  .on_call_column {
+    padding: 0 5px 1px 5px;
+
+    .on_call {
+      background-color: #77cca4;
+      padding: 6px 10px;
+      border: 1px solid #77cca4;
+      border-radius: 5px;
+      height: 34px;
+      color: white;
+
+      .glyphicon-earphone {
+        top: 2px;
+      }
+    }
+  }
 }
 
 label {
