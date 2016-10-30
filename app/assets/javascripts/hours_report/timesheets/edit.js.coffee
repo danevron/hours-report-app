@@ -21,13 +21,13 @@ HoursReport.Timesheets.Edit =
         valueInput.val(0)
         valueInput.prop('disabled', true)
 
-    $("#prefill-working-days").click ->
+    $(".prefill-working-days").click ->
       for day in $(".edit_timesheet fieldset")
         dayType = $(day).find(".day-type").val()
         $(day).find(".day-value").val(9) if dayType == "workday"
       $(".edit_timesheet").submit()
 
-    $("#extract-calendar-events").click ->
+    $(".extract-calendar-events").click ->
       $("#timesheet_calendar_events").attr("checked", true)
 
     $("form.edit_timesheet").submit (event) ->

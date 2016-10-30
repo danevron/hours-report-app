@@ -2,9 +2,9 @@
   .action-header
     = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.reload.submitted?
     = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.reload.submitted?
-    = button_tag("Prefill working days", :type => 'button', :class => "btn btn-info", :id => "prefill-working-days") unless @timesheet.submitted?
+    = button_tag("Prefill working days", type: "button", class: "btn btn-info prefill-working-days") unless @timesheet.submitted?
     = f.error :base
-    = f.submit "Extract calendar events", class: "btn btn-warning", :id => "extract-calendar-events" unless @timesheet.reload.submitted?
+    = f.submit "Extract calendar events", class: "btn btn-warning extract-calendar-events" unless @timesheet.reload.submitted?
     = f.submit "Submit Timesheet", class: "btn btn-success pull-right" unless @timesheet.reload.submitted?
   - show_on_call_column = @timesheet.on_call_days.present?
   = f.fields_for :days, @timesheet.days.sort do |days_form|
@@ -47,3 +47,15 @@
     .row
       .col-md-12
         = f.input :tenbis_usage, :disabled => true, :label => "10Bis usage for #{@timesheet.report.tenbis_date.strftime('%B %Y')}"
+  .row
+    .col-md-12
+      %label On Call Compensation amount:
+      %span= @timesheet.on_call_compensation
+      %label (ILS)
+  .action-header
+    = f.submit "Update Changes", class: "btn btn-primary" unless @timesheet.reload.submitted?
+    = f.submit "Reopen Timesheet", class: "btn btn-success" if @timesheet.reload.submitted?
+    = button_tag("Prefill working days", type: "button", class: "btn btn-info prefill-working-days") unless @timesheet.submitted?
+    = f.error :base
+    = f.submit "Extract calendar events", class: "btn btn-warning extract-calendar-events" unless @timesheet.reload.submitted?
+    = f.submit "Submit Timesheet", class: "btn btn-success pull-right" unless @timesheet.reload.submitted?
