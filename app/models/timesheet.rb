@@ -60,7 +60,8 @@ class Timesheet < ActiveRecord::Base
   end
 
   def expenses_abroad
-    expense_reports.inject(0) { |sum, report| sum += report.total }
+    total = expense_reports.inject(0) { |sum, report| sum += report.total }
+    total.ceil
   end
 
   def on_call_compensation
