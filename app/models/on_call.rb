@@ -8,7 +8,7 @@ class OnCall < ActiveRecord::Base
 
     on_call_schedules.each do |schedule, on_call_days|
       on_call_days.each do |day, email|
-        self.find_or_create_by(date: day.to_date, email: email, schedule: schedule)
+        self.find_or_create_by(date: day.to_date, schedule: schedule).update_attributes(email: email)
       end
     end
   end
