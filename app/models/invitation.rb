@@ -4,7 +4,7 @@ class Invitation < ActiveRecord::Base
   validate :recipient_already_registered?, if: "recipient.present?"
 
   def initialize(invitation_params)
-    invitation_params[:recipient].downcase!.strip!
+    invitation_params[:recipient].downcase!.strip! if invitation_params[:recipient]
     super(invitation_params)
   end
 
