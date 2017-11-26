@@ -395,6 +395,7 @@ DEPENDENCIES
   letter_opener
   momentjs-rails
   newrelic_rpm
+  nokogiri
   omniauth-google-oauth2
   pg
   poltergeist
@@ -428,4 +429,4 @@ RUBY VERSION
    ruby 2.1.2p95
 
 BUNDLED WITH
-   1.12.5
+   1.14.6

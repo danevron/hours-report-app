@@ -2,8 +2,6 @@ require 'capybara/poltergeist'
 
 class TenBisCrawler
 
-  include Capybara::DSL
-
   BASE_URL = "https://www.10bis.co.il/"
 
   attr_reader :user_name, :password, :month, :year
@@ -14,74 +12,49 @@ class TenBisCrawler
 
   def initialize(user_name, password, month, year)
     @user_name, @password, @month, @year = [user_name, password, month, year]
-    Capybara.run_server = false
-    Capybara.register_driver :poltergeist do |app|
-        Capybara::Poltergeist::Driver.new(app, {
-          :js_errors => false,
-          :timeout => 120,
-          :phantomjs_options => ['--load-images=no', '--ignore-ssl-errors=yes', '--ssl-protocol=any']
-        })
-    end
-    Capybara.current_driver = :poltergeist
-    Capybara.app_host = BASE_URL
   end
 
   def crawl
     login
-    get_report_and_logout
+    get_report
   end
 
-  private
-
-  def get_report_and_logout
-    path = "/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=#{year}&chosenMonth=#{month}&start_year=#{year}&start_mon=#{month}&start_day=1&end_year=#{year}&end_mon=#{month}&end_day=1"
-
-    puts "Visiting #{BASE_URL + path}"
-    visit BASE_URL + path
-    sleep 8
-
-    html = begin
-             page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
-           rescue Exception => e
-             page.evaluate_script('document.getElementById("OrderOfUsersByDayTable").innerText')
-           end
-
-    if html
-      puts "Found 10Bis data for #{month}/#{year}!"
-      report = html.each_line.map{|s| row = s.split(/\t/); {row.second.to_i.to_s => row.last.to_f} }.inject{|memo, el| memo.merge( el ){|k, old_v, new_v| old_v + new_v}}
-      logout
-      report.shift
-      report
-    else
-      logout
-      raise "Failed to find 10Bis data for #{month}/#{year}!"
-    end
-  end
 
   def login
-    puts "visiting #{BASE_URL} for login"
-    visit BASE_URL
-    sleep 1
-    begin
-      find('[data-home-page-logon-button]').click
-    rescue Capybara::ElementNotFound => e
-      logout
-      find('[data-home-page-logon-button]').click
+    response = HTTParty.post("https://www.10bis.co.il/Account/LogonAjax",
+      :body => {
+        'timestamp' => Time.now.to_i,
+        'model' => {
+          'UserName' => @user_name,
+          'Password' => @password,
+          'SocialLoginUID' => '',
+          'FacebookUserId' => nil,
+          'returnUrl' => ''
+        },
+      }.to_json,
+      :headers => { 'Content-Type' => 'application/json' } )
+
+    @cookie = HTTParty::CookieHash.new
+    response.get_fields('Set-Cookie').each { |c| @cookie.add_cookies(c) }
+  end
+
+  def get_report
+    report = {}
+
+    path = "/G10/ui/compAdmin/comp_admin_reports_viewer.aspx?action=true&form_type=report&comp_id=2278&ordersReportByDay=true&report_type=orders_per_day_by_user&orders_per_this_day_selection=by_res&chosenYear=#{year}&chosenMonth=#{month}&start_year=#{year}&start_mon=#{month}&start_day=1&end_year=#{year}&end_mon=#{month}&end_day=1"
+    html = HTTParty.get("https://www.10bis.co.il/#{path}", headers: { 'Cookie' => @cookie.to_cookie_string })
+
+    doc = Nokogiri::HTML.parse(html)
+    orders = doc.css('#OrderOfUsersByDayTable')
+    orders.css('tr').each do |row|
+      cells = row.css('td')
+      if (cells.count > 1)
+        tenbis_number = cells[1].inner_text.gsub(/[ \r\n]/,'')
+        tenbis_usage = cells.last.inner_text.gsub(/[ \r\n]/,'')
+        report[tenbis_number] = tenbis_usage
+      end
     end
 
-    submit_credentials
-  end
-
-  def submit_credentials
-    puts "Submitting credentials"
-    first('[data-logon-popup-form-user-name-input]', :visible => false).set(user_name)
-    first('[data-logon-popup-form-password-input]', :visible => false).set(password)
-    first('[data-logon-popup-form-submit-btn]', :visible => false).click
-    sleep 8
-  end
-
-  def logout
-    visit BASE_URL + "/Account/LogOff"
-    sleep 8
+    report
   end
 end
