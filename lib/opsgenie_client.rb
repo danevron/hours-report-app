@@ -1,7 +1,7 @@
 # require 'httparty'
 class OpsgenieClient
   START_TIME = '10:30:00'
-  SCHEDULES = ['personalization_schedule', 'myklarna_schedule', 'ondemand_schedule']
+  SCHEDULES = ['personalization_schedule', 'myklarna_richie_schedule', 'ondemand_schedule']
 
   def self.extract_final_schedule(start_time, end_time)
     days = ((end_time - start_time) / (24 * 3600)).to_i # hours a day * mins * secs
